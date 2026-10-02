@@ -1,0 +1,98 @@
+/* Drawn deliverables are laid out once on a fixed pixel canvas, then scaled to
+   the plate's width in pure CSS: tan(atan2(a, b)) turns a ratio of two lengths
+   into a plain number. No JS, no layout shift, never wider than its column. */
+.frame {
+  overflow-x: clip;
+}
+
+.canvas {
+  position: relative;
+  width: calc(var(--crop, 1) * 100%);
+  aspect-ratio: var(--w) / var(--h);
+  container-type: inline-size;
+}
+
+@media (min-width: 768px) {
+  .canvas {
+    width: 100%;
+  }
+}
+
+.inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(var(--w) * 1px);
+  height: calc(var(--h) * 1px);
+  transform-origin: 0 0;
+  transform: scale(tan(atan2(100cqw, calc(var(--w) * 1px))));
+  user-select: none;
+}
+
+/* Light registers: the lamp outline is too faint on paper, so focus turns ink.
+   Unlayered on purpose, to beat the global lamp :focus-visible rule. */
+.inkFocus :focus-visible,
+.inkFocus:focus-visible {
+  outline-color: var(--color-ink);
+}
+
+/* Automation: a pulse travels each connector in turn, then rests. */
+.pulse {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: var(--color-sail);
+  box-shadow: 0 0 0 5px rgb(42 76 158 / 0.18);
+  offset-rotate: 0deg;
+  offset-distance: 0%;
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .pulse {
+    animation: travel 4.2s var(--ease-water) infinite;
+    animation-delay: var(--d, 0s);
+  }
+
+  /* FAQ: the answer settles in when its question opens. */
+  .answer {
+    animation: settle 600ms var(--ease-water);
+  }
+}
+
+/* Reduced motion: each pulse rests halfway along its connector. */
+@media (prefers-reduced-motion: reduce) {
+  .pulse {
+    opacity: 1;
+    offset-distance: 50%;
+  }
+}
+
+@keyframes travel {
+  0% { offset-distance: 0%; opacity: 0; }
+  4% { opacity: 1; }
+  28% { opacity: 1; }
+  33% { offset-distance: 100%; opacity: 0; }
+  100% { offset-distance: 100%; opacity: 0; }
+}
+
+@keyframes settle {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: none; }
+}
+
+.faq > summary {
+  list-style: none;
+}
+
+.faq > summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Plus turns into a cross when open. */
+.faq[open] .sign {
+  transform: rotate(45deg);
+}

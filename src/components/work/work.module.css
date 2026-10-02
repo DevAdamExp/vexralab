@@ -1,0 +1,23 @@
+/* Work page: the opening's one orchestrated moment. Only clip-path and transform move.
+   Without motion preference the final state is the resting state. */
+
+@media (prefers-reduced-motion: no-preference) {
+  /* The sea pours in from the right edge... */
+  .pour {
+    animation: pour 1500ms var(--ease-water) 300ms backwards;
+  }
+  /* ...and the homepage settles onto it. */
+  .settle {
+    animation: settle 1300ms var(--ease-water) 650ms backwards;
+  }
+}
+
+@keyframes pour {
+  from { clip-path: inset(0 0 0 100%); }
+  to { clip-path: inset(0 0 0 0); }
+}
+
+@keyframes settle {
+  from { opacity: 0; transform: translateY(64px) scale(0.97); }
+  to { opacity: 1; transform: none; }
+}
