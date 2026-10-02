@@ -34,10 +34,12 @@ export function Header({ tone = "night" }: { tone?: "night" | "paper" }) {
 
   return (
     <>
-      <header className={`fixed inset-x-0 z-50 flex justify-center px-3 transition-[top,padding] duration-700 ease-water ${scrolled ? "top-3 md:top-4" : "top-0 py-4 md:py-6"}`}>
+      <header className={`fixed inset-x-0 z-50 flex justify-center transition-[top,padding] duration-700 ease-water ${scrolled ? "top-3 px-3 md:top-4" : "top-0 px-0"}`}>
+        {/* Hairline under the bar while it sits on the hero; gone once it gathers into a pill. */}
+        <span aria-hidden="true" className={`absolute inset-x-0 bottom-0 h-px transition-opacity duration-500 ${onPaper ? "bg-ink/12" : "bg-fg/15"} ${scrolled ? "opacity-0" : "opacity-100"}`} />
         <div
-          className={`flex w-full items-center justify-between gap-4 rounded-full border transition-[max-width,background-color,border-color,padding] duration-700 ease-water ${
-            scrolled ? "max-w-[960px] border-fg/10 bg-night/75 py-2 pr-2 pl-5 backdrop-blur-xl" : "max-w-[1320px] border-transparent px-2 py-0 sm:px-4 lg:px-8"
+          className={`flex w-full items-center justify-between gap-4 border transition-[max-width,background-color,border-color,padding,border-radius,height] duration-700 ease-water ${
+            scrolled ? "h-16 max-w-[960px] rounded-full border-fg/10 bg-void/80 pr-2 pl-6 backdrop-blur-xl" : "h-20 max-w-[1320px] rounded-none border-transparent px-6 lg:px-12"
           } ${onPaper ? "text-ink" : "text-fg"}`}
         >
           <Link href="/" aria-label="VexraLab, home" className="relative z-10 rounded-full">
@@ -53,13 +55,9 @@ export function Header({ tone = "night" }: { tone?: "night" | "paper" }) {
           </nav>
 
           <div className="flex items-center gap-4">
-            <span className={`label hidden items-center gap-2.5 text-[11px] transition-opacity duration-500 xl:flex ${scrolled ? "pointer-events-none w-0 opacity-0" : "opacity-80"}`}>
-              <span className="lamp-dot" aria-hidden="true" />
-              Booking new projects
-            </span>
             {!path.startsWith("/contact") && (
               <span className="hidden md:contents">
-                <LiquidButton href="/contact" size="sm" variant={onPaper ? "ink" : "lamp"}>
+                <LiquidButton href="/contact" size="sm" variant={onPaper ? "ink" : "fg"} caps={false}>
                   Start a project <Arrow />
                 </LiquidButton>
               </span>
@@ -98,7 +96,7 @@ export function Header({ tone = "night" }: { tone?: "night" | "paper" }) {
               style={{ transition: "opacity 700ms var(--ease-water), transform 700ms var(--ease-water)", transitionDelay: open ? `${180 + k * 60}ms` : "0ms", opacity: open ? 1 : 0, transform: open ? "none" : "translateY(24px)" }}
             >
               <span className="label text-lamp">0{k + 1}</span>
-              <span className="text-[clamp(2.75rem,13vw,4rem)] font-semibold leading-none tracking-[-0.04em]">{n.label}</span>
+              <span className="font-display text-[clamp(2.75rem,13vw,4rem)] leading-none">{n.label}</span>
             </Link>
           ))}
         </nav>

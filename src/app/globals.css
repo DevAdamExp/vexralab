@@ -123,3 +123,7 @@ strong, b { font-weight: 400; color: inherit; }
 .vx-steam { animation: vx-steam 3.2s ease-out infinite; }
 .vx-steam-2 { animation-delay: 1.4s; }
 .vx-buzz { transform-box: fill-box; transform-origin: center; animation: vx-buzz 4s ease-in-out infinite; }
+
+/* Hero photo settles in: a slow push from slightly closer. */
+@keyframes hero-settle { from { transform: scale(1.06); } to { transform: scale(1); } }
+@media (prefers-reduced-motion: no-preference) { .hero-photo { animation: hero-settle 2400ms var(--ease-water) both; } }

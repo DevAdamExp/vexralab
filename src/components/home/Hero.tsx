@@ -2,13 +2,19 @@
 
 import { useEffect, useRef } from "react";
 import { Arrow, LiquidButton } from "@/components/ui/LiquidButton";
-import { ServiceStrip } from "./ServiceStrip";
 
-const WORDS = "hero-type block text-[clamp(3.2rem,11vw,10.5rem)]";
+const COPY = {
+  eyebrow: "Design & engineering studio",
+  sub: "We design and build brands, websites and software for founders. Calm process, clear work, a demo every Friday.",
+  meta: ["Booking projects for [Month]", "Pakistan · working worldwide", "Reply within one working day"],
+};
+
+const H1 = "font-display text-[clamp(3.1rem,7.2vw,7rem)] leading-[0.98]";
 
 /**
- * The desk by the window, at night. Two poster words sit over the photo; the
- * pointer is a desk lamp, and inside its circle the words light up in Decor Yellow.
+ * Section 1 — "Window". The desk photo full-bleed, one calm Cranio headline,
+ * a short line and two actions, and a hairline meta bar. The pointer is a desk
+ * lamp: inside its circle the headline lights up in Decor Yellow.
  */
 export function Hero() {
   const box = useRef<HTMLDivElement>(null);
@@ -18,8 +24,8 @@ export function Hero() {
     const el = box.current;
     const ov = lit.current;
     if (!el || !ov || !matchMedia("(hover: hover) and (pointer: fine)").matches || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const t = { x: -999, y: -999 };
-    const c = { x: -999, y: -999 };
+    const t = { x: 0, y: 0 };
+    const c = { x: 0, y: 0 };
     let raf = 0;
     const move = (e: PointerEvent) => {
       const r = el.getBoundingClientRect();
@@ -34,8 +40,8 @@ export function Hero() {
     };
     const leave = () => (ov.style.opacity = "0");
     const tick = () => {
-      c.x += (t.x - c.x) * 0.18;
-      c.y += (t.y - c.y) * 0.18;
+      c.x += (t.x - c.x) * 0.16;
+      c.y += (t.y - c.y) * 0.16;
       ov.style.setProperty("--x", `${c.x}px`);
       ov.style.setProperty("--y", `${c.y}px`);
       raf = requestAnimationFrame(tick);
@@ -52,62 +58,60 @@ export function Hero() {
     };
   }, []);
 
-  const words = (overlay: boolean) => (
-    <div aria-hidden={overlay || undefined} className="flex flex-col gap-2 md:gap-3">
-      <div className="flex flex-wrap items-center justify-between gap-x-10 gap-y-6">
-        <span className={`${WORDS} load ${overlay ? "text-lamp" : "text-fg"}`} style={{ "--i": 1 } as React.CSSProperties}>
-          Quiet
-        </span>
-        <div className={`load max-md:hidden ${overlay ? "invisible" : ""}`} style={{ "--i": 4 } as React.CSSProperties}>
-          <LiquidButton href="/contact" variant="sea" size="lg">
-            Start a project <Arrow />
-          </LiquidButton>
-        </div>
-      </div>
-      <span className={`${WORDS} load ml-[4vw] md:ml-[14vw] ${overlay ? "text-lamp" : "text-fg"}`} style={{ "--i": 2 } as React.CSSProperties}>
-        Confidence
-      </span>
-    </div>
-  );
-
   return (
-    <section aria-labelledby="hero-title" className="relative flex h-[100svh] min-h-[640px] flex-col justify-end overflow-hidden bg-void">
+    <section aria-labelledby="hero-title" className="relative flex h-[100svh] min-h-[680px] flex-col overflow-hidden bg-void text-fg">
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src="/img/desk-window.jpg" alt="" fetchPriority="high" className="absolute inset-0 size-full object-cover object-[50%_40%] brightness-[0.62] saturate-[0.85]" />
-      <div aria-hidden="true" className="absolute inset-0 bg-[linear-gradient(180deg,rgb(21_20_25/0.55)_0%,transparent_30%,rgb(21_20_25/0.35)_55%,#151419_100%)]" />
-      <div aria-hidden="true" className="absolute inset-0 bg-[linear-gradient(90deg,rgb(21_20_25/0.75)_0%,transparent_60%)]" />
-      <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(ellipse_at_72%_38%,rgb(246_187_2/0.16),transparent_55%)] mix-blend-screen" />
+      <img src="/img/desk-window.jpg" alt="" fetchPriority="high" className="hero-photo absolute inset-0 size-full object-cover object-[50%_42%]" />
+      <div aria-hidden="true" className="absolute inset-0 bg-[linear-gradient(180deg,rgb(21_20_25/0.6)_0%,rgb(21_20_25/0.05)_26%,rgb(21_20_25/0.5)_55%,rgb(21_20_25/0.95)_100%)]" />
 
-      <p className="load absolute top-28 right-5 left-5 z-10 max-w-[32ch] text-[17px] leading-relaxed text-fg/85 sm:left-auto sm:right-8 sm:text-right md:top-32 lg:right-12 lg:text-[19px]" style={{ "--i": 3 } as React.CSSProperties}>
-        Websites and software for founders who are done apologising for their own site.
-      </p>
+      <div className="relative z-10 mx-auto flex w-full max-w-[1320px] flex-1 flex-col justify-end px-6 pt-28 pb-10 font-ui lg:px-12">
+        <div className="grid items-end gap-10 lg:grid-cols-12">
+          <div className="lg:col-span-7">
+            <p className="load mb-6 flex items-center gap-3 text-[13px] font-medium text-fg/80">
+              <span className="lamp-dot" aria-hidden="true" />
+              {COPY.eyebrow}
+            </p>
+            <div ref={box} className="relative">
+              <h1 id="hero-title" className={`load ${H1}`} style={{ "--i": 1 } as React.CSSProperties}>
+                Websites you&rsquo;re proud to send.
+              </h1>
+              <div
+                ref={lit}
+                aria-hidden="true"
+                className={`pointer-events-none absolute inset-0 text-lamp opacity-0 transition-opacity duration-300 max-md:hidden ${H1}`}
+                style={{
+                  maskImage: "radial-gradient(circle 96px at var(--x,-999px) var(--y,-999px), #000 98%, transparent 100%)",
+                  WebkitMaskImage: "radial-gradient(circle 96px at var(--x,-999px) var(--y,-999px), #000 98%, transparent 100%)",
+                }}
+              >
+                Websites you&rsquo;re proud to send.
+              </div>
+            </div>
+          </div>
 
-      <div className="relative mx-auto w-full max-w-[1320px] px-5 pb-32 sm:px-8 md:pb-40 lg:px-12">
-        <h1 id="hero-title" className="sr-only">
-          Quiet confidence. VexraLab designs and builds websites and software for founders.
-        </h1>
-
-        <div ref={box} className="relative py-4">
-          {words(false)}
-          <div
-            ref={lit}
-            className="pointer-events-none absolute inset-0 py-4 opacity-0 transition-opacity duration-300 max-md:hidden"
-            style={{
-              maskImage: "radial-gradient(circle 110px at var(--x,-999px) var(--y,-999px), #000 99%, transparent 100%)",
-              WebkitMaskImage: "radial-gradient(circle 110px at var(--x,-999px) var(--y,-999px), #000 99%, transparent 100%)",
-            }}
-          >
-            {words(true)}
+          <div className="flex flex-col gap-7 lg:col-span-5 lg:pb-3 lg:pl-10">
+            <p className="load max-w-[38ch] text-[16px] leading-[1.65] text-fg/85" style={{ "--i": 2 } as React.CSSProperties}>
+              {COPY.sub}
+            </p>
+            <div className="load flex flex-wrap gap-3" style={{ "--i": 3 } as React.CSSProperties}>
+              <LiquidButton href="/contact" variant="lamp">
+                Start a project <Arrow />
+              </LiquidButton>
+              <LiquidButton href="/work" variant="ghost-night">
+                See our work
+              </LiquidButton>
+            </div>
           </div>
         </div>
-        <div className="load mt-8 md:hidden" style={{ "--i": 4 } as React.CSSProperties}>
-          <LiquidButton href="/contact" variant="sea">
-            Start a project <Arrow />
-          </LiquidButton>
-        </div>
 
+        <ul className="load mt-14 grid gap-3 border-t border-fg/15 pt-6 text-[13px] text-fg/65 sm:grid-cols-3 lg:mt-16" style={{ "--i": 4 } as React.CSSProperties}>
+          {COPY.meta.map((m, k) => (
+            <li key={m} className={k === 1 ? "sm:text-center" : k === 2 ? "sm:text-right" : ""}>
+              {m}
+            </li>
+          ))}
+        </ul>
       </div>
-      <ServiceStrip />
     </section>
   );
 }

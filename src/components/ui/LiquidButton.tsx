@@ -4,13 +4,14 @@ import Link from "next/link";
 import { useRef, type CSSProperties, type MouseEventHandler, type PointerEvent, type ReactNode } from "react";
 import { edgeOf, offEdge } from "./edge";
 
-type Variant = "lamp" | "sea" | "ink" | "ghost-night" | "ghost-paper";
+type Variant = "lamp" | "sea" | "ink" | "fg" | "ghost-night" | "ghost-paper";
 type Size = "sm" | "md" | "lg";
 
 const VARIANT: Record<Variant, { base: string; blob: string; hover: string }> = {
   lamp: { base: "bg-lamp text-ink", blob: "bg-void", hover: "hover:text-lamp" },
   sea: { base: "border-[1.5px] border-sea-2 bg-fg/[0.03] text-fg backdrop-blur-md", blob: "bg-sea", hover: "hover:border-sea" },
   ink: { base: "bg-ink text-fg", blob: "bg-sea", hover: "" },
+  fg: { base: "bg-fg text-ink", blob: "bg-lamp", hover: "" },
   "ghost-night": { base: "border-[1.5px] border-fg/30 text-fg", blob: "bg-lamp", hover: "hover:text-ink hover:border-lamp" },
   "ghost-paper": { base: "border-[1.5px] border-ink/70 text-ink", blob: "bg-sail", hover: "hover:text-fg hover:border-sail" },
 };
@@ -33,13 +34,15 @@ type Props = {
   onClick?: MouseEventHandler<HTMLElement>;
   children: ReactNode;
   "aria-label"?: string;
+  /** Small uppercase UI label (default) or sentence case, as in the nav bar. */
+  caps?: boolean;
 };
 
 /**
  * The house button. A liquid blob enters from whichever edge the pointer crossed,
  * turns half a revolution while it settles, and leaves through the exit edge.
  */
-export function LiquidButton({ href, as = "a", type = "button", variant = "lamp", size = "md", className = "", style, disabled, onClick, children, ...aria }: Props) {
+export function LiquidButton({ href, as = "a", type = "button", variant = "lamp", size = "md", className = "", style, disabled, onClick, children, caps = true, ...aria }: Props) {
   const blob = useRef<HTMLSpanElement>(null);
   const v = VARIANT[variant];
 
@@ -66,7 +69,7 @@ export function LiquidButton({ href, as = "a", type = "button", variant = "lamp"
     el.style.transform = "translate(-50%,-50%) rotate(0deg)";
   };
 
-  const cls = `group relative isolate inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full font-ui font-semibold uppercase tracking-[0.16em] transition-[color,border-color,transform] duration-500 ease-water active:scale-[0.97] disabled:opacity-50 ${v.base} ${v.hover} ${SIZE[size]} ${className}`;
+  const cls = `group relative isolate inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full font-ui font-semibold ${caps ? "uppercase tracking-[0.16em]" : "text-[14px]! tracking-normal"} transition-[color,border-color,transform] duration-500 ease-water active:scale-[0.97] disabled:opacity-50 ${v.base} ${v.hover} ${SIZE[size]} ${className}`;
   const inner = (
     <>
       <span
