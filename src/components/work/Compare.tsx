@@ -71,10 +71,10 @@ export function Compare() {
         <div aria-hidden="true" className="absolute inset-0" style={{ clipPath: "inset(0 0 0 var(--pos))" }}>
           <NewSite />
         </div>
-        <span aria-hidden="true" className="label absolute top-3 left-3 rounded-full bg-ink/85 px-2.5 py-1 text-[10px] text-fg md:text-[11px]">
+        <span aria-hidden="true" className="label absolute bottom-3 left-3 rounded-full bg-ink/85 px-2.5 py-1 text-[10px] text-fg md:text-[11px]">
           Before
         </span>
-        <span aria-hidden="true" className="label absolute top-3 right-3 rounded-full bg-ink/85 px-2.5 py-1 text-[10px] text-fg md:text-[11px]">
+        <span aria-hidden="true" className="label absolute right-3 bottom-3 rounded-full bg-ink/85 px-2.5 py-1 text-[10px] text-fg md:text-[11px]">
           After
         </span>
       </Browser>

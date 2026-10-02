@@ -1,17 +1,15 @@
-import { FeelingStrip } from "@/components/home/FeelingStrip";
 import { Hero } from "@/components/home/Hero";
 import { Morning } from "@/components/home/Morning";
-import { Noise } from "@/components/home/Noise";
+import { Problems } from "@/components/home/Problems";
 import { Process } from "@/components/home/Process";
-import { ServiceIndex } from "@/components/home/ServiceIndex";
+import { Services } from "@/components/home/Services";
 import { WorkPreview } from "@/components/home/WorkPreview";
 import { Footer } from "@/components/ui/Footer";
 import { Header } from "@/components/ui/Header";
 
 /**
- * Home: one founder's night, told in chapters.
- * night (2:14 AM) → night (the noise) → night→paper (sunrise) → night (what we make)
- * → sea (how we work) → paper (the work) → night (footer, lamp on).
+ * Home. void (the desk at night) → belle (sound familiar?) → void (same desk,
+ * morning) → belle (what we make) → sail (how we work) → belle tint (the work) → void.
  */
 export default function Home() {
   return (
@@ -19,10 +17,9 @@ export default function Home() {
       <Header />
       <main id="main-content" className="flex-1">
         <Hero />
-        <FeelingStrip />
-        <Noise />
+        <Problems />
         <Morning />
-        <ServiceIndex />
+        <Services />
         <Process />
         <WorkPreview />
       </main>

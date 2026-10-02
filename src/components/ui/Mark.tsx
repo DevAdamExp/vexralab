@@ -18,7 +18,7 @@ export function Mark({
 }: {
   children: string;
   gesture?: Gesture;
-  tone?: "lamp" | "sea" | "ink" | "fg";
+  tone?: "lamp" | "sea" | "ink" | "fg" | "red" | "sail";
   onLoad?: boolean;
   delay?: number;
 }) {
@@ -45,7 +45,7 @@ export function Mark({
     return () => io.disconnect();
   }, [onLoad, delay]);
 
-  const color = { lamp: "var(--color-lamp)", sea: "var(--color-sea)", ink: "var(--color-ink)", fg: "var(--color-fg)" }[tone];
+  const color = { lamp: "var(--color-lamp)", sea: "var(--color-sea)", ink: "var(--color-ink)", fg: "var(--color-fg)", red: "var(--color-red)", sail: "var(--color-sail)" }[tone];
   const t = "transition-[transform,clip-path] duration-[800ms] ease-water motion-reduce:duration-[1ms]";
 
   return (

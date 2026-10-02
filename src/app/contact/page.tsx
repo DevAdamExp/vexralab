@@ -1,122 +1,154 @@
 import type { Metadata } from "next";
+import { FaEnvelope, FaWhatsapp } from "react-icons/fa6";
 import { Letter } from "@/components/contact/Letter";
+import { Blob } from "@/components/ui/Blob";
 import { Clock } from "@/components/ui/Clock";
 import { CopyEmail } from "@/components/ui/CopyEmail";
 import { Footer } from "@/components/ui/Footer";
 import { Header } from "@/components/ui/Header";
+import { LiquidButton } from "@/components/ui/LiquidButton";
 import { Mark } from "@/components/ui/Mark";
 import { Seen, i } from "@/components/ui/Seen";
-import { CONTAINER, LEDE } from "@/components/ui/tokens";
-import { EMAIL, STUDIO_CITY, STUDIO_TZ } from "@/data/site";
+import { SocialIcons } from "@/components/ui/Social";
+import { CONTAINER } from "@/components/ui/tokens";
+import { EMAIL, STUDIO_CITY } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: "Tell us what's keeping you up. A real person at VexraLab replies within one working day, with honest next steps.",
+  description: "Tell us what's keeping you up. A real person at VexraLab replies within one working day.",
   alternates: { canonical: "/contact" },
 };
 
-const OFFSET = new Intl.DateTimeFormat("en-US", { timeZone: STUDIO_TZ, timeZoneName: "shortOffset" }).formatToParts(new Date()).find((p) => p.type === "timeZoneName")?.value;
+// ponytail: placeholder until the owner supplies the studio's WhatsApp number.
+const WHATSAPP = "https://wa.me/[number]";
 
 const NEXT = [
-  { title: "You send this.", line: "A few minutes, in your own words." },
-  { title: "We reply within a day.", line: "Honest next steps, even if that's “not yet.”" },
-  { title: "A 30-minute call.", line: "We ask, we listen. No pitch deck." },
-  { title: "A written plan and fixed quote.", line: "What we'd do, in what order, for a set price." },
+  { emoji: "✉️", line: "You send the letter." },
+  { emoji: "🌙", line: "We reply within a day." },
+  { emoji: "☕", line: "A 30-minute call. No pitch deck." },
+  { emoji: "📐", line: "A plan and a fixed quote." },
 ];
 
-const NOT = [
-  { title: "No hard sell.", line: "If we're not the right fit, we'll say so." },
-  { title: "No spam.", line: "Your email is for replying to you. It doesn't go on a list." },
-  { title: "NDA on request.", line: "Ask before you share the details, and we'll sign one first." },
+const PROMISES = [
+  { emoji: "🤝", line: "No hard sell." },
+  { emoji: "🔕", line: "No mailing list." },
+  { emoji: "🔒", line: "NDA on request." },
 ];
 
 /**
- * Contact: a letter under the lamp. Night, one warm pool of light, and the brief as a
- * sheet of paper on the desk. Registers: night (letter), paper (reassurance), night (footer).
+ * Contact. Registers: void (the letter on the desk), belle (what happens next),
+ * sail (the promises), void footer.
  */
 export default function ContactPage() {
   return (
     <>
       <Header />
       <main id="main-content" className="flex-1">
-        <section aria-labelledby="contact-title" className="relative overflow-hidden bg-night pt-32 pb-24 text-fg md:pt-40 md:pb-32">
-          {/* The lamp: one warm pool, falling on the desk where the letter lies. */}
-          <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(900px_circle_at_72%_38%,rgb(246_187_2/0.13),transparent_65%)]" />
-
-          <div className={`${CONTAINER} grid gap-16 lg:grid-cols-12 lg:gap-10`}>
-            <div className="lg:col-span-5">
+        <section aria-labelledby="contact-title" className="relative overflow-hidden bg-void pt-36 pb-28 text-fg md:pt-44 md:pb-40">
+          <div className={`${CONTAINER} grid gap-20 lg:grid-cols-12 lg:grid-rows-[auto_1fr] lg:gap-x-12 lg:gap-y-0`}>
+            {/* The direct line: heading first, then the ways in (below the letter on phones). */}
+            <div className="lg:col-span-5 lg:row-start-1">
               <p className="label load flex items-center gap-3 text-muted">
                 <span className="lamp-dot" aria-hidden="true" /> Contact
               </p>
-              <h1 id="contact-title" className="load mt-6 text-[clamp(2.75rem,5.4vw,5rem)] leading-[0.96] font-semibold tracking-[-0.035em]" style={i(1)}>
+              <h1 id="contact-title" className="load mt-8 text-[clamp(3rem,6vw,5.75rem)] leading-[0.95]" style={i(1)}>
                 Tell us what&rsquo;s keeping you{" "}
                 <Mark gesture="underline" onLoad delay={900}>
                   up.
                 </Mark>
               </h1>
-              <p className={`${LEDE} load mt-7 text-muted`} style={i(2)}>
-                Write it the way you&rsquo;d say it. A real person reads every letter and replies within one working day, with honest next steps. Even if that&rsquo;s &ldquo;you don&rsquo;t need us yet.&rdquo;
+              <p className="load mt-8 text-[18px] text-muted" style={i(2)}>
+                A real person replies within a day.
               </p>
+            </div>
 
-              <dl className="load mt-12 grid gap-6 border-t border-fg/15 pt-8 sm:grid-cols-2" style={i(3)}>
-                <div className="sm:col-span-2">
+            {/* The letter on the desk: a sea form poured in above it, the lamp glowing around it. */}
+            <div className="load relative lg:col-span-7 lg:col-start-6 lg:row-span-2 lg:row-start-1" style={i(2)}>
+              <Blob
+                tone="sea"
+                side="right"
+                emoji="💌"
+                className="-mr-5 -mb-6 ml-auto w-[88%] max-w-[560px] sm:-mr-8 sm:-mb-10 lg:mr-[calc(-3rem_-_max(0px,(100vw_-_1320px)/2))] lg:-mb-20"
+              />
+              <div aria-hidden="true" className="pointer-events-none absolute inset-x-[-10%] top-1/4 bottom-0 bg-[radial-gradient(closest-side,rgb(246_187_2/0.16),transparent)]" />
+              <div className="relative">
+                <Letter />
+              </div>
+            </div>
+
+            <div className="lg:col-span-5 lg:row-start-2">
+              <div className="load flex flex-wrap gap-3 lg:mt-12" style={i(3)}>
+                <LiquidButton href={WHATSAPP} variant="sea" size="md">
+                  <FaWhatsapp aria-hidden="true" className="size-[18px]" /> WhatsApp<span className="sr-only"> (opens in a new tab)</span>
+                </LiquidButton>
+                <LiquidButton href={`mailto:${EMAIL}`} variant="ghost-night" size="md">
+                  <FaEnvelope aria-hidden="true" className="size-4" /> Email
+                </LiquidButton>
+              </div>
+
+              <dl className="load mt-14 grid gap-10" style={i(4)}>
+                <div>
                   <dt className="label text-muted">Write directly</dt>
-                  <dd className="mt-2">
+                  <dd className="mt-3">
                     <CopyEmail email={EMAIL} />
                   </dd>
                 </div>
                 <div>
                   <dt className="label text-muted">Studio time</dt>
-                  <dd className="mt-2 text-[17px]">
-                    <Clock className="text-[28px] font-semibold tracking-[-0.02em]" /> <span className="text-muted">in {STUDIO_CITY}{OFFSET && `, ${OFFSET}`}</span>
+                  <dd className="mt-3 flex items-baseline gap-3">
+                    <span aria-hidden="true" className="text-[26px] leading-none">
+                      🇵🇰
+                    </span>
+                    <Clock className="display text-[44px] leading-none" />
+                    <span className="text-[15px] text-muted">{STUDIO_CITY}</span>
                   </dd>
                 </div>
                 <div>
-                  <dt className="label text-muted">Typical reply</dt>
-                  <dd className="mt-2 text-[17px] leading-snug">Within one working day</dd>
+                  <dt className="label text-muted">Elsewhere</dt>
+                  <dd className="mt-4">
+                    <SocialIcons />
+                  </dd>
                 </div>
               </dl>
-
-              <Seen className="mt-14">
-                <h2 className="label fade text-muted">What happens next</h2>
-                <ol className="mt-5">
-                  {NEXT.map((s, k) => (
-                    <li key={s.title} className="rise draw grid grid-cols-[2.5rem_1fr] py-4" style={i(k + 1)}>
-                      <span className="label pt-1 text-lamp tabular" aria-hidden="true">
-                        0{k + 1}
-                      </span>
-                      <span>
-                        <span className="block text-[17px] font-medium">{s.title}</span>
-                        <span className="mt-1 block text-[15px] text-muted">{s.line}</span>
-                      </span>
-                    </li>
-                  ))}
-                </ol>
-              </Seen>
             </div>
 
-            <div className="load lg:col-span-7 xl:col-span-6 xl:col-start-7" style={i(2)}>
-              <Letter />
-            </div>
           </div>
         </section>
 
-        <section aria-labelledby="before-title" className="bg-paper py-20 text-ink md:py-28">
-          <Seen className={`${CONTAINER} grid gap-10 lg:grid-cols-12`}>
-            <div className="lg:col-span-4">
-              <p className="label fade text-ink-muted">Before you write</p>
-              <h2 id="before-title" className="rise mt-4 text-[clamp(1.75rem,3vw,2.75rem)] leading-[1.02] font-semibold tracking-[-0.025em]" style={i(1)}>
-                Write freely.
+        <section aria-labelledby="next-title" className="bg-paper-2 py-28 text-ink md:py-40">
+          <div className={CONTAINER}>
+            <Seen>
+              <p className="label fade text-ink-muted">After you send it</p>
+              <h2 id="next-title" className="rise mt-6 text-[clamp(2.5rem,5.4vw,5rem)] leading-[1]" style={i(1)}>
+                What happens next
               </h2>
-            </div>
-            <ul className="grid gap-8 sm:grid-cols-3 lg:col-span-8">
-              {NOT.map((n, k) => (
-                <li key={n.title} className="rise draw pt-5" style={i(k + 2)}>
-                  <p className="text-[19px] font-semibold">{n.title}</p>
-                  <p className="mt-2 text-[16px] leading-relaxed text-ink-muted">{n.line}</p>
+            </Seen>
+            <Seen as="ol" className="mt-16 grid gap-x-10 gap-y-14 sm:grid-cols-2 md:mt-24 lg:grid-cols-4">
+              {NEXT.map((s, k) => (
+                <li key={s.line} className="rise draw pt-8" style={i(k)}>
+                  <div className="flex items-center justify-between">
+                    <span className="font-mono text-[13px] tracking-[0.2em] text-red tabular">0{k + 1}</span>
+                    <span aria-hidden="true" className="grid size-14 place-items-center rounded-full bg-lamp text-[26px]">
+                      {s.emoji}
+                    </span>
+                  </div>
+                  <p className="display mt-8 text-[clamp(1.5rem,2.2vw,1.875rem)] leading-[1.15]">{s.line}</p>
                 </li>
               ))}
-            </ul>
+            </Seen>
+          </div>
+        </section>
+
+        <section aria-label="Our promises" className="bg-sail py-28 text-fg md:py-40">
+          <Seen as="ul" className={`${CONTAINER} grid gap-12 sm:grid-cols-3`}>
+            {PROMISES.map((p, k) => (
+              <li key={p.line} className="rise flex items-center gap-5" style={i(k)}>
+                <span aria-hidden="true" className="text-[2.5rem] leading-none">
+                  {p.emoji}
+                </span>
+                <span className="display text-[clamp(1.75rem,2.6vw,2.5rem)] leading-[1.05]">{p.line}</span>
+              </li>
+            ))}
           </Seen>
         </section>
       </main>

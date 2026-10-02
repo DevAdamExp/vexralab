@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
-import { Beliefs, Opening, People, Questions, StudioWeek, WhyWeExist } from "@/components/about/Sections";
+import { Beliefs, FindUs, Opening, People, Questions, StudioWeek, WhyWeExist } from "@/components/about/Sections";
 import { Footer } from "@/components/ui/Footer";
 import { Header } from "@/components/ui/Header";
 
 export const metadata: Metadata = {
   title: "Studio",
-  description: "VexraLab is a small design and engineering studio that helps founders stop apologising for their website. How we think, how our week runs, and who sits at the desk.",
+  description: "VexraLab is a small design and engineering studio by the window. How we think, how our week runs, and who sits at the desk.",
 };
 
-/** Studio: the desk by the window. Registers: paper / night / sea / belle / paper / night / Footer. */
+/** Studio. Registers: paper / night / sea / sail / paper / night / belle / Footer. */
 export default function AboutPage() {
   return (
     <>
@@ -19,6 +19,7 @@ export default function AboutPage() {
         <Beliefs />
         <StudioWeek />
         <People />
+        <FindUs />
         <Questions />
       </main>
       <Footer />

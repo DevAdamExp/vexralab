@@ -8,17 +8,17 @@ type Variant = "lamp" | "sea" | "ink" | "ghost-night" | "ghost-paper";
 type Size = "sm" | "md" | "lg";
 
 const VARIANT: Record<Variant, { base: string; blob: string; hover: string }> = {
-  lamp: { base: "bg-lamp text-ink", blob: "bg-fg", hover: "" },
-  sea: { base: "bg-sea text-fg", blob: "bg-lamp", hover: "hover:text-ink" },
-  ink: { base: "bg-ink text-fg", blob: "bg-lamp", hover: "hover:text-ink" },
-  "ghost-night": { base: "border-[1.5px] border-fg/35 text-fg", blob: "bg-lamp", hover: "hover:text-ink hover:border-lamp" },
-  "ghost-paper": { base: "border-[1.5px] border-ink text-ink", blob: "bg-sea", hover: "hover:text-fg hover:border-sea" },
+  lamp: { base: "bg-lamp text-ink", blob: "bg-void", hover: "hover:text-lamp" },
+  sea: { base: "border-[1.5px] border-sea-2 bg-fg/[0.03] text-fg backdrop-blur-md", blob: "bg-sea", hover: "hover:border-sea" },
+  ink: { base: "bg-ink text-fg", blob: "bg-sea", hover: "" },
+  "ghost-night": { base: "border-[1.5px] border-fg/30 text-fg", blob: "bg-lamp", hover: "hover:text-ink hover:border-lamp" },
+  "ghost-paper": { base: "border-[1.5px] border-ink/70 text-ink", blob: "bg-sail", hover: "hover:text-fg hover:border-sail" },
 };
 
 const SIZE: Record<Size, string> = {
-  sm: "min-h-11 px-5 text-[14px] gap-3",
-  md: "min-h-[52px] px-7 text-[15px] gap-4",
-  lg: "min-h-16 px-9 text-[17px] gap-5",
+  sm: "min-h-11 px-6 text-[11px] gap-3",
+  md: "min-h-[52px] px-8 text-[12px] gap-4",
+  lg: "min-h-16 px-10 text-[13px] gap-5",
 };
 
 type Props = {
@@ -66,7 +66,7 @@ export function LiquidButton({ href, as = "a", type = "button", variant = "lamp"
     el.style.transform = "translate(-50%,-50%) rotate(0deg)";
   };
 
-  const cls = `group relative isolate inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full font-semibold tracking-[0.005em] transition-[color,border-color,transform] duration-500 ease-water active:scale-[0.97] disabled:opacity-50 ${v.base} ${v.hover} ${SIZE[size]} ${className}`;
+  const cls = `group relative isolate inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full font-ui font-semibold uppercase tracking-[0.16em] transition-[color,border-color,transform] duration-500 ease-water active:scale-[0.97] disabled:opacity-50 ${v.base} ${v.hover} ${SIZE[size]} ${className}`;
   const inner = (
     <>
       <span

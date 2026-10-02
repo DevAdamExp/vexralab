@@ -5,7 +5,7 @@ import { Mark } from "@/components/ui/Mark";
 import { Seen, i } from "@/components/ui/Seen";
 import { CONTAINER, SECTION } from "@/components/ui/tokens";
 
-const CHAPTERS = ["The night before", "What we heard", "What we made", "The morning after", "Before and after"];
+const CHAPTERS = ["Online booking", "WhatsApp reminders", "A new website"];
 
 /**
  * Chapter five: the work. One case study as a large plate (a sample, labelled as
@@ -13,15 +13,15 @@ const CHAPTERS = ["The night before", "What we heard", "What we made", "The morn
  */
 export function WorkPreview() {
   return (
-    <section aria-labelledby="work-title" className="bg-paper text-ink">
+    <section aria-labelledby="work-title" className="bg-paper-2 text-ink">
       <div className={`${CONTAINER} ${SECTION}`}>
         <div className="grid gap-10 lg:grid-cols-12 lg:items-end">
-          <ChapterHead id="work" label="Chapter five · the work" register="paper" className="lg:col-span-8">
-            One clinic&rsquo;s <Mark gesture="highlight">morning after.</Mark>
+          <ChapterHead id="work" label="Selected work" register="paper" className="lg:col-span-8">
+            Work that tells a <Mark tone="red">story.</Mark>
           </ChapterHead>
           <Seen className="lg:col-span-4">
-            <p className="rise max-w-[40ch] text-[18px] leading-relaxed text-ink-muted">
-              A case study told the way the founder lived it, from the ringing phone to the quiet Thursday night.
+            <p className="rise max-w-[30ch] text-[18px] leading-relaxed text-ink-muted">
+              From a ringing phone to a quiet Thursday night. 📞 → 🌙
             </p>
           </Seen>
         </div>
@@ -39,7 +39,7 @@ export function WorkPreview() {
 
           <div className="rise flex flex-col lg:col-span-4" style={i(1)}>
             <p className="label text-ink-muted">Sample case study · Harbour Physio</p>
-            <h3 className="mt-4 text-[clamp(2rem,3.2vw,3rem)] leading-[1.02] font-semibold tracking-[-0.03em]">
+            <h3 className="mt-4 text-[clamp(2rem,3.2vw,3rem)] leading-[1.02] ">
               <Link href="/work" className="outline-none after:absolute after:inset-0 after:rounded-[28px] after:content-[''] focus-visible:after:outline-2 focus-visible:after:outline-ink">
                 A clinic that stopped losing patients to a ringing phone.
               </Link>
@@ -52,10 +52,10 @@ export function WorkPreview() {
                 </li>
               ))}
             </ol>
-            <span aria-hidden="true" className="mt-8 inline-flex min-h-12 items-center gap-3 self-start rounded-full bg-ink px-6 font-semibold text-fg transition-colors duration-300 group-hover:bg-sea">
+            <span aria-hidden="true" className="mt-8 inline-flex min-h-12 items-center gap-3 self-start rounded-full bg-ink px-7 font-ui text-[12px] font-semibold tracking-[0.16em] uppercase text-fg transition-colors duration-300 group-hover:bg-red">
               Read the story <Arrow />
             </span>
-            <p className="mt-6 text-[13px] text-ink-subtle">Fictional clinic, shown to illustrate how we work. Real case studies are on their way.</p>
+            <p className="mt-6 text-[13px] text-ink-subtle">Sample project, fictional clinic.</p>
           </div>
         </Seen>
       </div>
@@ -80,7 +80,7 @@ function BrowserShot() {
       <div className="grid grid-cols-[1.15fr_1fr] items-end gap-[4%] px-[5%] pt-[2%] pb-[5%]">
         <div>
           <p className="font-mono text-[clamp(6px,0.75vw,10px)] tracking-[0.2em] text-sea uppercase">Sports physio · Harbour Bay</p>
-          <p className="mt-[0.4em] text-[clamp(18px,3.6vw,52px)] leading-[0.95] font-semibold tracking-[-0.045em]">Back on the trail in six weeks.</p>
+          <p className="display mt-[0.4em] text-[clamp(18px,3.6vw,52px)] leading-[0.98]">Back on the trail in six weeks.</p>
           <p className="mt-[0.9em] max-w-[34ch] text-[clamp(7px,0.95vw,13px)] leading-relaxed text-ink-muted">Same-week appointments and a plan you can follow at home. Book online in under a minute.</p>
           <div className="mt-[1.2em] flex gap-[0.6em] text-[clamp(7px,0.9vw,12px)] font-semibold">
             <span className="rounded-full bg-ink px-[1.2em] py-[.7em] text-fg">See this week&rsquo;s times</span>
@@ -88,11 +88,9 @@ function BrowserShot() {
           </div>
         </div>
         <div className="relative aspect-[4/5] overflow-hidden rounded-[clamp(8px,1.2vw,16px)] bg-sea">
-          <div className="absolute -top-[12%] -right-[14%] aspect-square w-[62%] rounded-full bg-lamp" />
-          <svg viewBox="0 0 100 60" preserveAspectRatio="none" className="absolute inset-x-0 bottom-0 h-[50%] w-full">
-            <path d="M0 60V28l18-14 14 10 20-20 18 16 14-8 16 14V60Z" fill="var(--color-sea-soft)" opacity=".45" />
-            <path d="M0 60V40l24-10 18 8 22-14 20 12 16-6V60Z" fill="var(--color-sea-2)" />
-          </svg>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/img/desk-window.jpg" alt="" loading="lazy" className="absolute inset-0 size-full object-cover object-[60%_55%]" />
+          <span className="absolute bottom-[6%] left-[6%] rounded-full bg-lamp px-[0.9em] py-[0.45em] font-ui text-[clamp(6px,0.75vw,10px)] font-semibold">⭐ 4.9 · [reviews]</span>
         </div>
       </div>
     </div>
@@ -105,7 +103,7 @@ function PhoneShot() {
     <div aria-hidden="true" className="absolute right-[4%] -bottom-[10%] w-[30%] max-w-[230px] min-w-[120px] rounded-[clamp(18px,2.4vw,32px)] bg-ink p-[3%] shadow-[0_40px_70px_-30px_rgb(21_20_25/0.7)] transition-transform duration-[1200ms] ease-water motion-safe:group-hover:-translate-y-4">
       <div className="flex flex-col gap-[0.7em] rounded-[clamp(14px,2vw,26px)] bg-[#f7f4ef] p-[9%] text-[clamp(6px,0.8vw,11px)] text-ink">
         <p className="font-mono tracking-[0.18em] text-sea uppercase">Step 2 of 3</p>
-        <p className="text-[1.6em] leading-[1.05] font-semibold tracking-[-0.03em]">Pick a time on Thursday</p>
+        <p className="display text-[1.6em] leading-[1.05]">Pick a time on Thursday</p>
         <div className="grid grid-cols-2 gap-[0.5em]">
           {times.map((t, k) => (
             <span key={t} className={`rounded-[0.8em] py-[0.8em] text-center font-semibold tabular-nums ${k === 1 ? "bg-sea text-fg" : "bg-ink/6"}`}>{t}</span>

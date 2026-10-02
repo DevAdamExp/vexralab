@@ -1,10 +1,10 @@
 // Two homepages for the same fictional clinic, drawn in em on a 90em canvas (see Frames.Canvas).
-// Blue Sail is the clinic's brand colour and appears only in here.
+// Blue Sail is the clinic's brand colour; Deep Sea and Decor Yellow carry its panels.
 
-/** A numbered lamp pin pointing at a problem on the old site. Sized in px so it stays legible at any scale. */
+/** A numbered red pin pointing at a problem on the old site. Sized in px so it stays legible at any scale. */
 function Pin({ n, className }: { n: number; className: string }) {
   return (
-    <span className={`absolute z-10 grid size-6 place-items-center rounded-full bg-lamp font-ui text-[12px] font-bold text-ink shadow-[0_0_0_3px_rgb(21_20_25/0.85)] md:size-8 md:text-[14px] ${className}`}>
+    <span className={`absolute z-10 grid size-6 place-items-center rounded-full bg-red font-ui text-[12px] font-bold text-fg shadow-[0_0_0_3px_#f1ece5,0_6px_16px_-4px_rgb(0_0_0/0.5)] md:size-8 md:text-[14px] ${className}`}>
       {n}
     </span>
   );
@@ -68,16 +68,13 @@ export function OldSite({ pins = false }: { pins?: boolean }) {
   );
 }
 
-/** After: one promise, one button, and the next free slot. */
+/** After: one promise, one button, and the next free slot. Flat brand panels, no drawn scenery. */
 export function NewSite() {
   return (
-    <div className="flex h-full flex-col bg-[#f7f5f1] text-ink">
+    <div className="flex h-full flex-col bg-[#f7f5f1] font-ui text-ink">
       <div className="flex items-center justify-between px-[4em] py-[1.75em]">
-        <span className="flex items-center gap-[0.5em] text-[1.25em] font-bold tracking-[-0.03em]">
-          <svg viewBox="0 0 24 24" className="size-[1.3em]">
-            <circle cx="12" cy="12" r="12" fill="#2A4C9E" />
-            <path d="M5 14c2.3-2.4 4.7-2.4 7 0s4.7 2.4 7 0" stroke="#fff" strokeWidth="2" fill="none" strokeLinecap="round" />
-          </svg>
+        <span className="flex items-center gap-[0.55em] text-[1.2em] font-semibold tracking-[-0.01em]">
+          <span className="grid size-[1.5em] place-items-center rounded-full bg-sail text-[0.75em] text-white">H</span>
           Harbour Physio
         </span>
         <span className="flex gap-[2.25em] text-[0.95em] text-ink-muted">
@@ -86,54 +83,42 @@ export function NewSite() {
           <span>Prices</span>
           <span>Find us</span>
         </span>
-        <span className="rounded-full bg-sail px-[1.4em] py-[0.7em] text-[0.95em] font-semibold text-white">Book online</span>
+        <span className="rounded-full bg-sail px-[1.4em] py-[0.7em] text-[0.9em] font-semibold text-white">Book online</span>
       </div>
-      <div className="grid grid-cols-[1.15fr_1fr] gap-[3.5em] px-[4em] pt-[2.5em]">
-        <div className="pt-[1.5em]">
-          <span className="text-[0.8em] font-semibold tracking-[0.18em] text-sail uppercase">Sports physiotherapy · Harbourside</span>
-          <span className="mt-[0.4em] block text-[4.4em] leading-[0.98] font-semibold tracking-[-0.035em]">Back to the sport you love, sooner.</span>
-          <span className="mt-[1.4em] block max-w-[28em] text-[1.15em] leading-[1.55] text-ink-muted">
-            Assessment, treatment and a plan you can follow. Book online in a minute, any time of day.
+      <div className="grid flex-1 grid-cols-[1.1fr_1fr] gap-[3em] px-[4em] pt-[2em] pb-[3em]">
+        <div className="flex flex-col justify-center pb-[2em]">
+          <span className="font-mono text-[0.75em] tracking-[0.2em] text-sail uppercase">Sports physio · Harbourside</span>
+          <span className="mt-[0.5em] block font-display text-[5em] leading-[0.95] tracking-[-0.02em]">Back to the sport you love, sooner.</span>
+          <span className="mt-[1.2em] block max-w-[26em] text-[1.15em] leading-[1.55] text-ink-muted">Book online in a minute, any time of day.</span>
+          <span className="mt-[2em] flex gap-[0.8em] text-[0.95em] font-semibold">
+            <span className="rounded-full bg-sail px-[1.6em] py-[0.95em] text-white">Book an assessment →</span>
+            <span className="rounded-full border-[0.1em] border-ink/25 px-[1.6em] py-[0.95em]">See prices</span>
           </span>
-          <span className="mt-[2em] flex gap-[0.8em] text-[1em] font-semibold">
-            <span className="rounded-full bg-sail px-[1.6em] py-[0.9em] text-white">Book an assessment →</span>
-            <span className="rounded-full border-[0.1em] border-ink/25 px-[1.6em] py-[0.9em]">See prices</span>
-          </span>
-          <span className="mt-[2.2em] flex gap-[2em] text-[0.85em] text-ink-muted">
-            <span>✓ Registered physios</span>
-            <span>✓ Same-week slots</span>
-            <span>✓ Free parking</span>
+          <span className="mt-[2.4em] flex gap-[1.6em] text-[0.85em] text-ink-muted">
+            <span>🏅 Registered physios</span>
+            <span>🅿️ Free parking</span>
           </span>
         </div>
-        <div className="relative h-[31em] overflow-hidden rounded-[1.5em] bg-sail">
-          <svg viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice" className="absolute inset-0 size-full">
-            {[60, 110, 160, 210, 260].map((r) => (
-              <circle key={r} cx="330" cy="330" r={r} fill="none" stroke="#fff" strokeOpacity={0.14} strokeWidth="1.5" />
-            ))}
-            <path d="M0 290c50-26 100-26 150 0s100 26 150 0 100-26 150 0" stroke="#fff" strokeOpacity=".35" strokeWidth="3" fill="none" />
-            <path d="M0 330c50-26 100-26 150 0s100 26 150 0 100-26 150 0" stroke="#fff" strokeOpacity=".2" strokeWidth="3" fill="none" />
-          </svg>
-          <span className="absolute top-[2em] right-[2em] rounded-full bg-white/90 px-[1em] py-[0.5em] text-[0.8em] font-semibold text-sail">Reminder sent ✓</span>
-          <span className="absolute bottom-[2.5em] left-[2.5em] w-[17em] rounded-[1em] bg-white p-[1.4em] shadow-[0_1em_2em_-1em_rgb(0_0_0/0.4)]">
-            <span className="block text-[0.75em] font-semibold tracking-[0.14em] text-ink-muted uppercase">Next free</span>
-            <span className="mt-[0.2em] block text-[1.7em] font-semibold tracking-[-0.02em]">Today, 17:30</span>
-            <span className="block text-[0.9em] text-ink-muted">Follow-up · 30 min · Amina</span>
-            <span className="mt-[1em] block rounded-full bg-sail py-[0.6em] text-center text-[0.9em] font-semibold text-white">Book this slot</span>
+        <div className="grid grid-cols-2 grid-rows-[1fr_auto] gap-[1em]">
+          <div className="relative col-span-2 overflow-hidden rounded-[1.4em] bg-sea">
+            <span className="absolute -top-[30%] -right-[12%] aspect-square w-[55%] rounded-full bg-sea-2" />
+            <span className="absolute top-[1.6em] right-[1.6em] rounded-full bg-white/95 px-[1em] py-[0.5em] text-[0.8em] font-semibold text-sea">💬 Reminder sent</span>
+            <span className="absolute bottom-[1.8em] left-[1.8em] w-[17em] rounded-[1em] bg-white p-[1.3em] shadow-[0_1.2em_2.4em_-1em_rgb(0_0_0/0.45)]">
+              <span className="block font-mono text-[0.7em] tracking-[0.16em] text-ink-muted uppercase">Next free</span>
+              <span className="mt-[0.2em] block font-display text-[2em] leading-none">Today, 17:30</span>
+              <span className="mt-[0.4em] block text-[0.85em] text-ink-muted">Follow-up · 30 min · Amina</span>
+              <span className="mt-[1em] block rounded-full bg-lamp py-[0.65em] text-center text-[0.9em] font-semibold text-ink">Book this slot</span>
+            </span>
+          </div>
+          <span className="rounded-[1.2em] bg-lamp p-[1.2em]">
+            <span className="block text-[1.6em]">📅</span>
+            <span className="mt-[0.4em] block font-display text-[1.35em] leading-tight">Same-week slots</span>
+          </span>
+          <span className="rounded-[1.2em] bg-sail p-[1.2em] text-white">
+            <span className="block text-[1.6em]">⏱️</span>
+            <span className="mt-[0.4em] block font-display text-[1.35em] leading-tight">From £48</span>
           </span>
         </div>
-      </div>
-      <div className="mt-auto grid grid-cols-4 gap-[1.2em] px-[4em] pb-[2.5em]">
-        {[
-          ["Injury assessment", "45 min · £65"],
-          ["Follow-up", "30 min · £48"],
-          ["Sports massage", "45 min · £55"],
-          ["Return-to-run", "60 min · £75"],
-        ].map(([t, d]) => (
-          <span key={t} className="border-t-[0.1em] border-ink/15 pt-[0.8em]">
-            <span className="block text-[1em] font-semibold">{t}</span>
-            <span className="block text-[0.85em] text-ink-muted">{d}</span>
-          </span>
-        ))}
       </div>
     </div>
   );

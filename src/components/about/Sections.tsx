@@ -1,69 +1,61 @@
-import type { CSSProperties } from "react";
-import Link from "next/link";
-import { ALWAYS, BELIEFS, PAIRS, PEOPLE, QUESTIONS, WEEK, type Ritual } from "@/data/about";
-import { STUDIO_CITY, STUDIO_TZ } from "@/data/site";
+import { FaDribbble, FaGithub, FaLinkedinIn } from "react-icons/fa6";
+import { BELIEFS, PAIRS, PEOPLE, QUESTIONS, WEEK } from "@/data/about";
+import { STUDIO_CITY } from "@/data/site";
+import { Blob } from "@/components/ui/Blob";
 import { ChapterHead } from "@/components/ui/ChapterHead";
 import { Clock } from "@/components/ui/Clock";
-import { Arrow } from "@/components/ui/LiquidButton";
+import { Arrow, LiquidButton } from "@/components/ui/LiquidButton";
 import { Mark } from "@/components/ui/Mark";
 import { Seen, i } from "@/components/ui/Seen";
-import { CONTAINER, DISPLAY, H3, LEDE, REGISTER, SECTION } from "@/components/ui/tokens";
-import { Room } from "./Room";
+import { SocialIcons } from "@/components/ui/Social";
+import { CONTAINER, DISPLAY, REGISTER, SECTION } from "@/components/ui/tokens";
+import { Desk } from "./Desk";
 
-/** Paper. The one orchestrated moment on load: label, headline, lede, then the room. */
+/** Paper. One headline, one line, then the real desk. */
 export function Opening() {
   return (
     <section aria-labelledby="studio-title" className={`${REGISTER.paper} pt-32 pb-20 md:pt-44 md:pb-28`}>
-      <div className={`${CONTAINER} grid gap-y-8 lg:grid-cols-12 lg:gap-x-8`}>
+      <div className={`${CONTAINER} grid gap-y-8 lg:grid-cols-12 lg:items-end lg:gap-x-8`}>
         <div className="lg:col-span-8">
-          <p className="label load text-ink-muted" style={i(0)}>
-            Studio
+          <p className="label load flex items-center gap-3 text-ink-muted" style={i(0)}>
+            <span className="inline-grid h-7 place-items-center rounded-full bg-red px-3 tracking-[0.08em] text-fg">Studio</span>
+            Est. [year] 🇵🇰
           </p>
           <h1 id="studio-title" className={`load mt-6 max-w-[13ch] ${DISPLAY}`} style={i(1)}>
             A small studio with a big{" "}
-            <Mark gesture="highlight" onLoad delay={1100}>
+            <Mark tone="red" onLoad delay={1100}>
               window.
             </Mark>
           </h1>
         </div>
-        <p className={`load ${LEDE} text-ink-muted lg:col-span-4 lg:self-end`} style={i(2)}>
-          VexraLab exists for one job: helping founders stop apologising for their website. We design and build the site you&rsquo;d be proud to send, then stay to keep it that way.
+        <p className="load max-w-[30ch] text-[18px] leading-relaxed text-ink-muted lg:col-span-4" style={i(2)}>
+          We help founders stop apologising for their website.
         </p>
       </div>
-      <div className={`${CONTAINER} mt-14 md:mt-20`}>
-        <Room className="load" style={i(4)} />
+      <div className="load mx-auto mt-14 w-full max-w-[1600px] px-3 sm:px-5 md:mt-20" style={i(4)}>
+        <Desk />
       </div>
     </section>
   );
 }
 
-/** Night. The founder's worry in their own voice, answered plainly. */
+/** Night. The founder's worry, answered in one line. */
 export function WhyWeExist() {
   return (
     <section aria-labelledby="why-title" className={`${REGISTER.night} ${SECTION}`}>
       <div className={CONTAINER}>
-        <div className="grid gap-y-8 lg:grid-cols-12 lg:gap-x-8">
-          <ChapterHead id="why" label="Why we exist" register="night" className="lg:col-span-8">
-            Every rule here started as a <Mark>worry.</Mark>
-          </ChapterHead>
-          <p className={`${LEDE} text-muted lg:col-span-4 lg:self-end`}>
-            On the left, what founders carry into a new project. On the right, how the studio answers it.
-          </p>
-        </div>
-
-        <div aria-hidden="true" className="label mt-16 hidden text-muted md:mt-24 md:grid md:grid-cols-12 md:gap-x-8">
-          <span className="md:col-span-6">What you&rsquo;re thinking</span>
-          <span className="md:col-span-5 md:col-start-8">What we do about it</span>
-        </div>
-        <ol className="mt-12 border-b border-fg/15 md:mt-6">
+        <ChapterHead id="why" num="01" label="Why we exist" register="night">
+          Every rule started as a <Mark>worry.</Mark>
+        </ChapterHead>
+        <ol className="mt-16 border-b border-fg/15 md:mt-24">
           {PAIRS.map((p) => (
-            <Seen as="li" key={p.thought} threshold={0.4} className="draw grid gap-y-4 py-9 md:grid-cols-12 md:gap-x-8 md:py-12">
-              <p className="voice rise text-[clamp(1.75rem,3.4vw,2.875rem)] leading-[1.08] text-fg/85 md:col-span-6">&ldquo;{p.thought}&rdquo;</p>
-              <p className="rise flex gap-3 text-[clamp(1.125rem,1.6vw,1.5rem)] leading-snug font-medium md:col-span-5 md:col-start-8 md:self-center" style={i(2)}>
-                <span aria-hidden="true" className="text-muted">
+            <Seen as="li" key={p.thought} threshold={0.4} className="draw grid gap-y-3 border-t border-fg/15 py-9 md:grid-cols-12 md:items-baseline md:gap-x-8 md:py-12">
+              <p className="voice rise text-[clamp(1.6rem,3vw,2.5rem)] leading-[1.1] text-fg/80 md:col-span-7">&ldquo;{p.thought}&rdquo;</p>
+              <p className="rise flex gap-3 text-[clamp(1.125rem,1.6vw,1.375rem)] md:col-span-5" style={i(2)}>
+                <span aria-hidden="true" className="text-lamp">
                   →
                 </span>
-                <span>{p.answer}</span>
+                {p.answer}
               </p>
             </Seen>
           ))}
@@ -73,23 +65,22 @@ export function WhyWeExist() {
   );
 }
 
-/** Sea. Principles as a big type list; hover slides the line over a lamp stroke. */
+/** Sea. Five beliefs, names only. */
 export function Beliefs() {
   return (
     <section aria-labelledby="believe-title" className={`${REGISTER.sea} ${SECTION}`}>
       <div className={CONTAINER}>
-        <ChapterHead id="believe" label="What we believe" register="sea">
-          Six things we{" "}
-          <Mark gesture="circle">won&rsquo;t</Mark> trade.
+        <ChapterHead id="believe" num="02" label="What we believe" register="sea">
+          Five things we <Mark gesture="circle">won&rsquo;t</Mark> trade.
         </ChapterHead>
         <Seen as="ul" className="mt-16 border-t border-fg/20 md:mt-24">
           {BELIEFS.map((b, k) => (
-            <li key={b.name} className="rise group grid gap-y-3 border-b border-fg/20 py-7 md:grid-cols-12 md:items-baseline md:gap-x-8 md:py-9" style={i(k)}>
-              <h3 className={`relative transition-transform duration-700 ease-water group-hover:translate-x-[1.1em] md:col-span-7 ${H3}`}>
-                <span aria-hidden="true" className="absolute top-[0.52em] right-full mr-[0.3em] h-[0.08em] w-[0.8em] origin-right scale-x-0 bg-lamp transition-transform duration-700 ease-water group-hover:scale-x-100" />
-                {b.name}
-              </h3>
-              <p className="max-w-[40ch] text-[17px] leading-relaxed text-fg/80 transition-colors duration-500 group-hover:text-fg md:col-span-4 md:col-start-9">{b.note}</p>
+            <li key={b.name} className="rise flex items-baseline gap-5 border-b border-fg/20 py-7 md:gap-10 md:py-9" style={i(k)}>
+              <span className="label w-8 shrink-0 text-lamp">0{k + 1}</span>
+              <span className="display flex-1 text-[clamp(1.75rem,4vw,3.5rem)] leading-[1.05]">{b.name}</span>
+              <span aria-hidden="true" className="text-[clamp(1.5rem,3vw,2.5rem)]">
+                {b.emoji}
+              </span>
             </li>
           ))}
         </Seen>
@@ -98,116 +89,77 @@ export function Beliefs() {
   );
 }
 
-/** Belle. The studio week drawn as a strip: rituals sit on their days, the daily ones run across. */
+/** Sail. The week as a clean five-column strip, with the studio clock. */
 export function StudioWeek() {
-  const offset = new Intl.DateTimeFormat("en-GB", { timeZone: STUDIO_TZ, timeZoneName: "shortOffset" }).formatToParts(new Date()).find((p) => p.type === "timeZoneName")?.value;
   return (
-    <section aria-labelledby="week-title" className={`${REGISTER.belle} ${SECTION}`}>
+    <section aria-labelledby="week-title" className={`${REGISTER.sail} ${SECTION}`}>
       <div className={CONTAINER}>
-        <div className="grid gap-y-10 lg:grid-cols-12 lg:gap-x-8">
-          <div className="lg:col-span-8">
-            <ChapterHead id="week" label="How the studio works" register="belle">
-              The same week,{" "}
-              <Mark gesture="highlight">every</Mark> week.
-            </ChapterHead>
-            <p className={`${LEDE} mt-8 text-ink-muted`}>A rhythm you can plan around. You always know when you&rsquo;ll see progress and when we need you.</p>
-          </div>
-          <div className="rounded-[20px] border border-ink/15 p-6 lg:col-span-4 lg:self-end">
-            <p className="label flex items-center gap-2.5 text-ink-muted">
-              <span className="lamp-dot" aria-hidden="true" /> Studio time
-            </p>
-            <p className="mt-3 text-[clamp(2.5rem,4vw,3.5rem)] leading-none font-semibold tracking-[-0.03em]">
+        <div className="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
+          <ChapterHead id="week" num="03" label="How the week runs" register="sail">
+            The same week, <Mark>every</Mark> week.
+          </ChapterHead>
+          <p className="flex items-baseline gap-3">
+            <span className="display text-[clamp(2.75rem,5vw,4rem)] leading-none">
               <Clock />
-            </p>
-            <p className="mt-3 text-[15px] leading-relaxed text-ink-muted">
-              {STUDIO_CITY}, {offset}. Studio hours are [09:00 to 18:00], Monday to Friday. We book Friday demos for your morning.
-            </p>
-          </div>
+            </span>
+            <span className="label text-fg/85">in {STUDIO_CITY} 🇵🇰</span>
+          </p>
         </div>
-
-        <Seen threshold={0.2} className="relative mt-16 md:mt-24">
-          {/* The drawn strip: five column rules that wipe in. */}
-          <div aria-hidden="true" className="absolute inset-0 hidden grid-cols-5 md:grid">
-            {WEEK.map((d, k) => (
-              <span key={d.day} className="wipe border-l border-ink/15 last:border-r" style={i(k)} />
-            ))}
-          </div>
-          <ol className="relative grid md:grid-cols-5">
-            {WEEK.map((d, k) => (
-              <li key={d.day} className="grid grid-cols-[6.5rem_1fr] gap-x-4 border-t border-ink/15 py-5 md:block md:border-t-0 md:px-3 md:py-0">
-                <p className="label pt-1 text-ink-muted md:border-b md:border-ink/15 md:pt-0 md:pb-4">{d.day}</p>
-                <div className="flex flex-col gap-3 md:min-h-[260px] md:py-4">
-                  {d.rituals.length ? (
-                    d.rituals.map((r, n) => <RitualCard key={r.name} r={r} style={i(k + n + 2)} />)
-                  ) : (
-                    <p className="fade pt-1 text-[14px] text-ink-muted md:pt-2" style={i(k + 2)}>
-                      Heads down, building.
-                    </p>
-                  )}
-                </div>
-              </li>
-            ))}
-          </ol>
-          <ul className="relative mt-2 grid gap-3 md:mx-3">
-            {ALWAYS.map((r, k) => (
-              <li key={r.name} className="rise flex flex-col gap-1 rounded-[16px] bg-ink px-5 py-4 text-fg md:flex-row md:items-baseline md:justify-between md:gap-8 md:rounded-full md:px-7" style={i(k + 6)}>
-                <span className="flex items-baseline gap-3">
-                  <span className="label text-[11px] text-muted">Mon to Fri</span>
-                  <span className="text-[17px] font-semibold">{r.name}</span>
-                </span>
-                <span className="text-[15px] text-muted">{r.text}</span>
-              </li>
-            ))}
-          </ul>
+        <Seen as="ol" className="mt-16 grid grid-cols-2 border-t border-fg/25 sm:grid-cols-3 md:mt-24 lg:grid-cols-5">
+          {WEEK.map((w, k) => (
+            <li key={w.name} className="rise flex flex-col gap-4 border-b border-fg/25 py-8 pr-4 lg:border-b-0 lg:border-l lg:px-6 lg:first:border-l-0 lg:first:pl-0" style={i(k)}>
+              <span aria-hidden="true" className="text-[2.25rem] leading-none">
+                {w.emoji}
+              </span>
+              <span className="label text-fg/85">{w.when}</span>
+              <h3 className="text-[clamp(1.375rem,2vw,1.75rem)] leading-[1.1]">{w.name}</h3>
+            </li>
+          ))}
         </Seen>
       </div>
     </section>
   );
 }
 
-function RitualCard({ r, style }: { r: Ritual; style: CSSProperties }) {
-  return (
-    <article className="rise rounded-[16px] border border-ink/10 bg-paper p-4 md:p-5" style={style}>
-      <p className="label text-[11px] text-ink-muted">{r.kind}</p>
-      <h3 className="mt-2 text-[18px] font-semibold tracking-[-0.01em]">{r.name}</h3>
-      <p className="mt-1.5 text-[15px] leading-snug text-ink-muted">{r.text}</p>
-    </article>
-  );
-}
+const MONO = { sea: "bg-sea text-fg", sail: "bg-sail text-fg", red: "bg-red text-fg", lamp: "bg-lamp text-ink" } as const;
+const LINKS = [
+  { key: "linkedin", label: "LinkedIn", Icon: FaLinkedinIn },
+  { key: "github", label: "GitHub", Icon: FaGithub },
+  { key: "dribbble", label: "Dribbble", Icon: FaDribbble },
+] as const;
 
-const AVATAR = {
-  sea: "bg-sea text-fg",
-  ink: "bg-ink text-fg",
-  lamp: "bg-lamp text-ink",
-  belle: "bg-belle text-ink",
-} as const;
-
-/** Paper. PLACEHOLDER team (see PEOPLE in src/data/about.ts). Monograms drawn in CSS, no photos. */
+/** Paper. PLACEHOLDER team (see PEOPLE in src/data/about.ts). */
 export function People() {
   return (
-    <section aria-labelledby="people-title" className={`${REGISTER.paper} ${SECTION}`}>
+    <section aria-labelledby="people-title" className={`${REGISTER.paper} ${SECTION} relative overflow-hidden`}>
+      <div className="absolute top-24 -right-4 w-[46vw] max-w-[520px] md:top-32 max-sm:hidden">
+        <Blob tone="sail" side="right" emoji="👋" />
+      </div>
       <div className={CONTAINER}>
-        <div className="grid gap-y-8 lg:grid-cols-12 lg:gap-x-8">
-          <ChapterHead id="people" label="The people" register="paper" className="lg:col-span-8">
-            The hands on your <Mark gesture="highlight">project.</Mark>
-          </ChapterHead>
-          <p className={`${LEDE} text-ink-muted lg:col-span-4 lg:self-end`}>The people below are the people who do the work. You&rsquo;ll talk to them directly from the first call.</p>
-        </div>
-        <Seen as="ul" className="mt-16 grid gap-x-6 gap-y-12 sm:grid-cols-2 md:mt-24 lg:grid-cols-4">
+        <ChapterHead id="people" num="04" label="The people" register="paper" h2ClassName="max-w-[11ch]">
+          The hands on your <Mark tone="red">project.</Mark>
+        </ChapterHead>
+        <Seen as="ul" className="mt-16 grid grid-cols-2 gap-3 sm:gap-6 md:mt-24 lg:grid-cols-4">
           {PEOPLE.map((p, k) => (
-            <li key={p.role} className="rise group" style={i(k)}>
-              <div aria-hidden="true" className={`relative grid aspect-[4/5] place-items-center overflow-hidden rounded-[24px] ${AVATAR[p.tone]}`}>
-                <span className="absolute size-[74%] rounded-full border border-current opacity-20 transition-transform duration-700 ease-water group-hover:scale-110" />
-                <span className="absolute size-[52%] rounded-full border border-current opacity-15" />
-                <span className="absolute inset-x-0 bottom-[16%] h-px bg-current opacity-20" />
-                <span className="relative text-[clamp(4rem,9vw,6.5rem)] leading-none font-semibold tracking-[-0.05em]">{p.initials}</span>
+            <li key={p.role} className="rise rounded-[20px] bg-paper-2 p-3 pb-4 sm:rounded-[24px] sm:p-4 sm:pb-5" style={i(k)}>
+              <div aria-hidden="true" className={`grid aspect-square place-items-center rounded-[18px] ${MONO[p.tone]}`}>
+                <span className="display text-[clamp(3rem,8vw,6rem)] leading-none">{p.initials}</span>
               </div>
-              <h3 className="mt-5 text-[22px] font-semibold tracking-[-0.02em]">{p.name}</h3>
-              <p className="label mt-1.5 text-[11px] text-ink-muted">{p.role}</p>
-              <p className="mt-3 max-w-[32ch] text-[15px] leading-relaxed text-ink-muted">
-                <span className="font-medium text-ink">At the desk: </span>
-                {p.desk}
-              </p>
+              <h3 className="mt-4 px-1 text-[20px] leading-tight sm:mt-5 sm:text-[24px]">{p.name}</h3>
+              <p className="label mt-2 px-1 text-ink-muted">{p.role}</p>
+              <ul className="mt-3 -ml-1.5 flex flex-wrap">
+                {LINKS.map(({ key, label, Icon }) => (
+                  <li key={key}>
+                    <a
+                      href={p.links[key]}
+                      aria-label={`${p.name} on ${label}`}
+                      className="grid size-11 place-items-center rounded-full text-ink transition-colors duration-500 hover:bg-sea hover:text-fg"
+                    >
+                      <Icon aria-hidden="true" className="size-[17px]" />
+                    </a>
+                  </li>
+                ))}
+              </ul>
             </li>
           ))}
         </Seen>
@@ -216,43 +168,52 @@ export function People() {
   );
 }
 
-/** Night. Native disclosure widgets: keyboard and no-JS friendly. */
+/** Night strip. Every platform with its own logo. */
+export function FindUs() {
+  return (
+    <section aria-labelledby="find-title" className={`${REGISTER.night} py-28 md:py-40`}>
+      <Seen className={`${CONTAINER} flex flex-col gap-10 md:flex-row md:items-end md:justify-between`}>
+        <div>
+          <p className="label fade text-lamp">Find us 📍</p>
+          <h2 id="find-title" className="rise mt-5 text-[clamp(2.5rem,5vw,4.5rem)] leading-[1.02]" style={i(1)}>
+            Say hello <Mark>anywhere.</Mark>
+          </h2>
+        </div>
+        <div className="rise" style={i(2)}>
+          <SocialIcons tone="night" />
+        </div>
+      </Seen>
+    </section>
+  );
+}
+
+/** Belle. Native disclosure widgets: keyboard and no-JS friendly. */
 export function Questions() {
   return (
-    <section aria-labelledby="faq-title" className={`${REGISTER.belle} ${SECTION}`}>
+    <section aria-labelledby="faq-title" className={`${REGISTER.belle} ${SECTION} relative overflow-hidden`}>
+      <div className="absolute bottom-16 -left-4 w-[40vw] max-w-[440px] max-lg:hidden">
+        <Blob tone="red" side="left" emoji="💬" />
+      </div>
       <div className={`${CONTAINER} grid gap-y-12 lg:grid-cols-12 lg:gap-x-8`}>
-        <div className="lg:col-span-5">
-          <div className="lg:sticky lg:top-32">
-            <ChapterHead id="faq" label="Questions" register="belle" h2ClassName="max-w-[11ch]">
-              What founders ask <Mark>about us.</Mark>
-            </ChapterHead>
-            <p className={`${LEDE} mt-8 max-w-[36ch] text-ink-muted`}>
-              Something else on your mind?{" "}
-              <Link href="/contact" className="text-ink underline decoration-ink/30 decoration-1 underline-offset-[6px] transition-colors hover:decoration-sea">
-                Ask us directly
-              </Link>
-              . A person replies.
-            </p>
-          </div>
+        <div className="flex flex-col items-start gap-10 lg:col-span-5">
+          <ChapterHead id="faq" num="05" label="Questions" register="belle" h2ClassName="max-w-[10ch]">
+            What founders <Mark tone="red">ask.</Mark>
+          </ChapterHead>
+          <LiquidButton href="/contact" variant="lamp">
+            Ask us directly <Arrow />
+          </LiquidButton>
         </div>
         <Seen className="border-b border-ink/15 lg:col-span-7">
           {QUESTIONS.map((item, k) => (
-            <details key={item.q} className="draw group" style={i(k)}>
+            <details key={item.q} className="draw group border-t border-ink/15" style={i(k)}>
               <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-6 py-6 md:py-7 [&::-webkit-details-marker]:hidden">
-                <h3 className="text-[clamp(1.25rem,2vw,1.625rem)] leading-tight font-medium tracking-[-0.015em]">{item.q}</h3>
-                <span aria-hidden="true" className="relative grid size-10 shrink-0 place-items-center rounded-full border border-ink/25 transition-[transform,border-color] duration-500 ease-water group-open:rotate-45 group-hover:border-ink">
+                <h3 className="text-[clamp(1.375rem,2.2vw,1.875rem)] leading-tight">{item.q}</h3>
+                <span aria-hidden="true" className="relative grid size-11 shrink-0 place-items-center rounded-full border border-ink/25 transition-[transform,border-color,background-color] duration-500 ease-water group-open:rotate-45 group-open:border-red group-open:bg-red group-open:text-fg group-hover:border-ink">
                   <span className="absolute h-px w-3.5 bg-current" />
                   <span className="absolute h-3.5 w-px bg-current" />
                 </span>
               </summary>
-              <div className="max-w-[58ch] pr-12 pb-8 text-[17px] leading-[1.65] text-ink-muted">
-                <p>{item.a}</p>
-                {item.link && (
-                  <Link href={item.link.href} className="mt-4 inline-flex min-h-11 items-center gap-2 font-medium text-ink transition-colors hover:text-sea">
-                    {item.link.label} <Arrow />
-                  </Link>
-                )}
-              </div>
+              <p className="max-w-[48ch] pr-12 pb-8 text-[17px] leading-[1.65] text-ink-muted">{item.a}</p>
             </details>
           ))}
         </Seen>

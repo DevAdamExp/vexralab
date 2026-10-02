@@ -1,13 +1,15 @@
-/* The letter: a sheet of paper on the desk, under the lamp. */
+/* The letter: a sheet of paper on the void, under a soft lamp glow. */
 
 .sheet {
   position: relative;
   isolation: isolate;
-  background: var(--color-paper);
+  /* The lighter paper keeps red errors above AA. The lamp glows around the sheet. */
+  background: var(--color-paper-2);
   color: var(--color-ink);
-  border-radius: 3px;
+  border-radius: 6px;
   box-shadow:
     0 1px 0 rgb(255 255 255 / 0.6) inset,
+    0 0 140px -10px rgb(246 187 2 / 0.22),
     0 40px 80px -30px rgb(0 0 0 / 0.75),
     0 14px 28px -14px rgb(0 0 0 / 0.55);
   transition: transform 700ms var(--ease-water);
@@ -34,7 +36,7 @@
 /* Left on the desk at a slight angle; it straightens when you start writing. */
 @media (min-width: 768px) {
   .sheet {
-    transform: rotate(-1.1deg);
+    transform: rotate(-0.8deg);
   }
   .sheet:focus-within,
   .sheet[data-sent] {

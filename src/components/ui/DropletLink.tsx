@@ -40,7 +40,7 @@ export function DropletLink({ href, children, className = "", current = false }:
       aria-current={current ? "page" : undefined}
       onPointerEnter={(e) => move(e, true)}
       onPointerLeave={(e) => move(e, false)}
-      className={`group relative isolate overflow-hidden rounded-full px-4 py-2.5 text-[14px] font-medium transition-colors duration-300 hover:text-ink ${className}`}
+      className={`group relative isolate overflow-hidden rounded-full px-5 py-2.5 font-ui text-[12px] font-medium uppercase tracking-[0.15em] transition-colors duration-300 hover:text-ink ${className}`}
     >
       <span aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10" style={{ filter: "url(#vx-goo)" }}>
         {REST.map((r, i) => (

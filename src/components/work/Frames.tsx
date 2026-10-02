@@ -53,8 +53,8 @@ export function Browser({ url, className = "", children }: { url: string; classN
 /** A phone: ink bezel around a 22em-wide screen. Always decorative; caption it nearby. */
 export function Phone({ className = "", children }: { className?: string; children: ReactNode }) {
   return (
-    <div aria-hidden="true" className={`rounded-[2.4rem] bg-ink p-2 shadow-[0_30px_60px_-30px_rgb(0_0_0/0.55)] ring-1 ring-black/20 ${className}`}>
-      <Canvas em={22} ratio="9 / 18.5" className="rounded-[1.9rem] bg-[#f7f5f1] text-ink">
+    <div aria-hidden="true" className={`rounded-[2.4rem] bg-ink p-2 shadow-[0_40px_80px_-30px_rgb(0_0_0/0.6)] ring-1 ring-fg/10 ${className}`}>
+      <Canvas em={22} ratio="9 / 18.5" className="rounded-[1.9rem] bg-[#f7f5f1] font-ui text-ink">
         <div className="flex items-center justify-between px-[1.6em] pt-[0.9em] text-[0.8em] font-semibold">
           <span>9:41</span>
           <span className="h-[1.6em] w-[6.5em] rounded-full bg-ink" />

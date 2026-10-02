@@ -3,62 +3,69 @@
 /* VexraLab: night → morning. See DESIGN.md. */
 
 @theme inline {
+  /* The six brand colours, exact. */
+  --color-void: #151419;      /* Dark Void */
+  --color-belle: #dad2c8;     /* Ballroom Belle */
+  --color-sea: #075056;       /* Deep Sea Green */
+  --color-sail: #2a4c9e;      /* Blue Sail */
+  --color-lamp: #f6bb02;      /* Decor Yellow */
+  --color-red: #bd1b1f;       /* Red Inferno */
+
+  /* Working shades derived from them. */
   --color-night: #151419;
-  --color-night-2: #1d1c22;
-  --color-night-3: #26252c;
-  --color-fg: #eee9e1;
-  --color-muted: #aaa4aa;
-  --color-subtle: #7d7880;
-
-  --color-paper: #eee9e1;
-  --color-belle: #dad2c8;
+  --color-night-2: #1e1d23;
+  --color-night-3: #29282f;
+  --color-fg: #f1ece5;
+  --color-muted: #b3adb2;
+  --color-subtle: #857f86;
+  --color-paper: #dad2c8;
+  --color-paper-2: #e6e0d8;
   --color-ink: #151419;
-  --color-ink-muted: #56525a;
-  --color-ink-subtle: #7a757c;
-
-  --color-sea: #075056;
-  --color-sea-2: #0b6870;
-  --color-sea-soft: #a9c2be;
-  --color-lamp: #f6bb02;
-  --color-lamp-soft: #fbe7a6;
+  --color-ink-muted: #4f4b52;
+  --color-ink-subtle: #6e6970;
+  --color-sea-2: #0a666d;
+  --color-sea-soft: #9fbfbc;
+  --color-sail-2: #3a5fb8;
+  --color-sail-soft: #b7c4e6;
+  --color-lamp-soft: #fbe3a0;
   --color-alarm: #bd1b1f;
-  --color-sail: #2a4c9e;
 
-  --font-display: var(--font-schibsted);
-  --font-ui: var(--font-schibsted);
-  --font-voice: var(--font-newsreader);
-  --font-mono: var(--font-plex-mono);
+  --font-hero: var(--font-betha);
+  --font-display: var(--font-cranio);
+  --font-body: var(--font-mifetro);
+  --font-ui: var(--font-manrope);
+  --font-mono: var(--font-jbmono);
 
   --ease-water: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-drop: cubic-bezier(0.2, 1, 0.3, 1);
 }
 
-html {
-  color-scheme: dark;
-  overflow-x: clip;
-  scroll-behavior: auto;
-}
+html { color-scheme: dark; overflow-x: clip; scroll-behavior: auto; }
 
 body {
-  background: var(--color-night);
+  background: var(--color-void);
   color: var(--color-fg);
-  font-family: var(--font-schibsted), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-mifetro), ui-sans-serif, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;
   overflow-x: clip;
 }
 
-h1, h2, h3, h4 { font-family: var(--font-schibsted), ui-sans-serif, sans-serif; text-wrap: balance; }
+/* Cranio carries every heading. It has one weight, so headings never fake bold. */
+h1, h2, h3, h4, .display { font-family: var(--font-cranio), ui-serif, serif; font-weight: 400; letter-spacing: -0.015em; text-wrap: balance; }
+.hero-type { font-family: var(--font-betha), ui-sans-serif, sans-serif; font-weight: 400; letter-spacing: 0; line-height: 0.82; }
+button, .ui, nav a, label, input, select, textarea, summary { font-family: var(--font-manrope), ui-sans-serif, system-ui, sans-serif; }
 p { text-wrap: pretty; }
+strong, b { font-weight: 400; color: inherit; }
 ::selection { background: var(--color-lamp); color: var(--color-ink); }
 
 /* currentColor contrasts on every register; in a layer so utilities can override. */
 @layer base { :focus-visible { outline: 2px solid currentColor; outline-offset: 3px; } }
 
-/* The founder's voice. */
-.voice { font-family: var(--font-newsreader), Georgia, serif; font-style: italic; font-weight: 300; letter-spacing: -0.01em; }
+/* A spoken line: Cranio's oblique cut. */
+.voice { font-family: var(--font-cranio), ui-serif, serif; font-style: italic; font-weight: 400; letter-spacing: -0.01em; }
 
-.label { font-family: var(--font-plex-mono), ui-monospace, monospace; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; }
+.label { font-family: var(--font-jbmono), ui-monospace, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; }
 
 .tabular { font-variant-numeric: tabular-nums; }
 
@@ -95,6 +102,8 @@ p { text-wrap: pretty; }
 
 @keyframes load-rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
 @keyframes marquee { to { transform: translateX(-50%); } }
+@keyframes plate-in { from { opacity: 0; transform: translateY(14px) scale(.98); } to { opacity: 1; transform: none; } }
+@keyframes marquee-third { to { transform: translateX(-33.3333%); } }
 @keyframes pulse-lamp { 70% { box-shadow: 0 0 0 12px rgb(246 187 2 / 0); } 100% { box-shadow: 0 0 0 0 rgb(246 187 2 / 0); } }
 @keyframes drip { 0% { transform: scaleY(0); } 60% { transform: scaleY(1); opacity: 1; } 100% { transform: scaleY(1); opacity: 0; } }
 

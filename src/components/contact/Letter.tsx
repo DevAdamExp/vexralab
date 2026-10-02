@@ -14,13 +14,13 @@ const idOf = (f: BriefField) => `brief-${f}`;
 
 type Status = "idle" | "sending" | "failed" | "sent";
 
-const LABEL = "label text-[11px] text-ink-muted";
+const LABEL = "label text-ink-muted";
 const INPUT =
-  "block min-h-12 w-full min-w-0 rounded-none border-0 border-b-[1.5px] border-ink/35 bg-transparent px-0 py-2 text-[19px] text-ink transition-colors focus:border-ink aria-[invalid=true]:border-alarm";
+  "block min-h-12 w-full min-w-0 rounded-none border-0 border-b-[1.5px] border-ink/35 bg-transparent px-0 py-2 text-[19px] text-ink transition-colors focus:border-sea aria-[invalid=true]:border-alarm";
 
 /**
- * The letter under the lamp: a three-step brief on a sheet of paper, with the founder's
- * letter composing itself below as they answer. On send the sheet settles and is stamped.
+ * The letter: a three-step brief on a sheet of paper, with the founder's letter composing
+ * itself below as they answer. On send the sheet settles and is stamped.
  */
 export function Letter() {
   const [v, setV] = useState<Brief>(EMPTY);
@@ -97,147 +97,141 @@ export function Letter() {
   const err = (f: BriefField) => (errors[f] ? { "aria-invalid": true as const, "aria-describedby": `${idOf(f)}-error` } : {});
 
   return (
-    <div className="relative">
-      <div className={styles.sheet} data-sent={sent || undefined}>
-        <div className="p-5 sm:p-8 lg:p-10">
-          {sent ? (
-            <div className={styles.settle}>
-              <p className={LABEL}>Sent</p>
-              <h2 id="brief-sent-title" tabIndex={-1} className="mt-4 text-[clamp(2rem,3.4vw,2.75rem)] font-semibold leading-[1.02] tracking-[-0.025em] focus:outline-none">
-                Thank you, {v.name.trim().split(/\s+/)[0]}.
-              </h2>
-              <p className="mt-4 max-w-[46ch] text-[17px] leading-relaxed text-ink-muted">
-                Your letter is on our desk. We&rsquo;ll reply by <strong className="font-semibold text-ink">{day}</strong> to <span className="break-all text-ink">{v.email}</span>, with honest next steps.
-              </p>
+    <div className={styles.sheet} data-sent={sent || undefined}>
+      <div className="p-6 sm:p-10 lg:p-12">
+        {sent ? (
+          <div className={styles.settle}>
+            <p className="label text-sea">Sent ✉️</p>
+            <h2 id="brief-sent-title" tabIndex={-1} className="mt-5 text-[clamp(2.25rem,4vw,3.25rem)] leading-[1] focus:outline-none">
+              Thank you, {v.name.trim().split(/\s+/)[0]}.
+            </h2>
+            <p className="mt-5 max-w-[40ch] text-[17px] leading-relaxed text-ink-muted">
+              We&rsquo;ll reply by <strong className="text-ink">{day}</strong> to <span className="break-all text-ink">{v.email}</span>.
+            </p>
+          </div>
+        ) : (
+          <form noValidate onSubmit={onSubmit} aria-labelledby="brief-step-title">
+            <Progress step={step} />
+
+            <h2 id="brief-step-title" tabIndex={-1} className="mt-8 text-[clamp(2rem,3.4vw,2.75rem)] leading-[1.02] focus:outline-none">
+              {STEPS[step]}
+            </h2>
+
+            {/* Hidden from people; bots fill it in. */}
+            <div aria-hidden="true" className="absolute -left-[9999px] size-px overflow-hidden">
+              <label htmlFor="brief-nickname">Leave this empty</label>
+              <input id="brief-nickname" name="nickname" tabIndex={-1} autoComplete="off" value={trap} onChange={(e) => setTrap(e.target.value)} />
             </div>
-          ) : (
-            <form noValidate onSubmit={onSubmit} aria-labelledby="brief-step-title">
-              <Progress step={step} />
 
-              <h2 id="brief-step-title" tabIndex={-1} className="mt-7 text-[clamp(1.75rem,3vw,2.5rem)] font-semibold leading-[1.04] tracking-[-0.025em] focus:outline-none">
-                {STEPS[step]}
-              </h2>
-
-              {/* Hidden from people; bots fill it in. */}
-              <div aria-hidden="true" className="absolute -left-[9999px] size-px overflow-hidden">
-                <label htmlFor="brief-nickname">Leave this empty</label>
-                <input id="brief-nickname" name="nickname" tabIndex={-1} autoComplete="off" value={trap} onChange={(e) => setTrap(e.target.value)} />
-              </div>
-
-              <div className="mt-8 flex flex-col gap-7">
-                {step === 0 && (
-                  <>
-                    <div className="grid gap-7 sm:grid-cols-2 sm:gap-x-8">
-                      <Field f="name" label="Your name" error={errors.name}>
-                        <input id={idOf("name")} name="name" autoComplete="name" maxLength={LIMITS.name} value={v.name} onChange={(e) => set("name", e.target.value)} className={INPUT} {...err("name")} />
-                      </Field>
-                      <Field f="email" label="Email" error={errors.email}>
-                        <input id={idOf("email")} name="email" type="email" inputMode="email" autoComplete="email" spellCheck={false} maxLength={LIMITS.email} value={v.email} onChange={(e) => set("email", e.target.value)} className={INPUT} {...err("email")} />
-                      </Field>
-                    </div>
-                    <div className="grid gap-7 sm:grid-cols-2 sm:gap-x-8">
-                      <Field f="company" label="Company or project" error={errors.company}>
-                        <input id={idOf("company")} name="company" autoComplete="organization" maxLength={LIMITS.company} value={v.company} onChange={(e) => set("company", e.target.value)} className={INPUT} {...err("company")} />
-                      </Field>
-                      <Field f="website" label="Website" optional error={errors.website}>
-                        <input id={idOf("website")} name="website" inputMode="url" autoComplete="url" spellCheck={false} maxLength={LIMITS.website} value={v.website} onChange={(e) => set("website", e.target.value)} className={INPUT} {...err("website")} />
-                      </Field>
-                    </div>
-                  </>
-                )}
-
-                {step === 1 && (
-                  <>
-                    <Group legend="Lately I keep thinking… (pick any)">
-                        {WORRIES.map((w) => (
-                          <Chip key={w.id} type="checkbox" name="worries" id={`brief-worry-${w.id}`} checked={v.worries.includes(w.id)} onChange={() => toggle("worries", w.id)} voice>
-                            {w.label}
-                          </Chip>
-                        ))}
-                    </Group>
-                    <Field f="words" label="In your own words" optional={v.worries.some((w) => w !== "else")} error={errors.words}>
-                      <textarea
-                        id={idOf("words")}
-                        name="words"
-                        rows={4}
-                        maxLength={LIMITS.words}
-                        value={v.words}
-                        onChange={(e) => set("words", e.target.value)}
-                        placeholder="The thing you'd only say to a friend…"
-                        className={`${INPUT} voice resize-y text-[22px] leading-[1.45] placeholder:text-ink-muted`}
-                        {...err("words")}
-                      />
-                    </Field>
-                  </>
-                )}
-
-                {step === 2 && (
-                  <>
-                    <Group legend="Where could we help? (pick any)">
-                      {SERVICES.map((s) => (
-                        <Chip key={s.id} type="checkbox" name="services" id={`brief-service-${s.id}`} checked={v.services.includes(s.id)} onChange={() => toggle("services", s.id)}>
-                          {s.name}
-                        </Chip>
-                      ))}
-                    </Group>
-                    <Group legend="When would you like to start?">
-                      {TIMELINES.map((t) => (
-                        <Chip key={t.id} type="radio" name="timeline" id={`brief-timeline-${t.id}`} checked={v.timeline === t.id} onChange={() => set("timeline", t.id)}>
-                          {t.label}
-                        </Chip>
-                      ))}
-                    </Group>
-                    <Group legend="Rough budget">
-                      {BUDGETS.map((b) => (
-                        <Chip key={b.id} type="radio" name="budget" id={`brief-budget-${b.id}`} checked={v.budget === b.id} onChange={() => set("budget", b.id)}>
-                          {b.label}
-                        </Chip>
-                      ))}
-                    </Group>
-                  </>
-                )}
-              </div>
-
-              {status === "failed" && (
-                <div role="alert" className="mt-8 border-l-2 border-alarm pl-4 text-[15px] leading-relaxed">
-                  <p>That didn&rsquo;t reach us. Your letter is still here, so you can send it again, or write to us directly.</p>
-                  <div className="mt-2">
-                    <CopyEmail email={EMAIL} tone="paper" />
-                  </div>
+            <div className="mt-10 flex flex-col gap-9">
+              {step === 0 && (
+                <div className="grid gap-9 sm:grid-cols-2 sm:gap-x-10">
+                  <Field f="name" label="Your name" error={errors.name}>
+                    <input id={idOf("name")} name="name" autoComplete="name" maxLength={LIMITS.name} value={v.name} onChange={(e) => set("name", e.target.value)} className={INPUT} {...err("name")} />
+                  </Field>
+                  <Field f="email" label="Email" error={errors.email}>
+                    <input id={idOf("email")} name="email" type="email" inputMode="email" autoComplete="email" spellCheck={false} maxLength={LIMITS.email} value={v.email} onChange={(e) => set("email", e.target.value)} className={INPUT} {...err("email")} />
+                  </Field>
+                  <Field f="company" label="Company or project" error={errors.company}>
+                    <input id={idOf("company")} name="company" autoComplete="organization" maxLength={LIMITS.company} value={v.company} onChange={(e) => set("company", e.target.value)} className={INPUT} {...err("company")} />
+                  </Field>
+                  <Field f="website" label="Website" optional error={errors.website}>
+                    <input id={idOf("website")} name="website" inputMode="url" autoComplete="url" spellCheck={false} maxLength={LIMITS.website} value={v.website} onChange={(e) => set("website", e.target.value)} className={INPUT} {...err("website")} />
+                  </Field>
                 </div>
               )}
 
-              <div className="mt-9 flex flex-wrap items-center justify-between gap-4 border-t border-ink/12 pt-6">
-                {step > 0 ? (
-                  <button type="button" onClick={() => go(step - 1)} className="inline-flex min-h-11 items-center gap-2 rounded-full px-1 text-[15px] font-medium text-ink-muted transition-colors hover:text-ink">
-                    <span aria-hidden="true">&larr;</span> Back
-                  </button>
-                ) : (
-                  <span className="text-[14px] text-ink-muted">Takes about two minutes.</span>
-                )}
-                <LiquidButton as="button" type="submit" variant="ink" disabled={status === "sending"} className="ml-auto">
-                  {step < 2 ? (
-                    <>
-                      Next <Arrow />
-                    </>
-                  ) : status === "sending" ? (
-                    "Sending…"
-                  ) : (
-                    <>
-                      Send the letter <Arrow />
-                    </>
-                  )}
-                </LiquidButton>
-              </div>
-              <p role="status" className="sr-only">
-                {status === "sending" ? "Sending your letter." : ""}
-              </p>
-            </form>
-          )}
-        </div>
+              {step === 1 && (
+                <>
+                  <Group legend="Pick any">
+                    {WORRIES.map((w) => (
+                      <Chip key={w.id} type="checkbox" name="worries" id={`brief-worry-${w.id}`} emoji={w.emoji} checked={v.worries.includes(w.id)} onChange={() => toggle("worries", w.id)}>
+                        {w.label}
+                      </Chip>
+                    ))}
+                  </Group>
+                  <Field f="words" label="In your own words" optional={v.worries.some((w) => w !== "else")} error={errors.words}>
+                    <textarea
+                      id={idOf("words")}
+                      name="words"
+                      rows={3}
+                      maxLength={LIMITS.words}
+                      value={v.words}
+                      onChange={(e) => set("words", e.target.value)}
+                      placeholder="What you'd tell a friend…"
+                      className={`${INPUT} voice resize-y text-[22px] leading-[1.45] placeholder:text-ink-muted`}
+                      {...err("words")}
+                    />
+                  </Field>
+                </>
+              )}
 
-        <Preview v={v} sent={sent} day={day} />
+              {step === 2 && (
+                <>
+                  <Group legend="Where could we help?">
+                    {SERVICES.map((s) => (
+                      <Chip key={s.id} type="checkbox" name="services" id={`brief-service-${s.id}`} emoji={s.emoji} checked={v.services.includes(s.id)} onChange={() => toggle("services", s.id)}>
+                        {s.name}
+                      </Chip>
+                    ))}
+                  </Group>
+                  <Group legend="When?">
+                    {TIMELINES.map((t) => (
+                      <Chip key={t.id} type="radio" name="timeline" id={`brief-timeline-${t.id}`} emoji={t.emoji} checked={v.timeline === t.id} onChange={() => set("timeline", t.id)}>
+                        {t.label}
+                      </Chip>
+                    ))}
+                  </Group>
+                  <Group legend="Rough budget">
+                    {BUDGETS.map((b) => (
+                      <Chip key={b.id} type="radio" name="budget" id={`brief-budget-${b.id}`} emoji={b.emoji} checked={v.budget === b.id} onChange={() => set("budget", b.id)}>
+                        {b.label}
+                      </Chip>
+                    ))}
+                  </Group>
+                </>
+              )}
+            </div>
+
+            {status === "failed" && (
+              <div role="alert" className="mt-9 border-l-2 border-alarm pl-4 text-[15px] leading-relaxed">
+                <p className="text-alarm">That didn&rsquo;t reach us. Try again, or write to us.</p>
+                <div className="mt-2">
+                  <CopyEmail email={EMAIL} tone="paper" />
+                </div>
+              </div>
+            )}
+
+            <div className="mt-12 flex flex-wrap items-center justify-between gap-4">
+              {step > 0 ? (
+                <button type="button" onClick={() => go(step - 1)} className="inline-flex min-h-11 items-center gap-2 rounded-full px-1 text-[12px] font-semibold tracking-[0.16em] text-ink-muted uppercase transition-colors hover:text-ink">
+                  <span aria-hidden="true">&larr;</span> Back
+                </button>
+              ) : (
+                <span className="label text-ink-muted">⏱ 2 minutes</span>
+              )}
+              <LiquidButton as="button" type="submit" variant="lamp" disabled={status === "sending"} className="ml-auto">
+                {step < 2 ? (
+                  <>
+                    Next <Arrow />
+                  </>
+                ) : status === "sending" ? (
+                  "Sending…"
+                ) : (
+                  <>
+                    Send the letter <Arrow />
+                  </>
+                )}
+              </LiquidButton>
+            </div>
+            <p role="status" className="sr-only">
+              {status === "sending" ? "Sending your letter." : ""}
+            </p>
+          </form>
+        )}
       </div>
+
+      <Preview v={v} sent={sent} day={day} />
     </div>
   );
 }
@@ -245,18 +239,18 @@ export function Letter() {
 function Progress({ step }: { step: number }) {
   return (
     <div>
-      <p className={LABEL}>
-        Step {step + 1} of {STEPS.length}
+      <p className={`${LABEL} tabular`}>
+        <span className="text-red">0{step + 1}</span> / 0{STEPS.length}
       </p>
-      <ol className="mt-3 grid grid-cols-3 gap-2" aria-label="Progress">
+      <ol className="mt-4 grid grid-cols-3 gap-2" aria-label="Progress">
         {STEPS.map((s, k) => (
           <li key={s} aria-current={k === step ? "step" : undefined} className="min-w-0">
-            <span aria-hidden="true" className="block h-1 overflow-hidden rounded-full bg-ink/12">
-              <span className={`block h-full origin-left rounded-full bg-ink transition-transform duration-700 ease-water ${k <= step ? "scale-x-100" : "scale-x-0"}`} />
+            <span aria-hidden="true" className="block h-1.5 overflow-hidden rounded-full bg-ink/10">
+              <span className={`block h-full origin-left rounded-full bg-sea transition-transform duration-700 ease-water ${k <= step ? "scale-x-100" : "scale-x-0"}`} />
             </span>
-            <span className={`mt-2 hidden truncate text-[13px] sm:block ${k === step ? "text-ink" : "text-ink-muted"}`}>
+            <span className="sr-only">
               {s}
-              {k < step && <span className="sr-only"> (done)</span>}
+              {k < step && " (done)"}
             </span>
           </li>
         ))}
@@ -270,7 +264,7 @@ function Field({ f, label, optional, error, children }: { f: BriefField; label: 
     <div className="min-w-0">
       <label htmlFor={idOf(f)} className={`${LABEL} flex justify-between gap-3`}>
         {label}
-        {optional && <span className="tracking-[0.12em]">Optional</span>}
+        {optional && <span className="tracking-[0.12em] text-ink-muted">Optional</span>}
       </label>
       <div className="mt-1">{children}</div>
       {error && (
@@ -292,20 +286,25 @@ function Group({ legend, children }: { legend: string; children: ReactNode }) {
   );
 }
 
-/** A choice written on a slip: the native input stays (keyboard, screen readers), the slip shows it. */
-function Chip({ type, name, id, checked, onChange, voice, children }: { type: "checkbox" | "radio"; name: string; id: string; checked: boolean; onChange: () => void; voice?: boolean; children: ReactNode }) {
+/** A choice on a chip: the native input stays (keyboard, screen readers), the chip shows it. Selected chips turn sail. */
+function Chip({ type, name, id, emoji, checked, onChange, children }: { type: "checkbox" | "radio"; name: string; id: string; emoji: string; checked: boolean; onChange: () => void; children: ReactNode }) {
   return (
     <label htmlFor={id} className="relative">
       <input id={id} type={type} name={name} checked={checked} onChange={onChange} className="peer sr-only" />
       <span
-        className={`flex min-h-11 cursor-pointer items-center gap-2 rounded-full border-[1.5px] px-4 py-1.5 transition-colors peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-sea ${
-          voice ? "voice text-[19px]" : "text-[15px] font-medium"
-        } ${checked ? "border-ink bg-ink text-fg" : "border-ink/25 text-ink hover:border-ink"}`}
+        className={`flex min-h-11 cursor-pointer items-center gap-2.5 rounded-full border-[1.5px] py-1.5 pr-4 pl-3 text-[15px] font-medium transition-[background-color,border-color,color] duration-300 peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-sea ${
+          checked ? "border-sail bg-sail text-fg" : "border-ink/20 bg-paper-2/60 text-ink hover:border-sail"
+        }`}
       >
-        <span aria-hidden="true" className={`grid size-4 shrink-0 place-items-center text-[11px] not-italic ${type === "radio" ? "rounded-full" : "rounded-[3px]"} border ${checked ? "border-lamp bg-lamp text-ink" : "border-current/40"}`}>
-          {checked ? "✓" : ""}
+        <span aria-hidden="true" className="text-[18px] leading-none">
+          {emoji}
         </span>
         {children}
+        {checked && (
+          <span aria-hidden="true" className="text-[13px] text-lamp">
+            ✓
+          </span>
+        )}
       </span>
     </label>
   );
@@ -324,11 +323,11 @@ function Preview({ v, sent, day }: { v: Brief; sent: boolean; day: string }) {
   const words = v.words.trim();
 
   return (
-    <section aria-labelledby="letter-title" className="relative border-t border-dashed border-ink/20 px-5 pt-6 pb-8 sm:px-8 lg:px-10 lg:pb-10">
-      <h3 id="letter-title" className={LABEL}>
-        Your letter
+    <section aria-labelledby="letter-title" className="relative border-t border-dashed border-ink/20 px-6 pt-7 pb-10 sm:px-10 lg:px-12 lg:pb-12">
+      <h3 id="letter-title" className={`${LABEL} font-mono`}>
+        Your letter ✍️
       </h3>
-      <div className={`${styles.ruled} voice mt-3 pl-4 text-[20px] text-ink sm:pl-6 sm:text-[22px]`}>
+      <div className={`${styles.ruled} voice mt-4 pl-4 text-[19px] text-ink sm:pl-6 sm:text-[21px]`}>
         <p>Hi VexraLab,</p>
         <p>
           I&rsquo;m {name || <Blank>your name</Blank>} from {v.company.trim() || <Blank>your company</Blank>}.{" "}
@@ -351,10 +350,10 @@ function Preview({ v, sent, day }: { v: Brief; sent: boolean; day: string }) {
       </div>
 
       {sent && (
-        <div className="pointer-events-none absolute right-5 bottom-8 sm:right-10" aria-hidden="true">
-          <div className={`${styles.stamp} flex flex-col items-center rounded-[4px] border-[3px] border-double border-ink bg-lamp px-4 py-2.5 text-ink shadow-[0_2px_0_rgb(21_20_25/0.15)]`}>
-            <span className="text-[26px] leading-none font-extrabold tracking-[0.08em] uppercase">Received</span>
-            <span className="label mt-1.5 text-[10px] tracking-[0.16em]">Reply by {day}</span>
+        <div className="pointer-events-none absolute right-6 bottom-10 sm:right-12" aria-hidden="true">
+          <div className={`${styles.stamp} flex flex-col items-center rounded-[6px] border-[3px] border-double border-red bg-red px-5 py-3 text-fg shadow-[0_6px_18px_-8px_rgb(189_27_31/0.6)]`}>
+            <span className="hero-type text-[30px]">Received</span>
+            <span className="label mt-2 text-[10px] tracking-[0.16em] text-fg">Reply by {day}</span>
           </div>
         </div>
       )}

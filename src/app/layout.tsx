@@ -1,20 +1,30 @@
 import type { Metadata, Viewport } from "next";
-import { Schibsted_Grotesk, Newsreader, IBM_Plex_Mono } from "next/font/google";
+import localFont from "next/font/local";
+import { JetBrains_Mono, Manrope } from "next/font/google";
 import { SmoothScroll } from "@/components/ui/SmoothScroll";
 import "./globals.css";
 
-const schibsted = Schibsted_Grotesk({ variable: "--font-schibsted", subsets: ["latin"], weight: ["400", "500", "600", "700", "800"] });
-const newsreader = Newsreader({ variable: "--font-newsreader", subsets: ["latin"], style: ["italic"], weight: ["300", "400"] });
-const plexMono = IBM_Plex_Mono({ variable: "--font-plex-mono", subsets: ["latin"], weight: ["400", "500"] });
+// The Remark Studio type family: Betha for poster words, Cranio for headings, Mifetro for reading.
+const betha = localFont({ src: "./fonts/Betha/Betha-KVj87.otf", variable: "--font-betha", display: "swap" });
+const cranio = localFont({
+  src: [
+    { path: "./fonts/Cranio/CranioRegular-WpD9n.otf", style: "normal" },
+    { path: "./fonts/Cranio/CranioOblique-e97Pm.otf", style: "italic" },
+  ],
+  variable: "--font-cranio",
+  display: "swap",
+});
+const mifetro = localFont({ src: "./fonts/Mifetro/MifetroRegular-rvOly.ttf", variable: "--font-mifetro", display: "swap" });
+const manrope = Manrope({ variable: "--font-manrope", subsets: ["latin"], weight: ["400", "500", "600", "700"] });
+const mono = JetBrains_Mono({ variable: "--font-jbmono", subsets: ["latin"], weight: ["400", "500"] });
 
-const DESCRIPTION =
-  "VexraLab is a small design and engineering studio for founders. Brand, websites, web apps and automation that make your business easy to understand and easy to trust.";
+const DESCRIPTION = "VexraLab designs and builds brands, websites and software for founders. Calm process, clear work, real results.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://vexralab.com"),
-  title: { default: "VexraLab | Design & engineering studio for founders", template: "%s | VexraLab" },
+  title: { default: "VexraLab | Design & engineering studio", template: "%s | VexraLab" },
   description: DESCRIPTION,
-  openGraph: { title: "VexraLab", description: DESCRIPTION, siteName: "VexraLab", type: "website", locale: "en_US" },
+  openGraph: { title: "VexraLab", description: DESCRIPTION, siteName: "VexraLab", type: "website", locale: "en_US", images: ["/img/desk-window.jpg"] },
   twitter: { card: "summary_large_image", title: "VexraLab", description: DESCRIPTION },
 };
 
@@ -22,15 +32,14 @@ export const viewport: Viewport = { themeColor: "#151419" };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${schibsted.variable} ${newsreader.variable} ${plexMono.variable} h-full antialiased`}>
+    <html lang="en" className={`${betha.variable} ${cranio.variable} ${mifetro.variable} ${manrope.variable} ${mono.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col">
         <a
           href="#main-content"
-          className="sr-only focus-visible:not-sr-only focus-visible:fixed focus-visible:top-4 focus-visible:left-4 focus-visible:z-[90] focus-visible:rounded-full focus-visible:bg-lamp focus-visible:px-5 focus-visible:py-2.5 focus-visible:text-sm focus-visible:font-semibold focus-visible:text-ink"
+          className="sr-only focus-visible:not-sr-only focus-visible:fixed focus-visible:top-4 focus-visible:left-4 focus-visible:z-[90] focus-visible:rounded-full focus-visible:bg-sea focus-visible:px-5 focus-visible:py-2.5 focus-visible:font-ui focus-visible:text-sm focus-visible:text-fg"
         >
           Skip to main content
         </a>
-        {/* Shared goo filter for the droplet nav. */}
         <svg aria-hidden="true" width="0" height="0" className="absolute">
           <defs>
             <filter id="vx-goo" x="-50%" y="-50%" width="200%" height="200%">

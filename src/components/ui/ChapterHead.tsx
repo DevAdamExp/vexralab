@@ -3,10 +3,12 @@ import { Seen, i } from "./Seen";
 import { H2, MUTED, type Register } from "./tokens";
 
 const TAG: Record<Register, string> = {
-  night: "bg-lamp text-ink",
-  paper: "bg-ink text-fg",
+  night: "bg-red text-fg",
+  paper: "bg-red text-fg",
+  belle: "bg-red text-fg",
   sea: "bg-lamp text-ink",
-  belle: "bg-ink text-fg",
+  sail: "bg-lamp text-ink",
+  red: "bg-fg text-red",
 };
 
 /**

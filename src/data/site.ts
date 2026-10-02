@@ -13,6 +13,8 @@ export const SOCIALS = [
   { label: "Instagram", href: "https://www.instagram.com/" },
   { label: "Dribbble", href: "https://dribbble.com/" },
   { label: "GitHub", href: "https://github.com/DevAdamExp" },
+  { label: "X", href: "https://x.com/" },
+  { label: "WhatsApp", href: "https://wa.me/" },
 ];
 
 /** The studio's working timezone, shown as a live clock. */
@@ -22,9 +24,11 @@ export const STUDIO_CITY = "Pakistan";
 export type ServiceId = "brand" | "websites" | "apps" | "automation" | "care";
 
 /** Every service starts with the feeling it creates for the founder. */
-export const SERVICES: { id: ServiceId; name: string; feeling: string; line: string; includes: string[] }[] = [
+export const SERVICES: { id: ServiceId; name: string; emoji: string; tone: "sea" | "sail" | "red" | "lamp" | "void"; feeling: string; line: string; includes: string[] }[] = [
   {
     id: "brand",
+    emoji: "🎨",
+    tone: "red",
     name: "Brand & messaging",
     feeling: "They finally get it.",
     line: "Positioning, naming, identity and the words on your site, so people understand you in one read.",
@@ -32,6 +36,8 @@ export const SERVICES: { id: ServiceId; name: string; feeling: string; line: str
   },
   {
     id: "websites",
+    emoji: "🖥️",
+    tone: "sea",
     name: "Websites",
     feeling: "They trust us before the call.",
     line: "Marketing sites designed and built in Next.js, fast on every phone, with a CMS your team can actually use.",
@@ -39,6 +45,8 @@ export const SERVICES: { id: ServiceId; name: string; feeling: string; line: str
   },
   {
     id: "apps",
+    emoji: "📱",
+    tone: "sail",
     name: "Web apps & portals",
     feeling: "Our clients can do it themselves.",
     line: "Client portals, dashboards and internal tools, from the first clickable prototype to production.",
@@ -46,6 +54,8 @@ export const SERVICES: { id: ServiceId; name: string; feeling: string; line: str
   },
   {
     id: "automation",
+    emoji: "⚙️",
+    tone: "lamp",
     name: "Automation & AI",
     feeling: "We stopped doing it by hand.",
     line: "The repetitive work between your tools, handed to workflows and AI agents that report back.",
@@ -53,6 +63,8 @@ export const SERVICES: { id: ServiceId; name: string; feeling: string; line: str
   },
   {
     id: "care",
+    emoji: "🌱",
+    tone: "void",
     name: "Care & growth",
     feeling: "It keeps getting better.",
     line: "After launch we stay: monthly improvements, conversion tests, updates and a same-day reply.",

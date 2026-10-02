@@ -2,86 +2,112 @@
 
 import { useEffect, useRef } from "react";
 import { Arrow, LiquidButton } from "@/components/ui/LiquidButton";
-import { Mark } from "@/components/ui/Mark";
-import { CONTAINER } from "@/components/ui/tokens";
-import { DeskAtNight } from "./DeskAtNight";
+import { ServiceStrip } from "./ServiceStrip";
+
+const WORDS = "hero-type block text-[clamp(3.2rem,11vw,10.5rem)]";
 
 /**
- * 02:14 AM. The founder's desk, drawn: lamp on, a template site glowing on the
- * monitor, the phone buzzing. The room's warm light drifts toward the pointer.
+ * The desk by the window, at night. Two poster words sit over the photo; the
+ * pointer is a desk lamp, and inside its circle the words light up in Decor Yellow.
  */
 export function Hero() {
-  const root = useRef<HTMLElement>(null);
+  const box = useRef<HTMLDivElement>(null);
+  const lit = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const el = root.current;
-    if (!el || !matchMedia("(hover: hover) and (pointer: fine)").matches || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const target = { x: 0.72, y: 0.4 };
-    const cur = { ...target };
+    const el = box.current;
+    const ov = lit.current;
+    if (!el || !ov || !matchMedia("(hover: hover) and (pointer: fine)").matches || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const t = { x: -999, y: -999 };
+    const c = { x: -999, y: -999 };
     let raf = 0;
     const move = (e: PointerEvent) => {
       const r = el.getBoundingClientRect();
-      target.x = (e.clientX - r.left) / r.width;
-      target.y = (e.clientY - r.top) / r.height;
+      t.x = e.clientX - r.left;
+      t.y = e.clientY - r.top;
     };
+    const enter = (e: PointerEvent) => {
+      move(e);
+      c.x = t.x;
+      c.y = t.y;
+      ov.style.opacity = "1";
+    };
+    const leave = () => (ov.style.opacity = "0");
     const tick = () => {
-      cur.x += (target.x - cur.x) * 0.06;
-      cur.y += (target.y - cur.y) * 0.06;
-      el.style.setProperty("--lx", `${cur.x * 100}%`);
-      el.style.setProperty("--ly", `${cur.y * 100}%`);
+      c.x += (t.x - c.x) * 0.18;
+      c.y += (t.y - c.y) * 0.18;
+      ov.style.setProperty("--x", `${c.x}px`);
+      ov.style.setProperty("--y", `${c.y}px`);
       raf = requestAnimationFrame(tick);
     };
     el.addEventListener("pointermove", move);
+    el.addEventListener("pointerenter", enter);
+    el.addEventListener("pointerleave", leave);
     tick();
     return () => {
       cancelAnimationFrame(raf);
       el.removeEventListener("pointermove", move);
+      el.removeEventListener("pointerenter", enter);
+      el.removeEventListener("pointerleave", leave);
     };
   }, []);
 
-  return (
-    <section
-      ref={root}
-      aria-labelledby="hero-title"
-      className="relative isolate overflow-hidden bg-night text-fg"
-      style={{ "--lx": "72%", "--ly": "40%" } as React.CSSProperties}
-    >
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(720px_circle_at_var(--lx)_var(--ly),rgb(246_187_2/0.09),transparent_65%)]" />
-
-      <div className={`${CONTAINER} grid min-h-[100svh] items-center gap-12 pt-32 pb-16 md:pt-36 lg:grid-cols-12 lg:gap-10 lg:pt-28 lg:pb-20`}>
-        <div className="flex flex-col gap-8 lg:col-span-6">
-          <p className="load label flex flex-wrap items-center gap-x-3 gap-y-2 text-muted">
-            <span className="lamp-dot" aria-hidden="true" />
-            <span className="text-lamp">02:14 AM</span>
-            <span aria-hidden="true">·</span>
-            <span>A founder is still awake</span>
-          </p>
-
-          <h1 id="hero-title" className="load text-[clamp(2.6rem,4.9vw,5rem)] leading-[0.98] font-semibold tracking-[-0.04em]" style={{ "--i": 1 } as React.CSSProperties}>
-            You built something real. <span className="text-fg/50">So why does your website make you</span>{" "}
-            <span className="voice font-light tracking-[-0.025em] text-lamp">
-              <Mark onLoad delay={1300}>want to apologise?</Mark>
-            </span>
-          </h1>
-
-          <p className="load max-w-[46ch] text-[18px] leading-[1.65] text-muted" style={{ "--i": 2 } as React.CSSProperties}>
-            <strong className="font-semibold text-fg">VexraLab is a small design and engineering studio</strong> for founders tired of explaining their business twice: once on the website, then again on every call.
-          </p>
-
-          <div className="load flex flex-wrap gap-3" style={{ "--i": 3 } as React.CSSProperties}>
-            <LiquidButton href="/contact">
-              Start a project <Arrow />
-            </LiquidButton>
-            <LiquidButton href="#story" variant="ghost-night">
-              Read the story <Arrow dir="down" />
-            </LiquidButton>
-          </div>
-        </div>
-
-        <div className="load lg:col-span-6" style={{ "--i": 2 } as React.CSSProperties}>
-          <DeskAtNight />
+  const words = (overlay: boolean) => (
+    <div aria-hidden={overlay || undefined} className="flex flex-col gap-2 md:gap-3">
+      <div className="flex flex-wrap items-center justify-between gap-x-10 gap-y-6">
+        <span className={`${WORDS} load ${overlay ? "text-lamp" : "text-fg"}`} style={{ "--i": 1 } as React.CSSProperties}>
+          Quiet
+        </span>
+        <div className={`load max-md:hidden ${overlay ? "invisible" : ""}`} style={{ "--i": 4 } as React.CSSProperties}>
+          <LiquidButton href="/contact" variant="sea" size="lg">
+            Start a project <Arrow />
+          </LiquidButton>
         </div>
       </div>
+      <span className={`${WORDS} load ml-[4vw] md:ml-[14vw] ${overlay ? "text-lamp" : "text-fg"}`} style={{ "--i": 2 } as React.CSSProperties}>
+        Confidence
+      </span>
+    </div>
+  );
+
+  return (
+    <section aria-labelledby="hero-title" className="relative flex h-[100svh] min-h-[640px] flex-col justify-end overflow-hidden bg-void">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src="/img/desk-window.jpg" alt="" fetchPriority="high" className="absolute inset-0 size-full object-cover object-[50%_40%] brightness-[0.62] saturate-[0.85]" />
+      <div aria-hidden="true" className="absolute inset-0 bg-[linear-gradient(180deg,rgb(21_20_25/0.55)_0%,transparent_30%,rgb(21_20_25/0.35)_55%,#151419_100%)]" />
+      <div aria-hidden="true" className="absolute inset-0 bg-[linear-gradient(90deg,rgb(21_20_25/0.75)_0%,transparent_60%)]" />
+      <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(ellipse_at_72%_38%,rgb(246_187_2/0.16),transparent_55%)] mix-blend-screen" />
+
+      <p className="load absolute top-28 right-5 left-5 z-10 max-w-[32ch] text-[17px] leading-relaxed text-fg/85 sm:left-auto sm:right-8 sm:text-right md:top-32 lg:right-12 lg:text-[19px]" style={{ "--i": 3 } as React.CSSProperties}>
+        Websites and software for founders who are done apologising for their own site.
+      </p>
+
+      <div className="relative mx-auto w-full max-w-[1320px] px-5 pb-32 sm:px-8 md:pb-40 lg:px-12">
+        <h1 id="hero-title" className="sr-only">
+          Quiet confidence. VexraLab designs and builds websites and software for founders.
+        </h1>
+
+        <div ref={box} className="relative py-4">
+          {words(false)}
+          <div
+            ref={lit}
+            className="pointer-events-none absolute inset-0 py-4 opacity-0 transition-opacity duration-300 max-md:hidden"
+            style={{
+              maskImage: "radial-gradient(circle 110px at var(--x,-999px) var(--y,-999px), #000 99%, transparent 100%)",
+              WebkitMaskImage: "radial-gradient(circle 110px at var(--x,-999px) var(--y,-999px), #000 99%, transparent 100%)",
+            }}
+          >
+            {words(true)}
+          </div>
+        </div>
+        <div className="load mt-8 md:hidden" style={{ "--i": 4 } as React.CSSProperties}>
+          <LiquidButton href="/contact" variant="sea">
+            Start a project <Arrow />
+          </LiquidButton>
+        </div>
+
+      </div>
+      <ServiceStrip />
     </section>
   );
 }

@@ -2,26 +2,26 @@
 // /api/brief (server), so both sides check the same rules. No imports, so it runs in plain node.
 
 export const WORRIES = [
-  { id: "understood", label: "People don't get what we do" },
-  { id: "template", label: "Our site looks like a template" },
-  { id: "enquiries", label: "Enquiries don't come in" },
-  { id: "manual", label: "We do everything by hand" },
-  { id: "agency", label: "Our agency went quiet" },
-  { id: "else", label: "Something else" },
+  { id: "understood", emoji: "😬", label: "People don't get what we do" },
+  { id: "template", emoji: "🪞", label: "Our site looks like a template" },
+  { id: "enquiries", emoji: "📭", label: "Enquiries don't come in" },
+  { id: "manual", emoji: "🧾", label: "We do everything by hand" },
+  { id: "agency", emoji: "👻", label: "Our agency went quiet" },
+  { id: "else", emoji: "✍️", label: "Something else" },
 ] as const;
 
 export const TIMELINES = [
-  { id: "asap", label: "ASAP", line: "We'd like to start as soon as we can." },
-  { id: "soon", label: "1–3 months", line: "We'd like to start in the next one to three months." },
-  { id: "exploring", label: "Just exploring", line: "For now, we're just exploring." },
+  { id: "asap", emoji: "🔥", label: "ASAP", line: "We'd like to start as soon as we can." },
+  { id: "soon", emoji: "📅", label: "1–3 months", line: "We'd like to start in the next one to three months." },
+  { id: "exploring", emoji: "🧭", label: "Just exploring", line: "For now, we're just exploring." },
 ] as const;
 
 // ponytail: placeholder ranges until the studio sets its real price bands.
 export const BUDGETS = [
-  { id: "small", label: "[Under $X]" },
-  { id: "mid", label: "[$X to $Y]" },
-  { id: "large", label: "[$Y and up]" },
-  { id: "unsure", label: "Not sure yet" },
+  { id: "small", emoji: "🌱", label: "[Under $X]" },
+  { id: "mid", emoji: "🌿", label: "[$X to $Y]" },
+  { id: "large", emoji: "🌳", label: "[$Y and up]" },
+  { id: "unsure", emoji: "🤷", label: "Not sure yet" },
 ] as const;
 
 export const LIMITS = { name: 80, email: 254, company: 120, website: 200, words: 3000 } as const;
