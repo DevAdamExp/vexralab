@@ -331,44 +331,6 @@
 @keyframes lit3 { from, 75% { --lit: 0; } 78%, to { --lit: 1; } }
 @keyframes lit4 { from, 96% { --lit: 0; } 98%, to { --lit: 1; } }
 
-/* =====================================================================
- * Home signature: The Convergence (pinned scroll scene).
- * Base = the finished state (ordered grid, captions listed), so browsers
- * without scroll timelines and reduced-motion users get a clean static section.
- * ===================================================================== */
-.converge { position: relative; border-block: 1px solid var(--line); }
-.convergeStage { position: relative; }
-.captions { display: grid; gap: 40px; }
-.grid { position: relative; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); grid-template-rows: repeat(4, 62px); gap: 10px; padding: 22px; }
-.gridFrame { position: absolute; inset: 0; border: 1px solid rgb(111 211 199 / .35); box-shadow: 0 0 60px -10px rgb(111 211 199 / .25), inset 0 0 40px -20px rgb(111 211 199 / .3); pointer-events: none; }
-.gridFrame::after { content: "one view"; position: absolute; top: -10px; left: 18px; padding: 0 8px; background: var(--bg); font: 500 11px/20px var(--font-geist-mono), monospace; letter-spacing: .18em; text-transform: uppercase; color: var(--hi); }
-.gtile { position: relative; display: grid; place-items: center; background: linear-gradient(90deg, color-mix(in oklab, var(--c) 12%, transparent), color-mix(in oklab, var(--c) 70%, transparent)); }
-.gtile::after { content: ""; position: absolute; inset: 0; mix-blend-mode: multiply; opacity: .7; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1.4 -0.38'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
-.gtool { position: relative; z-index: 1; font: 500 11px var(--font-geist-mono), monospace; font-style: normal; color: var(--fg); opacity: 0; }
-
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) and (min-width: 1024px) {
-    .converge { height: 320vh; view-timeline-name: --conv; }
-    .convergeStage { position: sticky; top: 84px; height: calc(100vh - 84px); }
-    .captions { display: block; position: relative; min-height: 260px; }
-    .captions > li { position: absolute; inset: 0 auto auto 0; }
-    .cap0, .cap1, .cap2, .gtile, .gtool, .gridFrame { animation-timeline: --conv; animation-fill-mode: both; animation-timing-function: linear; animation-range: contain 0% contain 100%; }
-    .cap0 { animation-name: cap0; } .cap1 { animation-name: cap1; } .cap2 { animation-name: cap2; }
-    .gtile { animation-name: gather; animation-range: contain 0% contain 62%; }
-    .gtool { animation-name: toolOut; animation-range: contain 0% contain 55%; }
-    .gridFrame { animation-name: frameIn; animation-range: contain 60% contain 78%; }
-  }
-}
-@keyframes gather {
-  0%, 12% { transform: translate(var(--dx), var(--dy)) rotate(var(--rot)) scale(.82); filter: grayscale(1) brightness(.7); }
-  70% { filter: grayscale(.4) brightness(.9); }
-  100% { transform: none; filter: none; }
-}
-@keyframes toolOut { 0%, 40% { opacity: .85; } 100% { opacity: 0; } }
-@keyframes frameIn { from { opacity: 0; transform: scale(1.04); } to { opacity: 1; transform: none; } }
-@keyframes cap0 { 0%, 26% { opacity: 1; transform: none; } 33%, 100% { opacity: 0; transform: translateY(-16px); } }
-@keyframes cap1 { 0%, 30% { opacity: 0; transform: translateY(16px); } 37%, 60% { opacity: 1; transform: none; } 67%, 100% { opacity: 0; transform: translateY(-16px); } }
-@keyframes cap2 { 0%, 64% { opacity: 0; transform: translateY(16px); } 71%, 100% { opacity: 1; transform: none; } }
 
 /* =====================================================================
  * Services signature: The Shelf (vertical scroll drives a sideways track).
@@ -429,3 +391,83 @@
   }
 }
 @keyframes wordLit { from { opacity: .16; } to { opacity: 1; } }
+
+/* =====================================================================
+ * Home signature: The Convergence (pinned product reveal).
+ * Base = the finished dashboard, so unsupported browsers, phones and reduced
+ * motion get a clean static product shot.
+ * ===================================================================== */
+.converge { position: relative; border-block: 1px solid var(--line); }
+.convergeStage { position: relative; }
+.captions { display: grid; gap: 6px; }
+.cap0, .cap1 { display: none; }
+.cap2 { display: block; }
+
+.shot { position: relative; perspective: 1800px; }
+.shot::before { content: ""; position: absolute; inset: 8% 6% -6%; z-index: 0; background: radial-gradient(60% 60% at 50% 60%, rgb(111 211 199 / .18), transparent 70%); filter: blur(30px); pointer-events: none; }
+.win { position: relative; z-index: 1; border-radius: 14px; border: 1px solid rgb(239 234 227 / .12); background: linear-gradient(180deg, #121117, #0e0d12); box-shadow: 0 1px 0 rgb(255 255 255 / .06) inset, 0 40px 80px -30px rgb(0 0 0 / .9), 0 0 0 1px rgb(0 0 0 / .4); overflow: visible; transform-origin: 50% 0; }
+.winChrome, .appSide, .appTop { transition: none; }
+.app { display: grid; grid-template-columns: 172px minmax(0, 1fr); }
+@media (max-width: 767px) { .app { grid-template-columns: minmax(0, 1fr); } }
+.appSide { display: flex; flex-direction: column; gap: 2px; padding: 16px 10px; border-right: 1px solid rgb(239 234 227 / .08); }
+@media (max-width: 767px) { .appSide { display: none; } }
+
+.dash {
+  display: grid; gap: 10px; padding: 14px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-rows: 88px 140px 140px 126px;
+  grid-template-areas: "k1 k2 k3 k4" "ch ch ch ld" "ch ch ch iv" "ac ac au au";
+}
+@media (max-width: 767px) {
+  .dash { grid-template-columns: 1fr 1fr; grid-template-rows: none; grid-auto-rows: minmax(92px, auto); grid-template-areas: "k1 k2" "k3 k4" "ch ch" "ld ld" "iv iv" "ac ac" "au au"; }
+}
+.slot { position: relative; border-radius: 10px; border: 1px solid rgb(239 234 227 / .08); background: rgb(255 255 255 / .025); }
+.slotBack { height: 100%; padding: 12px 14px; }
+.slotFront {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 12px; padding: 12px;
+  border-radius: 10px; border: 1px solid rgb(239 234 227 / .14);
+  background: linear-gradient(160deg, #1c1b22, #121117);
+  box-shadow: 0 24px 50px -18px rgb(0 0 0 / .85), inset 0 1px 0 rgb(255 255 255 / .08);
+  opacity: 0; pointer-events: none;
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) and (min-width: 1024px) {
+    .converge { height: 420vh; view-timeline-name: --conv; }
+    .convergeStage { position: sticky; top: 84px; height: calc(100vh - 84px); overflow: hidden; }
+    .captions { display: block; position: relative; height: 1.3em; font-size: clamp(26px, 3vw, 40px); }
+    .cap0, .cap1, .cap2 { display: block; position: absolute; inset: 0 auto auto 0; white-space: nowrap; }
+
+    .cap0, .cap1, .cap2, .win, .slot, .slotFront, .slotBack, .winChrome, .appSide, .appTop {
+      animation-timeline: --conv; animation-fill-mode: both; animation-timing-function: linear;
+    }
+    .cap0 { animation-name: cap0; animation-range: contain 0% contain 100%; }
+    .cap1 { animation-name: cap1; animation-range: contain 0% contain 100%; }
+    .cap2 { animation-name: cap2; animation-range: contain 0% contain 100%; }
+
+    /* The shot: tilted and receding, then square to camera. */
+    .win { animation-name: shotFlat; animation-range: contain 30% contain 88%; }
+    /* The app shell builds around the widgets. */
+    .winChrome, .appSide, .appTop { animation-name: shellIn; animation-range: contain 62% contain 80%; }
+    .win { background: transparent; border-color: transparent; box-shadow: none; animation-name: shotFlat, winIn; }
+    /* Each card flies to its slot (staggered), then flips into its widget. */
+    .slot { animation-name: fly; animation-range: contain calc(6% + var(--k) * 3.5%) contain calc(42% + var(--k) * 3.5%); animation-timing-function: cubic-bezier(.22,.8,.3,1); }
+    .slotFront { opacity: 1; animation-name: frontOut; animation-range: contain calc(44% + var(--k) * 2%) contain calc(54% + var(--k) * 2%); }
+    .slotBack { animation-name: backIn; animation-range: contain calc(50% + var(--k) * 2%) contain calc(62% + var(--k) * 2%); }
+  }
+}
+@keyframes fly {
+  0% { transform: translate(var(--dx), var(--dy)) rotate(var(--rot)) scale(var(--sc, .78)); }
+  100% { transform: none; }
+}
+@keyframes frontOut { 0% { opacity: 1; transform: none; } 100% { opacity: 0; transform: rotateX(70deg) scale(.96); } }
+@keyframes backIn { 0% { opacity: 0; transform: translateY(6px); } 100% { opacity: 1; transform: none; } }
+@keyframes shellIn { 0% { opacity: 0; } 100% { opacity: 1; } }
+@keyframes shotFlat { 0% { transform: rotateX(22deg) scale(.9); } 100% { transform: none; } }
+@keyframes winIn {
+  0%, 60% { background: transparent; border-color: transparent; box-shadow: none; }
+  100% { background: linear-gradient(180deg, #121117, #0e0d12); border-color: rgb(239 234 227 / .12); box-shadow: 0 1px 0 rgb(255 255 255 / .06) inset, 0 40px 80px -30px rgb(0 0 0 / .9); }
+}
+@keyframes cap0 { 0%, 26% { opacity: 1; transform: none; } 32%, 100% { opacity: 0; transform: translateY(-14px); } }
+@keyframes cap1 { 0%, 30% { opacity: 0; transform: translateY(14px); } 36%, 60% { opacity: 1; transform: none; } 66%, 100% { opacity: 0; transform: translateY(-14px); } }
+@keyframes cap2 { 0%, 64% { opacity: 0; transform: translateY(14px); } 70%, 100% { opacity: 1; transform: none; } }
