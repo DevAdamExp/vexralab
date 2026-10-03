@@ -31,7 +31,7 @@ export function Slash({ children, as = "h2", className = "" }: { children: React
  * A tile's colour from its position: share of Deep Sea teal at the tile's centre,
  * the rest Blue Sail. Hero grids stay mostly teal; the others sweep the full ramp.
  */
-const tone = (c: number, span: number, cols: number, hero: boolean) => {
+export const tone = (c: number, span: number, cols: number, hero: boolean) => {
   const t = (c - 1 + span / 2) / cols;
   const teal = Math.round(hero ? 45 + t * 55 : t * 100);
   return `color-mix(in oklab, var(--hi) ${teal}%, var(--sail-hi))`;

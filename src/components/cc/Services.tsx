@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { PiCaretRight, PiCheck, PiX } from "react-icons/pi";
 import { SERVICES } from "@/data/vx";
+import { Glyph } from "./Glyph";
 import { Slash } from "./parts";
 import s from "./cc.module.css";
 
@@ -45,21 +46,30 @@ export function Services() {
               aria-controls="service-panel"
               onClick={() => setOn(k)}
               onMouseEnter={() => setOn(k)}
+              data-glyph-host
               className={`${s.row} ${on === k ? s.rowOn : ""}`}
             >
               <span className={s.rowNum}>0{k + 1}</span>
               <span>
                 {x.name} <span className={`${s.mono} ml-1 text-[14px] text-white/60 max-sm:hidden`}>{x.tag}</span>
               </span>
+              <span className={`ml-auto transition-opacity duration-500 max-sm:hidden ${on === k ? "opacity-100" : "opacity-35"}`}>
+                <Glyph id={x.id} size={4} />
+              </span>
             </button>
           ))}
         </div>
 
         <div id="service-panel" role="tabpanel" className="flex flex-col">
-          <p key={`t${on}`} className={`${s.rise} border-b border-white/[0.13] px-6 py-12 text-[20px] leading-7 text-(--muted) lg:px-10`}>
-            <span className="mr-2 text-white/50">{"//"}</span>
-            <b className="font-semibold text-white">{it.title}</b> {it.body}
-          </p>
+          <div key={`t${on}`} className={`${s.rise} flex items-start gap-8 border-b border-white/[0.13] px-6 py-12 lg:px-10`}>
+            <p className="flex-1 text-[20px] leading-7 text-(--muted)">
+              <span className="mr-2 text-white/50">{"//"}</span>
+              <b className="font-semibold text-white">{it.title}</b> {it.body}
+            </p>
+            <span className="shrink-0 pt-1 max-sm:hidden">
+              <Glyph id={it.id} size={9} label={`${it.name} icon`} />
+            </span>
+          </div>
           <div key={`p${on}`} className={`${s.rise} grid flex-1 sm:grid-cols-2`}>
             <div className="border-b border-white/[0.13] px-6 py-8 sm:border-r sm:border-b-0 lg:px-10">
               <p className={`${s.kicker} ${s.kickerCoral}`}>Before</p>

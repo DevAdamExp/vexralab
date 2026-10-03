@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { PiArrowsClockwise, PiChartBar, PiDatabase, PiQuestion } from "react-icons/pi";
 import { Band, Slash } from "./parts";
+import { TileChart } from "./TileChart";
 import s from "./cc.module.css";
 
 /** "// your business, one screen." Text left, a client dashboard right (the desktop-app section). */
@@ -60,13 +61,12 @@ export function Platform() {
                     </div>
                   ))}
                 </div>
-                <div className="rounded-md border border-(--panel-2) bg-(--panel-3) p-3">
-                  <p className="mb-3 text-white/70">Revenue by month</p>
-                  <div className="flex h-28 items-end gap-1.5">
-                    {bars.map((h, k) => (
-                      <span key={k} className={`${s.bar} flex-1 rounded-t-sm`} style={{ "--k": k, height: `${h}%`, background: k === bars.length - 1 ? "var(--hi)" : k % 3 === 1 ? "var(--sail)" : "var(--accent)" } as React.CSSProperties} />
-                    ))}
+                <div className="rounded-md border border-(--panel-2) bg-(--panel-3) p-4">
+                  <div className="mb-4 flex items-center justify-between">
+                    <p className="text-white/75">Revenue by month</p>
+                    <p className={`${s.mono} text-[10px] text-(--hi)`}>+[X]% vs last year</p>
                   </div>
+                  <TileChart values={bars} label="Sample revenue by month, rising through the year" />
                 </div>
                 <div className="grid gap-2 sm:grid-cols-2">
                   <div className="rounded-md border border-(--panel-2) bg-(--panel-3) p-3 text-white/75">

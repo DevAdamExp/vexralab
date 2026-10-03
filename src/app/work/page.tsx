@@ -115,16 +115,24 @@ export default function WorkPage() {
             <span id="process-title">how every project runs.</span>
           </Slash>
         </div>
-        <ol className="grid sm:grid-cols-2 lg:grid-cols-5">
-          {PROCESS.map((p, k) => (
-            <li key={p.name} data-spot className="flex flex-col gap-4 border-r border-b border-white/[0.13] px-6 py-9 lg:border-b-0 lg:last:border-r-0">
-              <span className={`${s.mono} text-[12px] text-(--hi)`}>0{k + 1}</span>
-              <p className="text-[24px] font-semibold tracking-[-0.02em]">{p.name}</p>
-              <p className={`${s.mono} text-[12px] text-white/60`}>{p.when}</p>
-              <p className="text-[15px] leading-6 text-white/70">{p.text}</p>
-            </li>
-          ))}
-        </ol>
+        {/* One packet travels the pipeline as you scroll; each step lights when it arrives. */}
+        <div className={s.proc}>
+          <div aria-hidden="true" className={`${s.procTrack} hidden lg:block`}>
+            <span className={s.procFill} />
+            <span className={s.procPacket} />
+          </div>
+          <ol className="grid sm:grid-cols-2 lg:grid-cols-5">
+            {PROCESS.map((p, k) => (
+              <li key={p.name} data-spot className={`${s[`step${k}`]} flex flex-col gap-4 border-r border-b border-white/[0.13] px-6 pt-16 pb-10 lg:pt-20 lg:border-b-0 lg:last:border-r-0`}>
+                <span aria-hidden="true" className={s.procNode} />
+                <span className={`${s.mono} ${s.stepNum} text-[12px]`}>0{k + 1}</span>
+                <p className="text-[24px] font-semibold tracking-[-0.02em]">{p.name}</p>
+                <p className={`${s.mono} text-[12px] text-white/60`}>{p.when}</p>
+                <p className="text-[15px] leading-6 text-white/70">{p.text}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
         <div className="flex flex-wrap items-center justify-between gap-4 border-t border-white/[0.13] px-6 py-6 lg:px-10">
           <p className="text-[15px] text-(--muted)">Every step ends with something you can see. No black boxes.</p>
           <Link href="/contact" className="inline-flex items-center gap-2 text-[14px] text-white hover:text-(--hi)">

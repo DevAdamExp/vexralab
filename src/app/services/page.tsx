@@ -3,6 +3,7 @@ import Link from "next/link";
 import { PiCaretRight, PiCheck } from "react-icons/pi";
 import { Faq } from "@/components/cc/Bottom";
 import { PageHead, Shell } from "@/components/cc/Page";
+import { Glyph } from "@/components/cc/Glyph";
 import { Band, Slash } from "@/components/cc/parts";
 import s from "@/components/cc/cc.module.css";
 import { SERVICES } from "@/data/vx";
@@ -43,8 +44,11 @@ export default function ServicesPage() {
         <ul className="grid sm:grid-cols-2 lg:grid-cols-4">
           {SERVICES.map((x, k) => (
             <li key={x.id} data-spot className="border-r border-b border-white/[0.13]">
-              <a href={`#${x.id}`} className="group flex h-full flex-col gap-6 px-6 py-7 transition-colors hover:bg-white/[0.03]">
-                <span className={s.rowNum}>0{k + 1}</span>
+              <a href={`#${x.id}`} data-glyph-host className="group flex h-full flex-col gap-7 px-6 py-8 transition-colors hover:bg-white/[0.03]">
+                <span className="flex items-start justify-between">
+                  <span className={s.rowNum}>0{k + 1}</span>
+                  <Glyph id={x.id} size={6} />
+                </span>
                 <span>
                   <span className="block text-[18px] text-white">{x.name}</span>
                   <span className={`${s.mono} mt-1 block text-[13px] text-white/60`}>{x.tag}</span>
@@ -70,8 +74,11 @@ export default function ServicesPage() {
         <div key={x.id}>
           <section id={x.id} className={`${s.col} scroll-mt-24`} aria-labelledby={`${x.id}-title`}>
             <div className="grid lg:grid-cols-[5fr_7fr]">
-              <div className="flex flex-col gap-6 border-b border-white/[0.13] px-6 py-12 lg:border-r lg:border-b-0 lg:px-10">
-                <span className={s.rowNum}>0{k + 1} / 0{SERVICES.length}</span>
+              <div data-glyph-host className="flex flex-col gap-6 border-b border-white/[0.13] px-6 py-12 lg:border-r lg:border-b-0 lg:px-10">
+                <span className="flex items-center justify-between">
+                  <span className={s.rowNum}>0{k + 1} / 0{SERVICES.length}</span>
+                  <Glyph id={x.id} size={8} label={`${x.name} icon`} />
+                </span>
                 <h2 id={`${x.id}-title`} className={s.h2mid}>
                   {x.name}
                 </h2>
