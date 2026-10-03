@@ -1,29 +1,29 @@
-import { Hero } from "@/components/home/Hero";
-import { Morning } from "@/components/home/Morning";
-import { Problems } from "@/components/home/Problems";
-import { Process } from "@/components/home/Process";
-import { Services } from "@/components/home/Services";
-import { WorkPreview } from "@/components/home/WorkPreview";
-import { Footer } from "@/components/ui/Footer";
-import { Header } from "@/components/ui/Header";
+import { Benefits, Community, Compare, Faq, FinalCta, Footer, Pricing } from "@/components/cc/Bottom";
+import { Clarity, Platform, Statements } from "@/components/cc/Middle";
+import { Services } from "@/components/cc/Services";
+import { Hero, Logos, Nav } from "@/components/cc/Top";
+import s from "@/components/cc/cc.module.css";
 
-/**
- * Home. void (the desk at night) → belle (sound familiar?) → void (same desk,
- * morning) → belle (what we make) → sail (how we work) → belle tint (the work) → void.
- */
+/** Home: VexraLab, the data / CRM / ERP partner. Layout system modelled on commandcode.ai. */
 export default function Home() {
   return (
-    <>
-      <Header />
-      <main id="main-content" className="flex-1">
+    <div className={s.page}>
+      <Nav />
+      <main id="main-content">
         <Hero />
-        <Problems />
-        <Morning />
+        <Logos />
         <Services />
-        <Process />
-        <WorkPreview />
+        <Platform />
+        <Statements />
+        <Clarity />
+        <Compare />
+        <Pricing />
+        <Community />
+        <Benefits />
+        <Faq />
+        <FinalCta />
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

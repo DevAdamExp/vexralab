@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
-import { JetBrains_Mono, Manrope } from "next/font/google";
+import { Geist, Geist_Mono, JetBrains_Mono, Manrope } from "next/font/google";
 import { SmoothScroll } from "@/components/ui/SmoothScroll";
 import "./globals.css";
 
@@ -16,6 +16,8 @@ const cranio = localFont({
 });
 const mifetro = localFont({ src: "./fonts/Mifetro/MifetroRegular-rvOly.ttf", variable: "--font-mifetro", display: "swap" });
 const manrope = Manrope({ variable: "--font-manrope", subsets: ["latin"], weight: ["400", "500", "600", "700"] });
+const geist = Geist({ variable: "--font-geist", subsets: ["latin"], weight: ["300", "400", "500", "600"] });
+const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"], weight: ["400", "500"] });
 const mono = JetBrains_Mono({ variable: "--font-jbmono", subsets: ["latin"], weight: ["400", "500"] });
 
 const DESCRIPTION = "VexraLab designs and builds brands, websites and software for founders. Calm process, clear work, real results.";
@@ -32,7 +34,7 @@ export const viewport: Viewport = { themeColor: "#151419" };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${betha.variable} ${cranio.variable} ${mifetro.variable} ${manrope.variable} ${mono.variable} h-full antialiased`}>
+    <html lang="en" className={`${betha.variable} ${cranio.variable} ${mifetro.variable} ${manrope.variable} ${mono.variable} ${geist.variable} ${geistMono.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col">
         <a
           href="#main-content"
@@ -51,7 +53,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         </svg>
         <SmoothScroll />
         {children}
-        <div className="grain" aria-hidden="true" />
       </body>
     </html>
   );
