@@ -27,10 +27,15 @@ export function Slash({ children, as = "h2", className = "" }: { children: React
   );
 }
 
-// Tile colours. Hero: mostly teal with Blue Sail accents. Spectrum: the whole palette,
-// coral and yellow kept rare so the grid reads as one family.
-const HERO = ["var(--hi)", "var(--hi)", "var(--sail-hi)", "var(--hi)", "var(--hi)", "var(--sail-hi)", "var(--hi)"];
-const SPECTRUM = ["var(--hi)", "var(--sail-hi)", "var(--hi)", "var(--coral)", "var(--sail-hi)", "var(--hi)", "var(--sail-hi)", "var(--spark)"];
+/**
+ * A tile's colour from its position: share of Deep Sea teal at the tile's centre,
+ * the rest Blue Sail. Hero grids stay mostly teal; the others sweep the full ramp.
+ */
+const tone = (c: number, span: number, cols: number, hero: boolean) => {
+  const t = (c - 1 + span / 2) / cols;
+  const teal = Math.round(hero ? 45 + t * 55 : t * 100);
+  return `color-mix(in oklab, var(--hi) ${teal}%, var(--sail-hi))`;
+};
 
 /** A dashed cell grid with grain tiles placed on it. tiles: [col, span, row]. */
 export function Tiles({
@@ -63,7 +68,7 @@ export function Tiles({
         <span
           key={k}
           className={`${mono ? s.tileMono : s.tile} ${flip && k % 3 === 1 ? s.tileFlip : ""}`}
-          style={{ gridColumn: `${c} / span ${span}`, gridRow: r, margin: 12, animationDelay: `${k * 60}ms`, "--k": k, "--c": (mono ? SPECTRUM : HERO)[k % (mono ? SPECTRUM.length : HERO.length)] } as React.CSSProperties}
+          style={{ gridColumn: `${c} / span ${span}`, gridRow: r, margin: 12, animationDelay: `${k * 60}ms`, "--k": k, "--c": tone(c, span, cols, !mono) } as React.CSSProperties}
         />
       ))}
     </div>
