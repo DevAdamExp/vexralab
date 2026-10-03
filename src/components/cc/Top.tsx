@@ -3,7 +3,7 @@ import { PiCalendarCheck, PiCaretDown, PiKey, PiReceipt, PiShieldCheck } from "r
 import { SiGooglebigquery, SiHubspot, SiLooker, SiOdoo, SiPostgresql, SiQuickbooks, SiSap, SiShopify, SiSnowflake, SiStripe, SiXero, SiZoho } from "react-icons/si";
 import { CopyText } from "./CopyText";
 import { DataFlow } from "./DataFlow";
-import { Logo } from "./Logo";
+import { Logo, Mark } from "./Logo";
 import { Band, Tiles } from "./parts";
 import s from "./cc.module.css";
 
@@ -128,6 +128,14 @@ const LOGOS = [
   { Icon: SiLooker, name: "Looker", brand: "#4285f4" },
 ];
 
+const GROUPS: [string, string][] = [
+  ["CRM", "HubSpot, Zoho"],
+  ["ERP", "Odoo, SAP"],
+  ["Commerce", "Shopify, Stripe"],
+  ["Finance", "QuickBooks, Xero"],
+  ["Data", "Postgres, Snowflake, BigQuery, Looker"],
+];
+
 const PROMISES = [
   { Icon: PiReceipt, title: "Fixed price.", text: "Agreed in writing before we start." },
   { Icon: PiCalendarCheck, title: "A demo every Friday.", text: "You always see where it's at." },
@@ -139,19 +147,58 @@ export function Logos() {
   return (
     <>
       <Band />
-      <section className={s.col} aria-label="Platforms we work with">
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6">
-          <p className="flex h-[100px] items-center border-r border-b border-white/[0.13] px-6 text-[14px] leading-5 text-white">
-            <span>
-              Built on <span className="text-(--muted)">your stack.</span>
-            </span>
-          </p>
-          {LOGOS.slice(0, 11).map(({ Icon, name, brand }) => (
-            <div key={name} data-spot style={{ "--brand": brand } as React.CSSProperties} className={`${s.logo} flex h-[100px] items-center justify-center gap-2.5 border-r border-b border-white/[0.13] text-white/85 transition-colors hover:text-white`}>
-              <Icon aria-hidden="true" className="size-6" />
-              <span className="text-[17px] font-semibold tracking-[-0.02em]">{name}</span>
+      <section className={s.col} aria-label="Integrations and commitments">
+        <div className="grid border-b border-white/[0.13] lg:grid-cols-[5fr_7fr]">
+          <div className="flex flex-col justify-center gap-6 px-6 py-14 lg:border-r lg:border-white/[0.13] lg:px-12">
+            <p className={s.kicker}>Integrations</p>
+            <h2 className="text-[clamp(30px,3.2vw,40px)] leading-[1.08] font-semibold tracking-[-0.035em]">
+              Works with the tools <span className="text-white/55">you already run.</span>
+            </h2>
+            <p className="max-w-[40ch] text-[17px] leading-7 text-(--muted)">No rip and replace. We connect what you have, then add only what&rsquo;s missing.</p>
+            <dl className="mt-2 grid grid-cols-[auto_1fr] gap-x-6 gap-y-3 border-t border-white/[0.1] pt-6 text-[14px]">
+              {GROUPS.map(([k, v]) => (
+                <div key={k} className="contents">
+                  <dt className={`${s.mono} text-[12px] text-white/45`}>{k}</dt>
+                  <dd className="text-white/80">{v}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+
+          <div className="relative grid place-items-center overflow-hidden px-4 py-10">
+            {/* Desktop: the hub. Each logo is wired to the centre by a line carrying data inwards. */}
+            <div className={`${s.hub} max-lg:hidden`} aria-hidden="true">
+              {LOGOS.map(({ Icon, name, brand }, k) => {
+                const a = ((k * 30 - 90) * Math.PI) / 180;
+                const x = 300 + Math.cos(a) * 236;
+                const y = 230 + Math.sin(a) * 178;
+                const len = Math.hypot(300 - x, 230 - y) - 46;
+                const ang = (Math.atan2(230 - y, 300 - x) * 180) / Math.PI;
+                return (
+                  <div key={name} className={s.hubItem} style={{ left: x, top: y, "--brand": brand, "--k": k } as React.CSSProperties}>
+                    <span className={s.hubLine} style={{ width: len, transform: `rotate(${ang}deg)` }} />
+                    <span className={s.hubChip}>
+                      <Icon className="size-4" />
+                      {name}
+                    </span>
+                  </div>
+                );
+              })}
+              <div className={s.hubCore}>
+                <Mark size={22} />
+              </div>
             </div>
-          ))}
+            {/* Phones: the same platforms as a tidy grid. */}
+            <ul className="grid w-full grid-cols-2 gap-2 sm:grid-cols-3 lg:hidden">
+              {LOGOS.map(({ Icon, name, brand }) => (
+                <li key={name} className="flex items-center gap-2.5 rounded-lg border border-white/[0.1] px-3 py-3 text-[14px]">
+                  <Icon aria-hidden="true" className="size-4" style={{ color: brand }} />
+                  {name}
+                </li>
+              ))}
+            </ul>
+            <p className="sr-only">Platforms: {LOGOS.map((l) => l.name).join(", ")}.</p>
+          </div>
         </div>
         <ul aria-label="What we commit to" className="grid sm:grid-cols-2 lg:grid-cols-4">
           {PROMISES.map(({ Icon, title, text }) => (
