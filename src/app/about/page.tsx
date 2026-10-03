@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PiCalendarCheck, PiChatCircle, PiEnvelopeSimple, PiGithubLogo, PiLightning, PiLinkedinLogo, PiNotepad } from "react-icons/pi";
 import { Clock } from "@/components/cc/Clock";
+import { Mark } from "@/components/cc/Logo";
 import { PageHead, Shell } from "@/components/cc/Page";
 import { Band, Slash } from "@/components/cc/parts";
 import s from "@/components/cc/cc.module.css";
@@ -10,11 +11,17 @@ export const metadata: Metadata = {
   description: "VexraLab is a small team of data, CRM and ERP specialists. How we work, what we believe and who you'll work with.",
 };
 
-const BELIEFS = [
-  ["Process first, tools second.", "We map how your business runs before we pick a platform."],
-  ["Boring is good.", "Reliable systems your team uses every day beat clever ones nobody opens."],
-  ["Show, don't tell.", "A live demo every Friday. Progress you can click."],
-  ["You own it.", "Every account, every credential, every line of config, in your name."],
+// [text, highlighted]: the four beliefs read as one sentence-led paragraph.
+const MANIFESTO: [string, boolean][] = [
+  ["We believe", false],
+  ["process comes before tools.", true],
+  ["We map how your business runs before we pick a platform.", false],
+  ["Boring is good:", true],
+  ["reliable systems your team uses every day beat clever ones nobody opens. We", false],
+  ["show, not tell,", true],
+  ["with a live demo every Friday. And", false],
+  ["you own it,", true],
+  ["every account, credential and line of config, in your name.", false],
 ];
 
 const WEEK = [
@@ -45,24 +52,25 @@ export default function AboutPage() {
         }
         grey="Est. [year]."
         lede="We help growing businesses replace spreadsheets and disconnected tools with systems their teams actually trust."
+        art={<Mark size={110} className="drop-shadow-[0_0_40px_rgb(111_211_199/0.25)]" />}
       />
 
+      {/* Manifesto: one paragraph that lights up line by line as you read it. */}
       <section className={s.col} aria-labelledby="believe-title">
         <div className="border-b border-white/[0.13] px-6 py-12 lg:px-12">
           <Slash>
             <span id="believe-title">what we believe.</span>
           </Slash>
         </div>
-        <ul className="grid lg:grid-cols-2">
-          {BELIEFS.map(([b, t], k) => (
-            <li key={b} className={`flex gap-5 border-b border-white/[0.13] px-6 py-10 lg:px-10 ${k % 2 === 0 ? "lg:border-r" : ""} ${k > 1 ? "lg:border-b-0" : ""}`}>
-              <span className={`${s.mono} pt-1.5 text-[12px] text-(--hi)`}>0{k + 1}</span>
-              <p className="text-[22px] leading-[30px] text-(--muted)">
-                <b className="font-semibold text-white">{b}</b> {t}
-              </p>
-            </li>
-          ))}
-        </ul>
+        <p className={`${s.manifesto} px-6 py-20 lg:px-12 lg:py-28`}>
+          {MANIFESTO.flatMap(([text, hi], i) =>
+            text.split(" ").map((w, j) => (
+              <span key={`${i}-${j}`} className={`${s.word} ${hi ? s.wordHi : ""}`}>
+                {w}{" "}
+              </span>
+            ))
+          )}
+        </p>
       </section>
       <Band />
 

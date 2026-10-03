@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { PiCaretRight, PiCheck } from "react-icons/pi";
+import { PiCaretRight } from "react-icons/pi";
 import { Faq } from "@/components/cc/Bottom";
 import { PageHead, Shell } from "@/components/cc/Page";
 import { Glyph } from "@/components/cc/Glyph";
+import { Shelf } from "@/components/cc/Shelf";
 import { Band, Slash } from "@/components/cc/parts";
 import s from "@/components/cc/cc.module.css";
 import { SERVICES } from "@/data/vx";
@@ -32,6 +33,15 @@ export default function ServicesPage() {
         grey="One partner, base to end."
         lede="From the first lead in your CRM to the last line of your accounts. Pick one service or let us run the whole stack."
         action={{ label: "Book a call", href: "/contact" }}
+        art={
+          <div data-glyph-host className="grid grid-cols-4 gap-x-10 gap-y-12">
+            {SERVICES.map((x) => (
+              <span key={x.id}>
+                <Glyph id={x.id} size={6} />
+              </span>
+            ))}
+          </div>
+        }
       />
 
       {/* Index */}
@@ -69,71 +79,8 @@ export default function ServicesPage() {
       </section>
       <Band />
 
-      {/* One block per service */}
-      {SERVICES.map((x, k) => (
-        <div key={x.id}>
-          <section id={x.id} className={`${s.col} scroll-mt-24`} aria-labelledby={`${x.id}-title`}>
-            <div className="grid lg:grid-cols-[5fr_7fr]">
-              <div data-glyph-host className="flex flex-col gap-6 border-b border-white/[0.13] px-6 py-12 lg:border-r lg:border-b-0 lg:px-10">
-                <span className="flex items-center justify-between">
-                  <span className={s.rowNum}>0{k + 1} / 0{SERVICES.length}</span>
-                  <Glyph id={x.id} size={8} label={`${x.name} icon`} />
-                </span>
-                <h2 id={`${x.id}-title`} className={s.h2mid}>
-                  {x.name}
-                </h2>
-                <p className="text-[20px] leading-7 text-(--muted)">
-                  <b className="font-semibold text-white">{x.title}</b> {x.body}
-                </p>
-                <dl className={`${s.mono} mt-auto grid grid-cols-2 gap-4 border-t border-white/[0.13] pt-6 text-[13px]`}>
-                  <div>
-                    <dt className="text-white/60">Timeline</dt>
-                    <dd className="mt-1 text-white">{x.timeline}</dd>
-                  </div>
-                  <div>
-                    <dt className="text-white/60">Price</dt>
-                    <dd className="mt-1 text-white">{x.price}</dd>
-                  </div>
-                </dl>
-                <Link href="/contact" data-magnet className={`${s.btnWhite} self-start`}>
-                  Talk about {x.name.split(" ")[0]} <PiCaretRight aria-hidden="true" />
-                </Link>
-              </div>
-
-              <div className="grid sm:grid-cols-2">
-                <div className="border-b border-white/[0.13] px-6 py-10 sm:border-r lg:px-8">
-                  <p className={`${s.kicker} ${s.kickerCoral}`}>Before</p>
-                  <ul className="mt-5 flex flex-col gap-3 text-[15px] leading-6 text-white/55">
-                    {x.before.map((b) => (
-                      <li key={b}>{b}</li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="border-b border-white/[0.13] bg-(--accent)/12 px-6 py-10 lg:px-8">
-                  <p className={`${s.kicker} !text-(--hi)`}>After</p>
-                  <ul className="mt-5 flex flex-col gap-3 text-[15px] leading-6 text-white">
-                    {x.after.map((a) => (
-                      <li key={a}>{a}</li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="px-6 py-10 sm:col-span-2 lg:px-8">
-                  <p className={s.kicker}>What you get</p>
-                  <ul className="mt-5 grid gap-x-8 gap-y-3 text-[15px] sm:grid-cols-2">
-                    {x.deliverables.map((d) => (
-                      <li key={d} data-spot className="flex gap-3">
-                        <PiCheck aria-hidden="true" className="mt-1 size-4 shrink-0 text-(--hi)" />
-                        {d}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </section>
-          <Band />
-        </div>
-      ))}
+      <Shelf />
+      <Band />
 
       {/* Ways to work */}
       <section className={s.col} aria-labelledby="models-title">

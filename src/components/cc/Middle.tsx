@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { PiArrowsClockwise, PiChartBar, PiDatabase, PiQuestion } from "react-icons/pi";
+import { PiChartBar } from "react-icons/pi";
 import { Band, Slash } from "./parts";
 import { TileChart } from "./TileChart";
 import s from "./cc.module.css";
@@ -83,117 +83,6 @@ export function Platform() {
               </div>
             </div>
           </figure>
-        </div>
-      </section>
-      <Band />
-    </>
-  );
-}
-
-/** "// stop running on spreadsheets." Two tagged statements. */
-export function Statements() {
-  return (
-    <>
-      <section className={s.col} aria-labelledby="stmt-title">
-        <div className="border-b border-white/[0.13] px-6 py-12 lg:px-12">
-          <Slash>
-            <span id="stmt-title">stop running on spreadsheets.</span>
-          </Slash>
-        </div>
-        <div className="grid lg:grid-cols-2">
-          <div className="border-white/[0.13] px-6 py-12 lg:border-r lg:px-12">
-            <span className={`${s.tag} !border-(--coral)/30 !bg-(--coral)/10 !text-(--coral)`}>data without structure is noise</span>
-            <p className="mt-4 text-[20px] leading-7 text-(--muted)">
-              <span className="mr-2 text-white/50">{"//"}</span>
-              <b className="font-semibold text-white">Scattered. Manual. Late.</b> Five tools, ten spreadsheets, and nobody trusts the numbers. What if every answer was one click away?
-            </p>
-          </div>
-          <div className="border-t border-white/[0.13] px-6 py-12 lg:border-t-0 lg:px-12">
-            <span className={s.tag}>systems, not spreadsheets</span>
-            <p className="mt-4 text-[20px] leading-7 text-(--muted)">
-              <span className="mr-2 text-white/50">{"//"}</span>
-              <b className="font-semibold text-white">Growing businesses run on VexraLab.</b> CRMs, ERPs and{" "}
-              <u className="decoration-white/30 underline-offset-4">data pipelines</u> designed around your process, with{" "}
-              <u className="decoration-white/30 underline-offset-4">fixed-price scopes</u> and weekly demos.
-            </p>
-          </div>
-        </div>
-      </section>
-      <Band />
-    </>
-  );
-}
-
-/** "Hello, clarity." Input → thinking flow beside an insight panel, then the big mono line. */
-export function Clarity() {
-  const steps = [
-    { icon: PiDatabase, title: "Connect every source.", text: "CRM, ERP, ads and payments, synced on a schedule." },
-    { icon: PiArrowsClockwise, title: "Clean and model.", text: "duplicates merged, one ID per customer and product." },
-    { icon: PiChartBar, title: "Answer the question.", text: "margin by product, region and rep, live." },
-  ];
-  return (
-    <>
-      <section id="process" className={`${s.col} scroll-mt-24`} aria-labelledby="clarity-title">
-        <div className="grid lg:grid-cols-2">
-          <h2 id="clarity-title" className="px-6 py-16 text-[26px] leading-[34px] font-normal text-(--muted) sm:text-[30px] sm:leading-9 lg:col-span-2 lg:px-[76px]">
-            <span className="text-white">Hello, clarity.</span> One source of truth that ties your CRM, ERP and finance into a single{" "}
-            <u className="decoration-white/40 underline-offset-[6px]">view of your business</u>.
-          </h2>
-        </div>
-
-        <div className="relative flex items-center gap-4 border-y border-white/[0.13] px-6 py-8">
-          <span className={`${s.mono} absolute top-1/2 -left-[118px] hidden -translate-y-1/2 text-[13px] text-white/55 xl:block`}>[ Input ]</span>
-          <PiQuestion aria-hidden="true" className="size-6 shrink-0 rounded border border-white/25 p-0.5 text-white/70" />
-          <p className="text-[15px]">Why are our margins shrinking this quarter?</p>
-        </div>
-
-        <div className="grid lg:grid-cols-2">
-          <ol className="relative border-white/[0.13] lg:border-r">
-            {steps.map(({ icon: Icon, title, text }, k) => (
-              <li key={title} className={`${s.cycle} relative flex items-center gap-4 px-6 py-8`} style={{ "--k": k } as React.CSSProperties}>
-                {k === 0 && <span className={`${s.mono} absolute top-1/2 -left-[132px] hidden -translate-y-1/2 text-[13px] text-white/55 xl:block`}>[ Thinking ]</span>}
-                <Icon aria-hidden="true" className="size-6 shrink-0 rounded border border-white/25 p-0.5 text-white/70" />
-                <p className="text-[15px] text-white">
-                  {title} <span className="text-(--muted)">{text}</span>
-                </p>
-              </li>
-            ))}
-          </ol>
-          <div className="p-6">
-            <div className={`${s.term} min-h-[320px]`}>
-              <div className={s.termBar}>
-                <span className={s.dot} style={{ background: "#ff5f57" }} />
-                <span className={s.dot} style={{ background: "#febc2e" }} />
-                <span className={s.dot} style={{ background: "#28c840" }} />
-                <span className="ml-2">~/insights</span>
-              </div>
-              <div className="flex flex-col gap-2 p-4">
-                <p className={s.prompt}>❯ analysis complete</p>
-                <p><span className={s.badge}>FOUND</span>discounting up on two product lines</p>
-                <p><span className={s.badge}>FOUND</span>shipping costs rising in one region</p>
-                <p><span className={s.badge}>FOUND</span>slow-moving stock tying up cash</p>
-                <p className="text-(--ok)">✓ 3 actions recommended</p>
-                <p className="mt-4 text-[12px] text-white/55">Illustrative example.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="grid border-t border-white/[0.13] lg:grid-cols-2">
-          <div className="hidden lg:block lg:border-r lg:border-white/[0.13]" />
-          <div className="flex flex-col items-center gap-8 px-6 py-16">
-            <p className={`${s.mono} text-[clamp(48px,6vw,72px)] leading-none font-medium`}>
-              <span className="text-white/25">{"//"}</span>one-view
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <Link href="/contact" data-magnet className={s.btnAccent}>
-                Book a call
-              </Link>
-              <a href="#pricing" className={s.btnGhost}>
-                Pricing
-              </a>
-            </div>
-          </div>
         </div>
       </section>
       <Band />

@@ -27,12 +27,13 @@ const TILES: [number, number, number][] = [
 ];
 
 /** Inner-page opening: a kicker, a two-tone headline, one line, an action, and grain tiles on the right. */
-export function PageHead({ kicker, title, grey, lede, action }: { kicker: string; title: ReactNode; grey: string; lede: string; action?: { label: string; href: string } }) {
+export function PageHead({ kicker, title, grey, lede, action, art }: { kicker: string; title: ReactNode; grey: string; lede: string; action?: { label: string; href: string }; art?: ReactNode }) {
   return (
     <>
       <section className={s.col} aria-labelledby="page-title">
         <div className="relative lg:min-h-[600px]">
-          <Tiles cols={10} rows={8} rowH={75} tiles={TILES} className="pointer-events-none absolute inset-0 hidden lg:grid" />
+          <Tiles cols={10} rows={8} rowH={75} tiles={art ? [] : TILES} className="pointer-events-none absolute inset-0 hidden lg:grid" />
+          {art && <div aria-hidden="true" className="absolute top-[75px] right-0 hidden h-[450px] w-[42%] place-items-center lg:grid">{art}</div>}
           <div className="relative z-10 flex flex-col justify-center px-6 py-20 lg:absolute lg:top-[75px] lg:left-0 lg:min-h-[450px] lg:w-[58%] lg:border-y lg:border-r lg:border-white/[0.13] lg:bg-black lg:px-10 lg:py-12">
             <p className={s.kicker}>
               <span className="text-white/50">{"//"}</span> {kicker}
