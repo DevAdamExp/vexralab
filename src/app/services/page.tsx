@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PiCaretRight } from "react-icons/pi";
 import { Faq } from "@/components/cc/Bottom";
-import { PageHead, Shell } from "@/components/cc/Page";
+import { Shell } from "@/components/cc/Page";
+import { ServicesHero } from "@/components/cc/ServicesHero";
 import { Glyph } from "@/components/cc/Glyph";
 import { Shelf } from "@/components/cc/Shelf";
 import { Band, Slash } from "@/components/cc/parts";
@@ -23,26 +24,7 @@ const MODELS = [
 export default function ServicesPage() {
   return (
     <Shell>
-      <PageHead
-        kicker="Services"
-        title={
-          <>
-            Seven ways we make your data <span className="text-(--hi)">work</span>.
-          </>
-        }
-        grey="One partner, base to end."
-        lede="From the first lead in your CRM to the last line of your accounts. Pick one service or let us run the whole stack."
-        action={{ label: "Book a call", href: "/contact" }}
-        art={
-          <div data-glyph-host className="grid grid-cols-4 gap-x-10 gap-y-12">
-            {SERVICES.map((x) => (
-              <span key={x.id}>
-                <Glyph id={x.id} size={6} />
-              </span>
-            ))}
-          </div>
-        }
-      />
+      <ServicesHero />
 
       {/* Index */}
       <section className={s.col} aria-labelledby="index-title">
