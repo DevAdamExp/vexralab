@@ -1,5 +1,5 @@
 import type { CSSProperties, ReactNode } from "react";
-import { PiArrowDownRight, PiArrowUpRight, PiDotsThree, PiGlobe, PiMegaphone, PiUsers } from "react-icons/pi";
+import { PiArrowDownRight, PiArrowUpRight, PiGlobe, PiMegaphone, PiUsers } from "react-icons/pi";
 import { SiOdoo, SiStripe, SiWhatsapp } from "react-icons/si";
 import type { IconType } from "react-icons";
 import { tone } from "./parts";
@@ -14,7 +14,6 @@ function Head({ title, right }: { title: string; right?: ReactNode }) {
       <p className="text-[12px] font-medium text-white/85">{title}</p>
       <div className="flex items-center gap-2">
         {right}
-        <PiDotsThree aria-hidden="true" className="size-3.5 text-white/35" />
       </div>
     </div>
   );
@@ -219,8 +218,8 @@ export function Activity() {
           </span>
         }
       />
-      {FEED.map(([Icon, c, t, meta, ago], i) => (
-        <div key={t} className={`${i === 0 ? s.feedNew : ""} flex items-center gap-2.5 text-[10.5px]`}>
+      {FEED.map(([Icon, c, t, meta, ago]) => (
+        <div key={t} className="flex items-center gap-2.5 text-[10.5px]">
           <span className="grid size-5 shrink-0 place-items-center rounded-md bg-white/[0.05]">
             <Icon aria-hidden="true" className="size-2.5" style={{ color: c }} />
           </span>

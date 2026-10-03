@@ -404,7 +404,7 @@
 .cap2 { display: block; }
 
 .shot { position: relative; perspective: 1800px; }
-.shot::before { content: ""; position: absolute; inset: 8% 6% -6%; z-index: 0; background: radial-gradient(60% 60% at 50% 60%, rgb(111 211 199 / .18), transparent 70%); filter: blur(30px); pointer-events: none; }
+.shot::before { content: ""; position: absolute; inset: 8% 6% -6%; z-index: 0; background: radial-gradient(60% 60% at 50% 60%, rgb(111 211 199 / .07), transparent 70%); filter: blur(30px); pointer-events: none; }
 .win { position: relative; z-index: 1; border-radius: 14px; border: 1px solid rgb(239 234 227 / .12); background: linear-gradient(180deg, #121117, #0e0d12); box-shadow: 0 1px 0 rgb(255 255 255 / .06) inset, 0 40px 80px -30px rgb(0 0 0 / .9), 0 0 0 1px rgb(0 0 0 / .4); overflow: visible; transform-origin: 50% 0; }
 .winChrome, .appSide, .appTop { transition: none; }
 .app { display: grid; grid-template-columns: 172px minmax(0, 1fr); }
@@ -425,17 +425,16 @@
 .slotBack { height: 100%; padding: 12px 14px; border-radius: 10px; border: 1px solid rgb(239 234 227 / .08); background: rgb(255 255 255 / .025); }
 /* Tool card: one uniform size, centred on its slot while it flies in. */
 .slotFront {
-  position: absolute; inset: 0; margin: auto; z-index: 2; width: 276px; height: 118px;
+  position: absolute; inset: 0; margin: auto; z-index: 2; width: 264px; height: 112px;
   display: flex; flex-direction: column; justify-content: space-between; padding: 16px 18px;
   border-radius: 14px; border: 1px solid rgb(239 234 227 / .14);
   background:
-    radial-gradient(120% 90% at 0% 0%, color-mix(in oklab, var(--b) 14%, transparent), transparent 60%),
-    linear-gradient(165deg, #1d1c23, #121117);
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / .09), 0 1px 0 rgb(0 0 0 / .6), 0 28px 60px -22px rgb(0 0 0 / .9), 0 0 0 1px rgb(0 0 0 / .35);
+    linear-gradient(180deg, #1a1920, #131217);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / .06), 0 18px 40px -20px rgb(0 0 0 / .8);
   opacity: 0; pointer-events: none;
 }
-.toolIcon { display: grid; place-items: center; width: 44px; height: 44px; flex-shrink: 0; border-radius: 12px; background: color-mix(in oklab, var(--b) 16%, #16151b); border: 1px solid color-mix(in oklab, var(--b) 30%, transparent); box-shadow: inset 0 1px 0 rgb(255 255 255 / .08); }
-.toolDot { width: 6px; height: 6px; border-radius: 999px; background: var(--hi); box-shadow: 0 0 6px var(--hi); }
+.toolIcon { display: grid; place-items: center; width: 44px; height: 44px; flex-shrink: 0; border-radius: 12px; background: color-mix(in oklab, var(--b) 12%, #18171d); border: 1px solid rgb(239 234 227 / .08); }
+.toolDot { width: 6px; height: 6px; margin-top: 6px; border-radius: 999px; background: var(--hi); }
 .toolSync { position: relative; width: 64px; height: 3px; border-radius: 999px; background: rgb(255 255 255 / .08); overflow: hidden; margin-bottom: 4px; }
 .toolSync i { position: absolute; inset: 0; width: 40%; border-radius: 999px; background: var(--b); }
 @media (prefers-reduced-motion: no-preference) { .toolSync i { animation: sync 1.6s ease-in-out infinite; } }
@@ -513,7 +512,6 @@
 /* Newest feed row arrives with a brief teal wash. */
 @media (prefers-reduced-motion: no-preference) {
   .feedNew { animation: feedNew 4s ease-in-out 2s infinite; border-radius: 6px; }
-  .sparkDot { animation: cellLive 2.4s ease-in-out infinite; }
 }
 @keyframes feedNew { 0%, 70%, 100% { background: transparent; } 80% { background: rgb(111 211 199 / .08); } }
 

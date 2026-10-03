@@ -19,20 +19,20 @@ import s from "./cc.module.css";
 type Slot = { key: string; Icon: IconType; brand: string; name: string; cat: string; stat: string; unit: string; area: string; dx: number; dy: number; rot: number; sc: number; widget: ReactNode };
 
 const SLOTS: Slot[] = [
-  { key: "stripe", Icon: SiStripe, brand: "#8f88ff", name: "Stripe", cat: "Payments", stat: "1,204", unit: "payments", area: "k1", dx: 700, dy: 60, rot: 10, sc: 1,
+  { key: "stripe", Icon: SiStripe, brand: "#8f88ff", name: "Stripe", cat: "Payments", stat: "1,204", unit: "payments", area: "k1", dx: 700, dy: 60, rot: 4, sc: 1,
     widget: <Kpi label="Revenue, this month" Icon={PiCurrencyDollar} value="$48,210" delta="12.4%" note="vs last month" spark={[22, 24, 23, 27, 26, 30, 29, 33, 35, 34, 38, 41]} /> },
-  { key: "shopify", Icon: SiShopify, brand: "#95bf47", name: "Shopify", cat: "Online store", stat: "326", unit: "orders today", area: "k2", dx: 470, dy: 190, rot: 8, sc: 1,
+  { key: "shopify", Icon: SiShopify, brand: "#95bf47", name: "Shopify", cat: "Online store", stat: "326", unit: "orders today", area: "k2", dx: 470, dy: 190, rot: 3, sc: 1,
     widget: <Kpi label="Orders today" Icon={PiShoppingCart} count={326} delta="8.1%" note="vs last Tuesday" spark={[12, 18, 15, 22, 19, 26, 24, 23, 29, 31, 28, 33]} /> },
-  { key: "hubspot", Icon: SiHubspot, brand: "#ff7a59", name: "HubSpot", cat: "CRM", stat: "41", unit: "open deals", area: "k3", dx: -630, dy: 140, rot: -7, sc: 1,
+  { key: "hubspot", Icon: SiHubspot, brand: "#ff7a59", name: "HubSpot", cat: "CRM", stat: "41", unit: "open deals", area: "k3", dx: -630, dy: 140, rot: -2, sc: 1,
     widget: <Kpi label="Open deals" Icon={PiHandshake} count={41} delta="9 closing" note="$182.6k pipeline" spark={[30, 32, 31, 35, 33, 36, 38, 37, 40, 39, 42, 41]} /> },
-  { key: "quickbooks", Icon: SiQuickbooks, brand: "#3fbf2c", name: "QuickBooks", cat: "Accounting", stat: "3", unit: "bank feeds", area: "k4", dx: -270, dy: 50, rot: 6, sc: 1,
+  { key: "quickbooks", Icon: SiQuickbooks, brand: "#3fbf2c", name: "QuickBooks", cat: "Accounting", stat: "3", unit: "bank feeds", area: "k4", dx: -270, dy: 50, rot: 2, sc: 1,
     widget: <Kpi label="Cash on hand" Icon={PiBank} value="$96.3k" delta="2 overdue" up={false} note="$7.4k to collect" spark={[44, 42, 45, 41, 40, 42, 39, 38, 40, 37, 36, 35]} /> },
-  { key: "sheets", Icon: SiGooglesheets, brand: "#34a853", name: "Google Sheets", cat: "Spreadsheet", stat: "37", unit: "tabs, 4 versions", area: "ch", dx: 100, dy: 20, rot: -4, sc: 1,
+  { key: "sheets", Icon: SiGooglesheets, brand: "#34a853", name: "Google Sheets", cat: "Spreadsheet", stat: "37", unit: "tabs, 4 versions", area: "ch", dx: 100, dy: 20, rot: -2, sc: 1,
     widget: <RevenueChart values={[38, 46, 42, 55, 51, 62, 58, 70, 66, 78, 84, 93]} /> },
-  { key: "zoho", Icon: SiZoho, brand: "#ff5a5f", name: "Zoho", cat: "Lead capture", stat: "2,918", unit: "leads", area: "ld", dx: -600, dy: -180, rot: 9, sc: 1, widget: <Leads /> },
-  { key: "odoo", Icon: SiOdoo, brand: "#c39bbd", name: "Odoo", cat: "ERP", stat: "1,140", unit: "SKUs", area: "iv", dx: -980, dy: 70, rot: -8, sc: 1, widget: <Stock /> },
-  { key: "whatsapp", Icon: SiWhatsapp, brand: "#25d366", name: "WhatsApp", cat: "Messaging", stat: "18", unit: "new chats", area: "ac", dx: 480, dy: -20, rot: 7, sc: 1, widget: <Activity /> },
-  { key: "zapier", Icon: SiZapier, brand: "#ff4f00", name: "Zapier", cat: "Automation", stat: "12", unit: "zaps", area: "au", dx: -540, dy: -20, rot: -6, sc: 1, widget: <Automations /> },
+  { key: "zoho", Icon: SiZoho, brand: "#ff5a5f", name: "Zoho", cat: "Lead capture", stat: "2,918", unit: "leads", area: "ld", dx: -600, dy: -180, rot: 3, sc: 1, widget: <Leads /> },
+  { key: "odoo", Icon: SiOdoo, brand: "#c39bbd", name: "Odoo", cat: "ERP", stat: "1,140", unit: "SKUs", area: "iv", dx: -980, dy: 70, rot: -3, sc: 1, widget: <Stock /> },
+  { key: "whatsapp", Icon: SiWhatsapp, brand: "#25d366", name: "WhatsApp", cat: "Messaging", stat: "18", unit: "new chats", area: "ac", dx: 480, dy: -20, rot: 2, sc: 1, widget: <Activity /> },
+  { key: "zapier", Icon: SiZapier, brand: "#ff4f00", name: "Zapier", cat: "Automation", stat: "12", unit: "zaps", area: "au", dx: -540, dy: -20, rot: -2, sc: 1, widget: <Automations /> },
 ];
 
 const NAV = [
@@ -128,18 +128,13 @@ export function Converge() {
                                 <span className="block truncate text-[16px] leading-tight font-semibold tracking-[-0.01em] text-white">{x.name}</span>
                                 <span className="block text-[12px] text-white/55">{x.cat}</span>
                               </span>
-                              <span className="flex items-center gap-1.5 self-start text-[10.5px] text-white/60">
-                                <i className={s.toolDot} /> Synced
-                              </span>
+                              <i aria-hidden="true" className={`${s.toolDot} self-start`} />
                             </div>
                             <div className="flex items-end justify-between gap-3">
-                              <p>
+                              <p className="leading-none">
                                 <span className={`${s.mono} ${s.tnum} text-[22px] leading-none tracking-[-0.03em] text-white`}>{x.stat}</span>
                                 <span className="ml-1.5 text-[12px] text-white/55">{x.unit}</span>
                               </p>
-                              <span className={s.toolSync}>
-                                <i />
-                              </span>
                             </div>
                           </div>
                         </div>
