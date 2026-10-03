@@ -310,7 +310,7 @@ export function FinalCta() {
   return (
     <>
       <section className={`${s.col} relative overflow-hidden`} aria-labelledby="cta-title">
-        <Tiles cols={10} rows={9} rowH={64} tiles={CTA_TILES} mono className="pointer-events-none absolute inset-0 hidden opacity-60 lg:grid" />
+        <Tiles cols={10} rows={9} rowH={64} tiles={CTA_TILES} mono className="pointer-events-none absolute inset-0 hidden opacity-80 lg:grid" />
         <div className="relative z-10 mx-auto flex max-w-[640px] flex-col items-center gap-8 bg-black px-6 py-20 text-center lg:my-16 lg:py-12">
           <h2 id="cta-title" className="text-[clamp(32px,3.8vw,48px)] leading-[1.1] font-semibold tracking-[-0.04em]">
             <span className="mr-2 text-[0.8em] text-white/30">{"//"}</span>Take control of your data.
@@ -357,7 +357,7 @@ export function Footer() {
           ))}
         </ul>
         <div className="relative flex min-h-[146px] items-end justify-center overflow-hidden border-b border-white/[0.13]">
-          <Tiles cols={6} rows={2} rowH={73} mono tiles={[[1, 2, 1], [4, 3, 1], [2, 3, 2], [6, 1, 2]]} className="absolute inset-0 grid opacity-20" />
+          <Tiles cols={6} rows={2} rowH={73} mono tiles={[[1, 2, 1], [4, 3, 1], [2, 3, 2], [6, 1, 2]]} className="absolute inset-0 grid opacity-35" />
           <p className="relative flex items-center gap-3 pb-4 text-[44px] leading-none font-semibold tracking-[-0.05em]">
             <Mark size={30} />
             <span>

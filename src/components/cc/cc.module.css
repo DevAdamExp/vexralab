@@ -83,13 +83,19 @@
 
 /* Grain tiles: accent and mono variants */
 .cellDash { border-right: 1px dashed var(--dash); border-bottom: 1px dashed var(--dash); }
-.tile, .tileMono { position: relative; overflow: hidden; }
-.tile { background: linear-gradient(90deg, rgb(11 107 114 / 0.04), rgb(15 128 137 / 0.8) 55%, rgb(111 211 199 / 0.95)); }
-.tile:nth-of-type(5n) { background: linear-gradient(90deg, rgb(58 95 184 / 0.04), rgb(58 95 184 / 0.75) 55%, rgb(120 150 230 / 0.9)); }
-.tileMono { background: linear-gradient(90deg, rgb(218 210 200 / 0.03), rgb(218 210 200 / 0.3) 50%, rgb(218 210 200 / 0.5)); }
+.tile, .tileMono { position: relative; overflow: hidden; border-radius: 3px; --c: var(--hi); }
+/* One recipe for every tile: its colour (--c, set per tile) fades in from the left,
+   a fine top highlight gives it an edge, and the grain stays soft. */
+.tile, .tileMono {
+  background: linear-gradient(90deg, color-mix(in oklab, var(--c) 3%, transparent), color-mix(in oklab, var(--c) 62%, transparent) 58%, color-mix(in oklab, var(--c) 92%, transparent));
+  box-shadow: inset 0 1px 0 color-mix(in oklab, var(--c) 45%, transparent), inset 0 0 0 1px color-mix(in oklab, var(--c) 10%, transparent);
+  transition: filter .5s, transform .5s cubic-bezier(.16,1,.3,1);
+}
+/* Spectrum tiles (benefits, closing, footer) sit a little quieter than the hero's. */
+.tileMono { opacity: .78; }
 .tile::after, .tileMono::after {
-  content: ""; position: absolute; inset: 0; mix-blend-mode: multiply;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.15' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1.7 -0.4'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  content: ""; position: absolute; inset: 0; mix-blend-mode: multiply; opacity: .75;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1.4 -0.38'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
 }
 .tileFlip { transform: scaleX(-1); }
 @media (prefers-reduced-motion: no-preference) {

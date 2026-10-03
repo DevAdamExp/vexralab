@@ -27,6 +27,11 @@ export function Slash({ children, as = "h2", className = "" }: { children: React
   );
 }
 
+// Tile colours. Hero: mostly teal with Blue Sail accents. Spectrum: the whole palette,
+// coral and yellow kept rare so the grid reads as one family.
+const HERO = ["var(--hi)", "var(--hi)", "var(--sail-hi)", "var(--hi)", "var(--hi)", "var(--sail-hi)", "var(--hi)"];
+const SPECTRUM = ["var(--hi)", "var(--sail-hi)", "var(--hi)", "var(--coral)", "var(--sail-hi)", "var(--hi)", "var(--sail-hi)", "var(--spark)"];
+
 /** A dashed cell grid with grain tiles placed on it. tiles: [col, span, row]. */
 export function Tiles({
   cols,
@@ -58,7 +63,7 @@ export function Tiles({
         <span
           key={k}
           className={`${mono ? s.tileMono : s.tile} ${flip && k % 3 === 1 ? s.tileFlip : ""}`}
-          style={{ gridColumn: `${c} / span ${span}`, gridRow: r, margin: 12, animationDelay: `${k * 60}ms`, "--k": k } as React.CSSProperties}
+          style={{ gridColumn: `${c} / span ${span}`, gridRow: r, margin: 12, animationDelay: `${k * 60}ms`, "--k": k, "--c": (mono ? SPECTRUM : HERO)[k % (mono ? SPECTRUM.length : HERO.length)] } as React.CSSProperties}
         />
       ))}
     </div>
