@@ -42,7 +42,7 @@ export function Shelf() {
                 <p className="text-[18px] leading-7 text-(--muted)">
                   <b className="font-semibold text-white">{x.title}</b> {x.body}
                 </p>
-                <dl className={`${s.mono} mt-auto grid grid-cols-2 gap-4 border-t border-white/[0.13] pt-5 text-[13px]`}>
+                <dl className={`${s.mono} mt-2 grid grid-cols-2 gap-4 border-t border-white/[0.13] pt-5 text-[13px]`}>
                   <div>
                     <dt className="text-white/60">Timeline</dt>
                     <dd className="mt-1">{x.timeline}</dd>
@@ -52,7 +52,7 @@ export function Shelf() {
                     <dd className="mt-1">{x.price}</dd>
                   </div>
                 </dl>
-                <Link href="/contact" data-magnet className={`${s.btnWhite} self-start`}>
+                <Link href="/contact" data-magnet className={`${s.btnWhite} mt-auto self-start`}>
                   Start with this <PiCaretRight aria-hidden="true" />
                 </Link>
               </div>

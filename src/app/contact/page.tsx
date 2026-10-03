@@ -32,10 +32,11 @@ export default function ContactPage() {
     <Shell cta={false}>
       <section className={s.col} aria-labelledby="contact-title">
         <div className="grid lg:grid-cols-[5fr_7fr]">
-          <div className="flex flex-col border-b border-white/[0.13] lg:border-r lg:border-b-0">
+          <div className="border-b border-white/[0.13] lg:border-r lg:border-b-0">
+            <div className="flex flex-col lg:sticky lg:top-[85px]">
             <div className="px-6 py-14 lg:px-10">
               <p className={s.kicker}>
-                <span className="text-white/50">{"//"}</span> Free data audit
+Free data audit
               </p>
               <h1 id="contact-title" className={`${s.h1} ${s.rise} mt-5`}>
                 Let&rsquo;s look at your data <span className="text-(--hi)">together</span>.
@@ -55,7 +56,7 @@ export default function ContactPage() {
               ))}
             </ol>
 
-            <div className="mt-auto flex flex-col gap-5 px-6 py-8 lg:px-10">
+            <div className="flex flex-col gap-5 px-6 py-8 lg:px-10">
               <div className="flex items-center gap-3">
                 <PiEnvelopeSimple aria-hidden="true" className="size-5 text-white/60" />
                 <CopyText text={EMAIL} className={`${s.mono} flex items-center gap-2 text-[15px] text-white hover:text-(--hi)`} />
@@ -72,6 +73,7 @@ export default function ContactPage() {
                   </li>
                 ))}
               </ul>
+            </div>
             </div>
           </div>
 

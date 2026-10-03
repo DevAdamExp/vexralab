@@ -7,7 +7,7 @@ import { EMAIL, SERVICES, STUDIO_TZ } from "@/data/vx";
 import s from "./cc.module.css";
 
 const IDS = SERVICES.map((x) => x.id);
-const FIELD = "h-12 w-full border border-white/[0.13] bg-white/[0.03] px-4 text-[15px] text-white placeholder:text-white/50 outline-none transition-colors focus:border-(--hi)";
+const FIELD = "h-12 w-full rounded-lg border border-white/[0.12] bg-white/[0.025] px-4 text-[15px] text-white placeholder:text-white/30 outline-none transition-[border-color,background-color,box-shadow] hover:border-white/25 focus:border-(--hi) focus:bg-white/[0.04] focus:shadow-[0_0_0_4px_rgb(111_211_199/0.12)]";
 
 function Chip({ on, label, onClick }: { on: boolean; label: string; onClick: () => void }) {
   return (

@@ -4,7 +4,7 @@ import { PiCaretRight } from "react-icons/pi";
 import { SiHubspot, SiLooker, SiOdoo, SiPostgresql, SiShopify, SiZapier } from "react-icons/si";
 import type { IconType } from "react-icons";
 import { Compare } from "@/components/cc/Bottom";
-import { PageHead, Shell } from "@/components/cc/Page";
+import { Shell } from "@/components/cc/Page";
 import { Band, Slash } from "@/components/cc/parts";
 import s from "@/components/cc/cc.module.css";
 import { PROCESS } from "@/data/vx";
@@ -45,34 +45,73 @@ const CASES: { sector: string; title: string; problem: string; built: string[]; 
 export default function WorkPage() {
   return (
     <Shell>
-      <PageHead
-        kicker="Work"
-        title={
-          <>
-            Systems that run <span className="text-(--hi)">real</span> businesses.
-          </>
-        }
-        grey="Here’s how."
-        lede="Three typical engagements and the process behind every one. Sample scopes, shown to illustrate how we work."
-        action={{ label: "Book a call", href: "/contact" }}
-      />
+      {/* Work opening: a case index. Headline left; the three engagements as an index on the right. */}
+      <section className={s.col} aria-labelledby="page-title">
+        <div className="grid lg:grid-cols-[5fr_7fr]">
+          <div className="flex flex-col justify-between gap-10 border-b border-white/[0.13] px-6 py-14 lg:border-r lg:border-b-0 lg:px-12">
+            <div>
+              <p className={s.kicker}>Work</p>
+              <h1 id="page-title" className={`${s.h1} ${s.rise} mt-5`}>
+                Systems that run <span className="text-(--hi)">real</span> businesses.
+              </h1>
+              <p className="mt-5 max-w-[40ch] text-[17px] leading-7 text-(--muted)">Three typical engagements and the process behind every one.</p>
+            </div>
+            <dl className="grid grid-cols-3 gap-4 border-t border-white/[0.1] pt-6">
+              {[["3", "sectors"], ["5", "steps, every project"], ["Fri", "live demo, weekly"]].map(([v, l]) => (
+                <div key={l}>
+                  <dt className="sr-only">{l}</dt>
+                  <dd className={`${s.mono} ${s.tnum} text-[28px] leading-none tracking-[-0.03em]`}>{v}</dd>
+                  <dd className="mt-2 text-[13px] text-white/55">{l}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+          <ol className="flex flex-col">
+            {CASES.map((c, k) => (
+              <li key={c.title} className="flex-1 border-b border-white/[0.13] last:border-b-0">
+                <a href={`#case-${k}`} className={`${s.caseRow} group flex h-full flex-col justify-center gap-3 px-6 py-8 lg:px-10`}>
+                  <div className="flex items-center justify-between gap-4">
+                    <span className={`${s.mono} text-[12px] text-white/50`}>
+                      Case 0{k + 1} · {c.sector}
+                    </span>
+                    <span className="flex gap-1.5">
+                      {c.stack.map(({ Icon, name }) => (
+                        <span key={name} title={name} className="grid size-7 place-items-center rounded-md border border-white/[0.1] text-white/70">
+                          <Icon aria-hidden="true" className="size-3.5" />
+                        </span>
+                      ))}
+                    </span>
+                  </div>
+                  <p className="text-[22px] leading-tight font-semibold tracking-[-0.025em] transition-colors group-hover:text-(--hi)">{c.title}</p>
+                  <p className="flex items-center gap-2 text-[14px] text-white/60">
+                    <PiCaretRight aria-hidden="true" className="size-3.5 text-(--hi) transition-transform group-hover:translate-x-1" />
+                    {c.result[0]}
+                  </p>
+                </a>
+              </li>
+            ))}
+          </ol>
+        </div>
+        <p className={`${s.mono} border-t border-white/[0.13] px-6 py-3 text-[11px] text-white/45 lg:px-12`}>Sample engagements, shown to illustrate how we work.</p>
+      </section>
+      <Band />
 
       {/* Case stack: each case pins, and the next card slides up over it as it recedes. */}
       <section className={s.col} aria-labelledby="cases-title">
         <div className="border-b border-white/[0.13] px-6 py-12 lg:px-12">
           <Slash>
-            <span id="cases-title">three typical engagements.</span>
+            <span id="cases-title">the details.</span>
           </Slash>
         </div>
         <div className={`${s.stack} px-4 py-10 sm:px-6 lg:px-10`}>
           {CASES.map((c, k) => (
-            <article key={c.title} className={`${s.card} ${s[`card${k}`]}`} style={{ "--k": k } as React.CSSProperties} aria-labelledby={`case-${k}`}>
+            <article key={c.title} id={`case-${k}`} className={`${s.card} ${s[`card${k}`]} scroll-mt-28`} style={{ "--k": k } as React.CSSProperties} aria-labelledby={`case-${k}-title`}>
               <div className="flex flex-col gap-6 border-b border-white/[0.13] px-6 py-8 lg:flex-row lg:items-end lg:justify-between lg:px-10">
                 <div>
                   <p className={s.kicker}>
                     Case 0{k + 1} · Sample · {c.sector}
                   </p>
-                  <h2 id={`case-${k}`} className={`${s.h2mid} mt-4 max-w-[22ch]`}>
+                  <h2 id={`case-${k}-title`} className={`${s.h2mid} mt-4 max-w-[22ch]`}>
                     {c.title}
                   </h2>
                 </div>

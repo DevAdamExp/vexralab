@@ -30,7 +30,7 @@ export function ServicesHero() {
   return (
     <>
       <section className={s.col} aria-labelledby="page-title">
-        <div className="grid lg:grid-cols-[5fr_7fr]">
+        <div className="grid lg:grid-cols-[11fr_13fr]">
           <div className="flex flex-col gap-8 border-b border-white/[0.13] px-6 py-14 lg:border-r lg:border-b-0 lg:px-12">
             <div>
               <p className={s.kicker}>Services</p>
@@ -62,28 +62,32 @@ export function ServicesHero() {
 
           <div className={`${s.finder} relative flex flex-col justify-between gap-10 overflow-hidden px-6 py-14 lg:px-14`} aria-live="polite">
             <div className="flex items-start justify-between gap-6">
-              <p className={`${s.kicker}`}>We’d start with</p>
+              <p className={s.kicker}>Where we’d start</p>
               <p className={`${s.mono} text-[12px] text-white/45`}>
                 0{on + 1} / 0{SERVICES.length}
               </p>
             </div>
 
-            <div key={x.id} className="grid items-center gap-10 sm:grid-cols-[auto_1fr]">
-              <div className={s.finderGlyph} data-glyph-host>
-                <Glyph id={x.id} size={20} label={`${x.name} icon`} />
+            <div key={x.id} className="flex flex-col gap-7">
+              <div className="flex items-center gap-6">
+                <div className={s.finderGlyph} data-glyph-host>
+                  <Glyph id={x.id} size={12} label={`${x.name} icon`} />
+                </div>
+                <div className={s.rise}>
+                  <p className={`${s.mono} text-[12px] text-(--coral)`}>“{PROBLEMS[x.id]}”</p>
+                  <h2 className="mt-2 text-[clamp(28px,2.8vw,38px)] leading-[1.08] font-semibold tracking-[-0.035em]">{x.name}</h2>
+                </div>
               </div>
-              <div className={s.rise}>
-                <h2 className="text-[clamp(30px,3.2vw,42px)] leading-[1.06] font-semibold tracking-[-0.035em]">{x.name}</h2>
-                <p className="mt-3 text-[18px] leading-7 text-(--muted)">
-                  <b className="font-semibold text-white">{x.title}</b> {x.body}
-                </p>
-                <ul className="mt-5 flex flex-wrap gap-2">
-                  {x.after.map((a) => (
-                    <li key={a} className="rounded-full border border-(--hi)/25 bg-(--hi)/[0.06] px-3 py-1 text-[13px] text-white/85">
-                      {a}
-                    </li>
-                  ))}
-                </ul>
+              <p className={`${s.rise} max-w-[52ch] text-[18px] leading-7 text-(--muted)`}>
+                <b className="font-semibold text-white">{x.title}</b> {x.body}
+              </p>
+              <div className={`${s.rise} grid gap-px overflow-hidden rounded-xl border border-white/[0.08] bg-white/[0.08] sm:grid-cols-3`}>
+                {x.after.map((a, i) => (
+                  <div key={a} className="flex flex-col gap-2 bg-(--bg) px-4 py-4">
+                    <span className={`${s.mono} text-[11px] text-(--hi)`}>0{i + 1}</span>
+                    <span className="text-[14px] leading-5 text-white/85">{a}</span>
+                  </div>
+                ))}
               </div>
             </div>
 

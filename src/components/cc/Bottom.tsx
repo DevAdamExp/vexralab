@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { PiCaretDown, PiCaretRight, PiCheck, PiLinkedinLogo, PiXLogo } from "react-icons/pi";
+import { PiCaretRight, PiCheck, PiLinkedinLogo, PiXLogo } from "react-icons/pi";
 import { Glyph } from "./Glyph";
 import { EMAIL } from "./Top";
 import { FAQ } from "@/data/vx";
@@ -192,31 +192,33 @@ export function Faq() {
   return (
     <>
       <section id="faq" className={`${s.col} scroll-mt-24`} aria-labelledby="faq-title">
-        <div className="grid lg:grid-cols-[1fr_2fr]">
-          <div className="border-b border-white/[0.13] px-6 py-14 lg:border-r lg:border-b-0 lg:px-10">
-            <p className={s.kicker}>
-              <span className="text-white/50">{"//"}</span> FAQ
-            </p>
-            <h2 id="faq-title" className={`${s.h2mid} mt-4`}>
-              Questions,
-              <span className="block">answered.</span>
-            </h2>
-            <p className="mt-6 max-w-[34ch] text-[16px] leading-[22px] text-(--muted)">
-              Everything that usually comes up before a first call. Still curious?{" "}
-              <Link href="/contact" className="underline underline-offset-4 hover:text-white">
-                Ask us directly
-              </Link>
-              .
-            </p>
+        <div className="grid lg:grid-cols-[5fr_7fr]">
+          <div className="border-b border-white/[0.13] px-6 py-14 lg:border-r lg:border-b-0 lg:px-12">
+            <div className="lg:sticky lg:top-28">
+              <p className={s.kicker}>FAQ</p>
+              <h2 id="faq-title" className={`${s.h2mid} mt-4`}>
+                Questions,
+                <span className="block text-white/55">answered.</span>
+              </h2>
+              <p className="mt-5 max-w-[34ch] text-[16px] leading-6 text-(--muted)">Everything that usually comes up before a first call.</p>
+              <div className="mt-8 rounded-xl border border-white/[0.1] bg-white/[0.02] p-5">
+                <p className="text-[15px] font-medium">Still have a question?</p>
+                <p className="mt-1 text-[14px] text-(--muted)">A real person replies within one working day.</p>
+                <Link href="/contact" className="mt-4 inline-flex items-center gap-2 text-[14px] text-(--hi) hover:underline">
+                  Ask us directly <PiCaretRight aria-hidden="true" />
+                </Link>
+              </div>
+            </div>
           </div>
-          <div>
+          <div className="px-2 py-4 lg:px-4">
             {FAQ.map(([q, a], k) => (
-              <details key={q} className={`${s.faq} border-b border-white/[0.13] last:border-b-0`} open={k === 0}>
-                <summary className="flex min-h-[76px] items-center justify-between gap-6 px-8 py-6 text-[16px] font-medium">
-                  {q}
-                  <PiCaretDown aria-hidden="true" className={`${s.chev} size-4 shrink-0`} />
+              <details key={q} name="faq" className={`${s.faq} ${s.faqItem} border-b border-white/[0.1] last:border-b-0`} open={k === 0}>
+                <summary className="flex min-h-[72px] items-center gap-5 px-5 py-5 text-[16.5px] font-medium">
+                  <span className={`${s.mono} ${s.faqNum} text-[12px]`}>0{k + 1}</span>
+                  <span className="flex-1">{q}</span>
+                  <span aria-hidden="true" className={s.faqPlus} />
                 </summary>
-                <p className="px-8 pb-8 text-[15px] leading-6 text-(--muted)">{a}</p>
+                <p className="max-w-[60ch] pr-12 pb-7 pl-[60px] text-[15.5px] leading-[26px] text-(--muted)">{a}</p>
               </details>
             ))}
           </div>
