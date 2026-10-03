@@ -167,10 +167,10 @@ export function Logos() {
             <div className={`${s.hub} max-lg:hidden`} aria-hidden="true">
               {LOGOS.map(({ Icon, name, brand }, k) => {
                 const a = ((k * 30 - 90) * Math.PI) / 180;
-                const x = 300 + Math.cos(a) * 236;
-                const y = 230 + Math.sin(a) * 178;
-                const len = Math.hypot(300 - x, 230 - y) - 46;
-                const ang = (Math.atan2(230 - y, 300 - x) * 180) / Math.PI;
+                const x = Math.round(300 + Math.cos(a) * 236);
+                const y = Math.round(230 + Math.sin(a) * 178);
+                const len = Math.round(Math.hypot(300 - x, 230 - y) - 46);
+                const ang = Math.round(((Math.atan2(230 - y, 300 - x) * 180) / Math.PI) * 10) / 10;
                 return (
                   <div key={name} className={s.hubItem} style={{ left: x, top: y, "--brand": brand, "--k": k } as React.CSSProperties}>
                     <span className={s.hubLine} style={{ width: len, transform: `rotate(${ang}deg)` }} />

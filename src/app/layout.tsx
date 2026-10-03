@@ -19,8 +19,8 @@ export const viewport: Viewport = { themeColor: "#0d0c10" };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${geist.variable} ${geistMono.variable} h-full antialiased`}>
-      <body>
+    <html lang="en" suppressHydrationWarning className={`${geist.variable} ${geistMono.variable} h-full antialiased`}>
+      <body suppressHydrationWarning>
         <a href="#main-content" className="sr-only focus-visible:not-sr-only focus-visible:fixed focus-visible:top-4 focus-visible:left-4 focus-visible:z-50 focus-visible:rounded-full focus-visible:bg-white focus-visible:px-5 focus-visible:py-2.5 focus-visible:text-sm focus-visible:text-black">
           Skip to main content
         </a>
