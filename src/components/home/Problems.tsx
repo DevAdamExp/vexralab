@@ -1,60 +1,54 @@
-import { Blob } from "@/components/ui/Blob";
 import { Mark } from "@/components/ui/Mark";
 import { Seen, i } from "@/components/ui/Seen";
-import { CONTAINER } from "@/components/ui/tokens";
 
-const PROBLEMS = [
-  { emoji: "🌙", tone: "sea", title: "A site you're embarrassed to send.", line: "So you send your Instagram instead." },
-  { emoji: "📭", tone: "sail", title: "Enquiries that never arrive.", line: "Visitors look, shrug, and leave." },
-  { emoji: "👻", tone: "red", title: "An agency that went quiet.", line: "“Two weeks” became March." },
-] as const;
+const ITEMS = [
+  { title: "A site you’re embarrassed to send.", line: "So you send your Instagram instead.", accent: "bg-sea" },
+  { title: "Visitors who never become enquiries.", line: "They look, they shrug, they leave.", accent: "bg-sail" },
+  { title: "An agency that went quiet.", line: "“Two weeks” turned into March.", accent: "bg-red" },
+];
 
 /**
- * Sound familiar? Three 2 AM problems, each with a liquid form poured in from
- * alternating edges. Then the turn, set large.
+ * Section 2 — "Sticky". The question stays pinned on the left while three
+ * problem cards scroll past on the right, each edged in a brand colour.
+ * Then the turn: "Good enough" struck through in red, and the promise.
  */
 export function Problems() {
   return (
-    <section id="story" aria-labelledby="problems-title" className="relative overflow-hidden bg-paper py-28 text-ink md:py-40">
-      <div className={CONTAINER}>
-        <Seen className="flex items-center gap-4">
-          <p className="label fade text-ink-muted">Sound familiar?</p>
-          <span className="draw block h-px w-16" aria-hidden="true" />
-        </Seen>
-        <h2 id="problems-title" className="sr-only">
-          Three problems founders bring us
-        </h2>
-
-        <div className="mt-20 flex flex-col gap-28 md:mt-28 md:gap-40">
-          {PROBLEMS.map((p, k) => {
-            const flip = k % 2 === 1;
-            return (
-              <Seen key={p.title} className="relative grid items-center gap-10 md:grid-cols-12">
-                <div className={`rise relative z-10 md:col-span-7 ${flip ? "md:col-start-6" : ""}`}>
-                  <span className="font-mono text-[28px] text-ink/25 md:text-[36px]">0{k + 1}</span>
-                  <h3 className="mt-3 text-[clamp(2.25rem,4.6vw,4rem)] leading-[1.02]">{p.title}</h3>
-                  <p className="mt-5 text-[18px] text-ink-muted md:text-[20px]">{p.line}</p>
-                </div>
-                <Blob
-                  tone={p.tone}
-                  side={flip ? "left" : "right"}
-                  emoji={p.emoji}
-                  className={`w-[78%] max-w-[560px] md:absolute md:top-1/2 md:w-[46%] md:-translate-y-1/2 ${flip ? "-ml-5 sm:-ml-8 md:ml-0 md:left-[calc(50%-50vw)]" : "ml-auto -mr-5 sm:-mr-8 md:mr-0 md:right-[calc(50%-50vw)]"}`}
-                />
-              </Seen>
-            );
-          })}
+    <section id="story" aria-labelledby="problems-title" className="bg-paper py-32 font-ui text-ink md:py-44">
+      <div className="mx-auto grid max-w-[1320px] gap-14 px-6 lg:grid-cols-12 lg:gap-10 lg:px-12">
+        <div className="lg:col-span-5">
+          <Seen className="lg:sticky lg:top-36">
+            <p className="fade text-[13px] font-medium tracking-[0.18em] text-ink/60 uppercase">Three problems</p>
+            <h2 id="problems-title" className="rise mt-6 font-display text-[clamp(3rem,6vw,5.5rem)] leading-[1]" style={i(1)}>
+              Sound familiar?
+            </h2>
+          </Seen>
         </div>
 
-        <Seen className="mt-36 md:mt-56">
-          <p className="display fade text-[clamp(1.75rem,4vw,3.25rem)] leading-[1.1] text-ink/40">
-            <Mark gesture="strike" tone="red">Good enough</Mark>{" "}isn&rsquo;t enough.
-          </p>
-          <p className="display rise mt-3 text-[clamp(2.75rem,7.6vw,6.75rem)] leading-[1] tracking-[-0.02em]" style={i(1)}>
-            It&rsquo;s not you. It&rsquo;s what you were <Mark tone="red">sold.</Mark>
-          </p>
+        <Seen as="ol" className="flex flex-col gap-5 lg:col-span-7" threshold={0.1}>
+          {ITEMS.map((p, k) => (
+            <li
+              key={p.title}
+              className="rise group relative overflow-hidden rounded-[20px] bg-paper-2 px-8 pt-10 pb-11 transition-[transform,box-shadow] duration-700 ease-water hover:-translate-y-1 hover:shadow-[0_30px_60px_-30px_rgb(21_20_25/0.25)] md:px-12 md:pt-12 md:pb-14"
+              style={i(k)}
+            >
+              <span aria-hidden="true" className={`absolute inset-x-0 top-0 h-1 origin-top transition-transform duration-700 ease-water group-hover:scale-y-[2] ${p.accent}`} />
+              <span className="text-[14px] font-medium text-ink/45 tabular-nums">0{k + 1} / 03</span>
+              <h3 className="mt-8 max-w-[18ch] font-display text-[clamp(1.9rem,3vw,2.75rem)] leading-[1.06]">{p.title}</h3>
+              <p className="mt-4 text-[17px] text-ink/60">{p.line}</p>
+            </li>
+          ))}
         </Seen>
       </div>
+
+      <Seen className="mx-auto mt-32 max-w-[1320px] px-6 md:mt-44 lg:px-12">
+        <p className="fade font-display text-[clamp(1.75rem,3.4vw,3rem)] leading-[1.1] text-ink/45">
+          <Mark gesture="strike" tone="red">Good enough</Mark>{"\u00a0"}isn&rsquo;t enough.
+        </p>
+        <p className="rise mt-3 max-w-[16ch] font-display text-[clamp(2.75rem,6.6vw,6rem)] leading-[1.02]" style={i(1)}>
+          You deserve a site that does the selling.
+        </p>
+      </Seen>
     </section>
   );
 }
