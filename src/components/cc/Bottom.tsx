@@ -2,6 +2,7 @@ import Link from "next/link";
 import { PiCaretDown, PiCaretRight, PiLinkedinLogo, PiXLogo } from "react-icons/pi";
 import { SiGooglesheets, SiHubspot, SiMake, SiOdoo, SiQuickbooks, SiShopify, SiStripe, SiZoho } from "react-icons/si";
 import { EMAIL } from "./Top";
+import { FAQ } from "@/data/vx";
 import { Band, Slash, Tiles } from "./parts";
 import s from "./cc.module.css";
 
@@ -109,8 +110,8 @@ export function Pricing() {
           </div>
 
           <div className="flex flex-col justify-end gap-6 bg-[#2a4c9e] px-8 py-10 text-white">
-            <p className="text-[96px] leading-none" aria-hidden="true">
-              ⚡
+            <p className={`${s.mono} text-[64px] leading-none font-medium tracking-[-0.04em] text-white/90`} aria-hidden="true">
+              30:00
             </p>
             <p className="text-[16px] tracking-[0.2em] text-white/80">AUDIT</p>
             <p>
@@ -171,8 +172,8 @@ export function Community() {
               <span className="text-white/35">{"//"}</span> Who we work with
             </p>
             <h2 id="community-title" className={`${s.h2big} mt-5`}>
-              Founders love it.
-              <span className="block">Operations teams, too.</span>
+              Made for teams that
+              <span className="block text-white/55">outgrew spreadsheets.</span>
             </h2>
           </div>
           <div className="flex flex-col items-start gap-3 lg:items-end">
@@ -260,15 +261,6 @@ export function Benefits() {
   );
 }
 
-const FAQ = [
-  ["What does VexraLab actually do?", "We design, build and run the data systems behind growing businesses: CRMs, ERPs, data pipelines, dashboards and automations, set up around how your team already works."],
-  ["Which platforms do you work with?", "HubSpot, Zoho, Odoo, SAP, Shopify, Stripe, QuickBooks, Xero, Postgres, BigQuery and most tools with an API. If we recommend a platform, we explain why in writing."],
-  ["How long does a typical project take?", "An audit takes a week. Most CRM or dashboard builds take [4-8 weeks]; ERP rollouts take [8-16 weeks]. You see progress in a demo every Friday."],
-  ["Will we lose any data during migration?", "No. We migrate in stages, validate row counts and keep an audit trail, and the old system stays read-only until you sign off."],
-  ["Who owns the system and the data?", "You do. Every account, credential and line of configuration is in your name from day one."],
-  ["What happens after launch?", "We train your team, hand over documentation, and offer a monthly Care plan for improvements and support."],
-];
-
 export function Faq() {
   return (
     <>
@@ -340,13 +332,13 @@ export function FinalCta() {
 }
 
 const FOOT = [
-  ["Services", "#services"],
-  ["Platform", "#platform"],
-  ["Process", "#process"],
-  ["Pricing", "#pricing"],
+  ["Home", "/"],
+  ["Services", "/services"],
   ["Work", "/work"],
   ["Studio", "/about"],
-  ["FAQ", "#faq"],
+  ["Pricing", "/#pricing"],
+  ["Process", "/work#process"],
+  ["FAQ", "/#faq"],
   ["Contact", "/contact"],
 ];
 
@@ -357,9 +349,9 @@ export function Footer() {
         <ul className="grid grid-cols-2 sm:grid-cols-4">
           {FOOT.map(([l, h]) => (
             <li key={l} className="border-r border-b border-white/[0.13]">
-              <a href={h} className="flex h-[73px] items-center px-6 text-[14px] text-white/75 transition-colors hover:text-white">
+              <Link href={h} className="flex h-[73px] items-center px-6 text-[14px] text-white/75 transition-colors hover:text-white">
                 {l}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>

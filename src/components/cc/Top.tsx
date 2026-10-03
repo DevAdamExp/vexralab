@@ -5,15 +5,9 @@ import { CopyText } from "./CopyText";
 import { Band, Tiles } from "./parts";
 import s from "./cc.module.css";
 
-export const EMAIL = "hello@vexralab.com";
+import { EMAIL, NAV } from "@/data/vx";
 
-const NAV = [
-  { label: "Services", href: "#services" },
-  { label: "Platform", href: "#platform" },
-  { label: "Process", href: "#process" },
-  { label: "Pricing", href: "#pricing" },
-  { label: "FAQ", href: "#faq" },
-];
+export { EMAIL };
 
 export function Nav() {
   return (
@@ -24,17 +18,35 @@ export function Nav() {
         </Link>
         <nav aria-label="Main" className="hidden items-center gap-1 lg:flex">
           {NAV.map((n) => (
-            <a key={n.href} href={n.href} className={s.navLink}>
+            <Link key={n.href} href={n.href} className={s.navLink}>
               {n.label}
-            </a>
+            </Link>
           ))}
           <Link href="/contact" className={s.navLink}>
             Contact
           </Link>
         </nav>
-        <Link href="/contact" className="inline-flex h-9 items-center rounded-full bg-[#fafafa] px-5 text-[14px] font-medium text-black transition-colors hover:bg-white">
-          Book a call
-        </Link>
+        <div className="flex items-center gap-2">
+          <Link href="/contact" className="inline-flex h-9 items-center rounded-full bg-[#fafafa] px-5 text-[14px] font-medium text-black transition-colors hover:bg-white">
+            Book a call
+          </Link>
+          {/* Phone menu: native disclosure, no script needed. */}
+          <details className="group relative lg:hidden">
+            <summary aria-label="Menu" className="grid size-9 cursor-pointer list-none place-items-center rounded-full border border-white/[0.13] [&::-webkit-details-marker]:hidden">
+              <span aria-hidden="true" className="flex w-4 flex-col gap-1">
+                <i className="h-px bg-white transition-transform group-open:translate-y-[2.5px] group-open:rotate-45" />
+                <i className="h-px bg-white transition-transform group-open:-translate-y-[2.5px] group-open:-rotate-45" />
+              </span>
+            </summary>
+            <nav aria-label="Mobile" className="absolute top-12 right-0 flex w-56 flex-col border border-white/[0.13] bg-black p-2">
+              {[...NAV, { label: "Contact", href: "/contact" }].map((n) => (
+                <Link key={n.href} href={n.href} className="px-3 py-3 text-[15px] text-white/80 hover:bg-white/5 hover:text-white">
+                  {n.label}
+                </Link>
+              ))}
+            </nav>
+          </details>
+        </div>
       </div>
     </header>
   );
@@ -50,10 +62,10 @@ export function Hero() {
   return (
     <section className={s.col} aria-labelledby="hero-title">
       <div className="flex items-center justify-between gap-4 border-b border-white/[0.13] px-4 py-3 text-[14px] sm:px-5">
-        <a href="/contact" className="flex items-center gap-2.5 underline decoration-white/30 underline-offset-4 hover:decoration-white">
+        <Link href="/contact" className="flex items-center gap-2.5 underline decoration-white/30 underline-offset-4 hover:decoration-white">
           <span aria-hidden="true" className="grid size-[18px] place-items-center rounded-[4px] bg-white/10 text-[10px]">✦</span>
           Free 30-minute data audit. A written plan in 5 days.
-        </a>
+        </Link>
         <span className="hidden items-center gap-5 text-[12px] text-white/70 md:flex">
           <span><b className="font-semibold text-white">Fixed price</b> agreed up front</span>
           <span><b className="font-semibold text-white">Demo</b> every Friday</span>

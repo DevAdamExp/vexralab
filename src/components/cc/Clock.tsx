@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { STUDIO_TZ } from "@/data/site";
+import { STUDIO_TZ } from "@/data/vx";
 
 /** The studio's local time, ticking. Renders a stable placeholder until mounted (no hydration mismatch). */
 export function Clock({ className = "" }: { className?: string }) {

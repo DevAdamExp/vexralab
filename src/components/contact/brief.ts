@@ -2,17 +2,17 @@
 // /api/brief (server), so both sides check the same rules. No imports, so it runs in plain node.
 
 export const WORRIES = [
-  { id: "understood", emoji: "😬", label: "People don't get what we do" },
-  { id: "template", emoji: "🪞", label: "Our site looks like a template" },
-  { id: "enquiries", emoji: "📭", label: "Enquiries don't come in" },
-  { id: "manual", emoji: "🧾", label: "We do everything by hand" },
-  { id: "agency", emoji: "👻", label: "Our agency went quiet" },
-  { id: "else", emoji: "✍️", label: "Something else" },
+  { id: "spreadsheets", emoji: "", label: "We run on spreadsheets" },
+  { id: "view", emoji: "", label: "No single view of the business" },
+  { id: "manual", emoji: "", label: "Too much manual data entry" },
+  { id: "crm", emoji: "", label: "Our CRM isn't used properly" },
+  { id: "erp", emoji: "", label: "Our ERP project is stuck" },
+  { id: "else", emoji: "", label: "Something else" },
 ] as const;
 
 export const TIMELINES = [
   { id: "asap", emoji: "🔥", label: "ASAP", line: "We'd like to start as soon as we can." },
-  { id: "soon", emoji: "📅", label: "1–3 months", line: "We'd like to start in the next one to three months." },
+  { id: "soon", emoji: "📅", label: "1-3 months", line: "We'd like to start in the next one to three months." },
   { id: "exploring", emoji: "🧭", label: "Just exploring", line: "For now, we're just exploring." },
 ] as const;
 
@@ -89,7 +89,7 @@ export function validateBrief(raw: unknown, serviceIds: readonly string[]): { br
   if (brief.website.length > LIMITS.website) errors.website = tooLong(LIMITS.website);
   else if (brief.website && (/\s/.test(brief.website) || !brief.website.includes("."))) errors.website = "Check the address, as in harbour.com. Or leave it empty.";
   if (brief.words.length > LIMITS.words) errors.words = tooLong(LIMITS.words);
-  else if (!brief.words && brief.worries.filter((w) => w !== "else").length === 0) errors.words = "Pick a thought above, or write a line here in your own words.";
+  else if (!brief.words && brief.worries.filter((w) => w !== "else").length === 0) errors.words = "Pick a challenge above, or describe it in a line.";
   return { brief, errors };
 }
 

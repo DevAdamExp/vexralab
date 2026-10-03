@@ -1,5 +1,5 @@
 import { BUDGETS, TIMELINES, WORRIES, validateBrief, type Brief } from "@/components/contact/brief";
-import { SERVICES } from "@/data/site";
+import { SERVICES } from "@/data/vx";
 
 const label = (list: readonly { id: string; label: string }[], id: string) => list.find((x) => x.id === id)?.label ?? "";
 
@@ -8,7 +8,7 @@ function asText(b: Brief) {
     `From: ${b.name} <${b.email}>`,
     `Company: ${b.company}`,
     b.website && `Website: ${b.website}`,
-    `Keeping them up: ${b.worries.map((w) => label(WORRIES, w)).join("; ") || "(none picked)"}`,
+    `Challenges: ${b.worries.map((w) => label(WORRIES, w)).join("; ") || "(none picked)"}`,
     b.words && `In their words:\n${b.words}`,
     `Services: ${b.services.map((s) => SERVICES.find((x) => x.id === s)?.name).join(", ") || "(none picked)"}`,
     `Timeline: ${label(TIMELINES, b.timeline) || "(not given)"}`,
@@ -52,7 +52,7 @@ export async function POST(req: Request) {
         from: process.env.BRIEF_FROM_EMAIL ?? "VexraLab <onboarding@resend.dev>",
         to: [to],
         reply_to: brief.email,
-        subject: `New letter from ${brief.name}, ${brief.company}`,
+        subject: `New enquiry from ${brief.name}, ${brief.company}`,
         text,
       }),
     });
