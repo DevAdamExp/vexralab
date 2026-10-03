@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { PiCaretDown } from "react-icons/pi";
+import { PiCalendarCheck, PiCaretDown, PiKey, PiReceipt, PiShieldCheck } from "react-icons/pi";
 import { SiGooglebigquery, SiHubspot, SiLooker, SiOdoo, SiPostgresql, SiQuickbooks, SiSap, SiShopify, SiSnowflake, SiStripe, SiXero, SiZoho } from "react-icons/si";
 import { CopyText } from "./CopyText";
 import { Band, Tiles } from "./parts";
@@ -50,15 +50,14 @@ export function Hero() {
   return (
     <section className={s.col} aria-labelledby="hero-title">
       <div className="flex items-center justify-between gap-4 border-b border-white/[0.13] px-4 py-3 text-[14px] sm:px-5">
-        <a href="#pricing" className="flex items-center gap-2.5 underline decoration-white/30 underline-offset-4 hover:decoration-white">
+        <a href="/contact" className="flex items-center gap-2.5 underline decoration-white/30 underline-offset-4 hover:decoration-white">
           <span aria-hidden="true" className="grid size-[18px] place-items-center rounded-[4px] bg-white/10 text-[10px]">✦</span>
-          Free 30-minute data audit for growing teams.
+          Free 30-minute data audit. A written plan in 5 days.
         </a>
-        <span className="hidden text-[12px] text-white/70 md:block">
-          <b className="font-semibold text-[#7c97f0]">AUDIT</b>
-          <span className="mx-2 font-semibold text-white">Free</span>written plan in 5 days
-          <span className="mx-2 font-semibold text-white">CRM · ERP · BI</span>
-          (fixed-price builds)
+        <span className="hidden items-center gap-5 text-[12px] text-white/70 md:flex">
+          <span><b className="font-semibold text-white">Fixed price</b> agreed up front</span>
+          <span><b className="font-semibold text-white">Demo</b> every Friday</span>
+          <span><b className="font-semibold text-[#7c97f0]">You own</b> everything</span>
         </span>
       </div>
 
@@ -68,7 +67,7 @@ export function Hero() {
         <div className="relative z-10 flex flex-col justify-center px-5 py-20 sm:px-6 lg:absolute lg:top-[75px] lg:left-0 lg:h-[450px] lg:w-[54%] lg:border-y lg:border-r lg:border-white/[0.13] lg:bg-black lg:py-0">
           <div>
             <h1 id="hero-title" className={`${s.h1} ${s.rise} max-w-[520px]`}>
-              Meet the data partner built for <span className="text-[#7c97f0]">growing businesses</span>.
+              Run your business on data you can <span className="text-[#7c97f0]">trust</span>.
               <span className="block text-white/55">VexraLab.</span>
             </h1>
 
@@ -79,17 +78,17 @@ export function Hero() {
                 </Link>
                 <CopyText text={EMAIL} className={`${s.mono} flex h-[34px] items-center gap-2 px-3 text-[14px] text-[#a1a1aa] hover:text-white`} />
               </div>
-              <a href="#platform" className="inline-flex h-11 items-center gap-2.5 rounded-full border border-white/[0.13] px-3.5 text-[14px] font-medium transition-colors hover:border-white/35">
+              <a href="#platform" className="inline-flex h-11 items-center gap-2.5 rounded-full border border-white/[0.13] px-4 text-[14px] font-medium transition-colors hover:border-white/35">
                 <span aria-hidden="true" className="size-2 rounded-full bg-[#7c97f0]" />
-                <span className={s.mono}>sample-dashboard</span>
+                See a sample dashboard
               </a>
             </div>
 
             <p className={`${s.rise} mt-9 text-[18px] leading-7 text-[#a1a1aa]`} style={{ animationDelay: "200ms" }}>
-              Data <span className="text-white">in one place</span>. Reports, <span className="text-white">automated</span>. Decisions, <span className="text-white">faster</span>.
+              CRM, ERP and reporting, <span className="text-white">set up around how your team already works</span>.
             </p>
             <p className={`${s.rise} mt-2 text-[14px] leading-5 text-white/55`} style={{ animationDelay: "240ms" }}>
-              Start with a <a href="#pricing" className="font-semibold text-[#7c97f0]">free audit</a>, then a fixed-price plan.
+              Start with a <a href="/contact" className="font-semibold text-[#7c97f0]">free audit</a>. No long contracts.
             </p>
           </div>
         </div>
@@ -113,6 +112,13 @@ const LOGOS = [
   { Icon: SiLooker, name: "Looker" },
 ];
 
+const PROMISES = [
+  { Icon: PiReceipt, title: "Fixed price.", text: "Agreed in writing before we start." },
+  { Icon: PiCalendarCheck, title: "A demo every Friday.", text: "You always see where it's at." },
+  { Icon: PiKey, title: "You own everything.", text: "Accounts, data and config, in your name." },
+  { Icon: PiShieldCheck, title: "Your data stays safe.", text: "NDA and data agreement on request." },
+];
+
 export function Logos() {
   return (
     <>
@@ -121,7 +127,7 @@ export function Logos() {
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6">
           <p className="flex h-[100px] items-center border-r border-b border-white/[0.13] px-6 text-[14px] leading-5 text-white">
             <span>
-              Built on the platforms <span className="text-[#a1a1aa]">you already run.</span>
+              We build on the platforms <span className="text-[#a1a1aa]">you already run.</span>
             </span>
           </p>
           {LOGOS.slice(0, 11).map(({ Icon, name }) => (
@@ -131,13 +137,17 @@ export function Logos() {
             </div>
           ))}
         </div>
-        <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 px-6 py-4 text-[14px]">
-          <span aria-hidden="true" className="text-white/40">❝</span>
-          <span>Your data already knows how to grow your business. We make it easy to read.</span>
-          <span className="flex items-center gap-2 text-[#a1a1aa]">
-            <span className="rounded-full border border-white/[0.13] px-2.5 py-0.5 text-[12px]">Our promise</span>
-          </span>
-        </div>
+        <ul aria-label="What we commit to" className="grid sm:grid-cols-2 lg:grid-cols-4">
+          {PROMISES.map(({ Icon, title, text }) => (
+            <li key={title} className="flex gap-4 border-r border-b border-white/[0.13] px-6 py-7 last:border-r-0 lg:border-b-0">
+              <Icon aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-[#7c97f0]" />
+              <p className="text-[14px] leading-5">
+                <span className="block font-semibold text-white">{title}</span>
+                <span className="text-[#a1a1aa]">{text}</span>
+              </p>
+            </li>
+          ))}
+        </ul>
       </section>
       <Band />
     </>
