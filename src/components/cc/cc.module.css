@@ -415,7 +415,7 @@
 .dash {
   display: grid; gap: 10px; padding: 14px;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  grid-template-rows: 88px 140px 140px 126px;
+  grid-template-rows: 100px 134px 134px 122px;
   grid-template-areas: "k1 k2 k3 k4" "ch ch ch ld" "ch ch ch iv" "ac ac au au";
 }
 @media (max-width: 767px) {
@@ -471,3 +471,48 @@
 @keyframes cap0 { 0%, 26% { opacity: 1; transform: none; } 32%, 100% { opacity: 0; transform: translateY(-14px); } }
 @keyframes cap1 { 0%, 30% { opacity: 0; transform: translateY(14px); } 36%, 60% { opacity: 1; transform: none; } 66%, 100% { opacity: 0; transform: translateY(-14px); } }
 @keyframes cap2 { 0%, 64% { opacity: 0; transform: translateY(14px); } 70%, 100% { opacity: 1; transform: none; } }
+
+/* ---------- Dashboard detailing ---------- */
+.tnum { font-variant-numeric: tabular-nums; }
+@property --n { syntax: "<integer>"; inherits: false; initial-value: 0; }
+.count { --n: var(--to); counter-reset: n var(--n); }
+.count::after { content: counter(n); }
+
+/* Window: a lit top edge and a soft floor shadow. */
+.win::after { content: ""; position: absolute; left: 12%; right: 12%; top: -1px; height: 1px; background: linear-gradient(90deg, transparent, rgb(239 234 227 / .35), transparent); border-radius: 1px; pointer-events: none; }
+.shot::after { content: ""; position: absolute; left: 10%; right: 10%; bottom: -26px; height: 40px; background: radial-gradient(50% 50% at 50% 50%, rgb(0 0 0 / .75), transparent); filter: blur(10px); z-index: 0; pointer-events: none; }
+
+/* Widgets: quiet hover lift so the dashboard feels operable. */
+.slot { transition: border-color .3s, background .3s; }
+.slot:hover { border-color: rgb(111 211 199 / .3); background: rgb(255 255 255 / .035); }
+
+/* Chart: hover a month to read its value; dashed target line. */
+.col2 { position: relative; }
+.col2::after { content: attr(data-v); position: absolute; left: 50%; bottom: calc(100% + 6px); transform: translate(-50%, 4px); padding: 2px 6px; border-radius: 4px; background: var(--fg); color: var(--bg); font: 500 9.5px var(--font-geist-mono), monospace; white-space: nowrap; opacity: 0; transition: opacity .2s, transform .2s; pointer-events: none; z-index: 2; }
+.col2:hover::after { opacity: 1; transform: translate(-50%, 0); }
+.col2:hover .cell { filter: brightness(1.35); }
+.target { position: absolute; left: 0; right: 0; height: 0; border-top: 1px dashed rgb(246 187 2 / .45); z-index: 1; pointer-events: none; }
+.target em { position: absolute; left: 0; top: -14px; font: 500 8.5px var(--font-geist-mono), monospace; font-style: normal; letter-spacing: .1em; text-transform: uppercase; color: rgb(246 187 2 / .75); }
+
+/* Toggle switch (on). */
+.toggle { position: relative; display: inline-block; width: 18px; height: 10px; border-radius: 999px; background: var(--accent); flex-shrink: 0; }
+.toggle::after { content: ""; position: absolute; right: 1.5px; top: 1.5px; width: 7px; height: 7px; border-radius: 999px; background: var(--fg); }
+
+/* Newest feed row arrives with a brief teal wash. */
+@media (prefers-reduced-motion: no-preference) {
+  .feedNew { animation: feedNew 4s ease-in-out 2s infinite; border-radius: 6px; }
+  .sparkDot { animation: cellLive 2.4s ease-in-out infinite; }
+}
+@keyframes feedNew { 0%, 70%, 100% { background: transparent; } 80% { background: rgb(111 211 199 / .08); } }
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) and (min-width: 1024px) {
+    /* Counters tick up, bars grow and sparklines draw as each card flips into its widget. */
+    .slot .count { animation: countUp linear both; animation-timeline: --conv; animation-range: contain calc(52% + var(--k) * 2%) contain calc(70% + var(--k) * 2%); }
+    .slot .barGrow { transform-origin: left; animation: barGrow linear both; animation-timeline: --conv; animation-range: contain calc(54% + var(--k) * 2%) contain calc(70% + var(--k) * 2%); }
+    .slot .sparkLine { stroke-dasharray: 400; animation: sparkDraw linear both; animation-timeline: --conv; animation-range: contain calc(52% + var(--k) * 2%) contain calc(68% + var(--k) * 2%); }
+  }
+}
+@keyframes countUp { from { --n: 0; } to { --n: var(--to); } }
+@keyframes barGrow { from { transform: scaleX(0); } to { transform: none; } }
+@keyframes sparkDraw { from { stroke-dashoffset: 400; } to { stroke-dashoffset: 0; } }

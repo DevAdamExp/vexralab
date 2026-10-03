@@ -1,10 +1,10 @@
 import type { CSSProperties, ReactNode } from "react";
-import { PiBell, PiCalendarBlank, PiChartLineUp, PiGearSix, PiMagnifyingGlass, PiPackage, PiSquaresFour, PiUsers, PiWallet } from "react-icons/pi";
+import { PiBank, PiBell, PiCalendarBlank, PiChartLineUp, PiCurrencyDollar, PiGearSix, PiHandshake, PiMagnifyingGlass, PiPackage, PiShoppingCart, PiSquaresFour, PiUsers, PiWallet } from "react-icons/pi";
 import { SiGooglesheets, SiHubspot, SiOdoo, SiQuickbooks, SiShopify, SiStripe, SiWhatsapp, SiZapier, SiZoho } from "react-icons/si";
 import type { IconType } from "react-icons";
 import { Mark } from "./Logo";
 import { Band } from "./parts";
-import { TileChart } from "./TileChart";
+import { Activity, Automations, Kpi, Leads, RevenueChart, Stock } from "./Widgets";
 import s from "./cc.module.css";
 
 /*
@@ -18,102 +18,21 @@ import s from "./cc.module.css";
 
 type Slot = { key: string; Icon: IconType; brand: string; name: string; snippet: string; area: string; dx: number; dy: number; rot: number; sc: number; widget: ReactNode };
 
-const KPI = ({ label, value, delta, up = true }: { label: string; value: string; delta: string; up?: boolean }) => (
-  <div className="flex h-full flex-col justify-between">
-    <p className="text-[11px] text-white/60">{label}</p>
-    <p className={`${s.mono} text-[22px] leading-none tracking-[-0.02em] text-white`}>{value}</p>
-    <p className={`text-[11px] ${up ? "text-(--hi)" : "text-(--coral)"}`}>{delta}</p>
-  </div>
-);
-
 const SLOTS: Slot[] = [
-  { key: "stripe", Icon: SiStripe, brand: "#8f88ff", name: "Stripe", snippet: "1,204 payments", area: "k1", dx: 860, dy: 60, rot: 10, sc: 0.8, widget: <KPI label="Revenue (MTD)" value="$48,210" delta="▲ 12.4% vs last month" /> },
-  { key: "shopify", Icon: SiShopify, brand: "#95bf47", name: "Shopify", snippet: "326 orders", area: "k2", dx: 630, dy: 170, rot: 8, sc: 0.8, widget: <KPI label="Orders today" value="326" delta="▲ 8.1% vs last week" /> },
-  { key: "hubspot", Icon: SiHubspot, brand: "#ff7a59", name: "HubSpot", snippet: "41 open deals", area: "k3", dx: -630, dy: 140, rot: -7, sc: 0.8, widget: <KPI label="Open pipeline" value="$182.6k" delta="41 deals · 9 closing" /> },
-  { key: "quickbooks", Icon: SiQuickbooks, brand: "#3fbf2c", name: "QuickBooks", snippet: "Ledger · 3 banks", area: "k4", dx: -270, dy: 50, rot: 6, sc: 0.8, widget: <KPI label="Cash on hand" value="$96.3k" delta="▼ 2 invoices overdue" up={false} /> },
-  {
-    key: "sheets", Icon: SiGooglesheets, brand: "#34a853", name: "Google Sheets", snippet: "revenue_v7_FINAL.xlsx", area: "ch", dx: 100, dy: 20, rot: -4, sc: 0.5,
-    widget: (
-      <div className="flex h-full flex-col">
-        <div className="mb-3 flex items-center justify-between">
-          <p className="text-[12px] text-white/80">Revenue by month</p>
-          <div className={`${s.mono} flex gap-1 text-[10px]`}>
-            {["1M", "6M", "1Y"].map((t) => (
-              <span key={t} className={`rounded px-1.5 py-0.5 ${t === "1Y" ? "bg-(--panel-2) text-white" : "text-white/50"}`}>{t}</span>
-            ))}
-          </div>
-        </div>
-        <div className="mt-auto">
-          <TileChart values={[38, 46, 42, 55, 51, 62, 58, 70, 66, 78, 84, 93]} label="Sample revenue by month" />
-        </div>
-      </div>
-    ),
-  },
-  {
-    key: "zoho", Icon: SiZoho, brand: "#ff5a5f", name: "Zoho", snippet: "2,918 leads", area: "ld", dx: -600, dy: -180, rot: 9, sc: 0.7,
-    widget: (
-      <div className="flex h-full flex-col justify-between">
-        <p className="text-[12px] text-white/80">Leads by channel</p>
-        {[["Website", 42], ["Referral", 27], ["Ads", 19], ["WhatsApp", 12]].map(([n, v]) => (
-          <div key={n} className="grid grid-cols-[64px_1fr_28px] items-center gap-2 text-[11px]">
-            <span className="text-white/65">{n}</span>
-            <span className="h-1.5 rounded-full bg-white/[0.06]"><i className="block h-full rounded-full bg-gradient-to-r from-(--sail-hi) to-(--hi)" style={{ width: `${v}%` }} /></span>
-            <span className={`${s.mono} text-right text-white/80`}>{v}%</span>
-          </div>
-        ))}
-      </div>
-    ),
-  },
-  {
-    key: "odoo", Icon: SiOdoo, brand: "#c39bbd", name: "Odoo", snippet: "1,140 SKUs", area: "iv", dx: -980, dy: 70, rot: -8, sc: 0.7,
-    widget: (
-      <div className="flex h-full flex-col justify-between">
-        <p className="text-[12px] text-white/80">Stock watch</p>
-        {[["Oak desk", "84", false], ["Lamp, brass", "12", true], ["Chair, linen", "57", false]].map(([n, q, low]) => (
-          <div key={n as string} className="flex items-center justify-between text-[11px]">
-            <span className="text-white/70">{n}</span>
-            <span className="flex items-center gap-2">
-              <span className={`${s.mono} text-white`}>{q}</span>
-              {low && <span className="rounded bg-(--coral)/15 px-1.5 text-[10px] text-(--coral)">Low</span>}
-            </span>
-          </div>
-        ))}
-      </div>
-    ),
-  },
-  {
-    key: "whatsapp", Icon: SiWhatsapp, brand: "#25d366", name: "WhatsApp", snippet: "18 new chats", area: "ac", dx: 480, dy: -20, rot: 7, sc: 0.5,
-    widget: (
-      <div className="flex h-full flex-col justify-between">
-        <p className="text-[12px] text-white/80">Live activity</p>
-        {[["Order #1042 paid", "Stripe", "now"], ["New lead, Sara M.", "WhatsApp", "2m"], ["Lamp, brass below reorder", "Odoo", "9m"]].map(([t, src, ago]) => (
-          <div key={t} className="flex items-center gap-2 text-[11px]">
-            <span className={`${s.live} shrink-0 scale-75`} />
-            <span className="flex-1 truncate text-white/80">{t}</span>
-            <span className="text-white/45">{src}</span>
-            <span className={`${s.mono} w-6 text-right text-white/45`}>{ago}</span>
-          </div>
-        ))}
-      </div>
-    ),
-  },
-  {
-    key: "zapier", Icon: SiZapier, brand: "#ff4f00", name: "Zapier", snippet: "12 zaps", area: "au", dx: -540, dy: -20, rot: -6, sc: 0.5,
-    widget: (
-      <div className="flex h-full flex-col justify-between">
-        <div className="flex items-center justify-between">
-          <p className="text-[12px] text-white/80">Automations</p>
-          <span className={`${s.mono} rounded bg-(--accent)/30 px-1.5 text-[10px] text-(--hi)`}>12 running</span>
-        </div>
-        {[["Quote → invoice", "4m"], ["Lead → CRM + owner", "6m"], ["Low stock → reorder", "1h"]].map(([n, t]) => (
-          <div key={n} className="flex items-center justify-between text-[11px]">
-            <span className="flex items-center gap-2 text-white/75"><i className="size-1.5 rounded-full bg-(--hi)" />{n}</span>
-            <span className={`${s.mono} text-white/45`}>{t}</span>
-          </div>
-        ))}
-      </div>
-    ),
-  },
+  { key: "stripe", Icon: SiStripe, brand: "#8f88ff", name: "Stripe", snippet: "1,204 payments", area: "k1", dx: 860, dy: 60, rot: 10, sc: 0.8,
+    widget: <Kpi label="Revenue, this month" Icon={PiCurrencyDollar} value="$48,210" delta="12.4%" note="vs last month" spark={[22, 24, 23, 27, 26, 30, 29, 33, 35, 34, 38, 41]} /> },
+  { key: "shopify", Icon: SiShopify, brand: "#95bf47", name: "Shopify", snippet: "326 orders", area: "k2", dx: 630, dy: 170, rot: 8, sc: 0.8,
+    widget: <Kpi label="Orders today" Icon={PiShoppingCart} count={326} delta="8.1%" note="vs last Tuesday" spark={[12, 18, 15, 22, 19, 26, 24, 23, 29, 31, 28, 33]} /> },
+  { key: "hubspot", Icon: SiHubspot, brand: "#ff7a59", name: "HubSpot", snippet: "41 open deals", area: "k3", dx: -630, dy: 140, rot: -7, sc: 0.8,
+    widget: <Kpi label="Open deals" Icon={PiHandshake} count={41} delta="9 closing" note="$182.6k pipeline" spark={[30, 32, 31, 35, 33, 36, 38, 37, 40, 39, 42, 41]} /> },
+  { key: "quickbooks", Icon: SiQuickbooks, brand: "#3fbf2c", name: "QuickBooks", snippet: "Ledger · 3 banks", area: "k4", dx: -270, dy: 50, rot: 6, sc: 0.8,
+    widget: <Kpi label="Cash on hand" Icon={PiBank} value="$96.3k" delta="2 overdue" up={false} note="$7.4k to collect" spark={[44, 42, 45, 41, 40, 42, 39, 38, 40, 37, 36, 35]} /> },
+  { key: "sheets", Icon: SiGooglesheets, brand: "#34a853", name: "Google Sheets", snippet: "revenue_v7_FINAL.xlsx", area: "ch", dx: 100, dy: 20, rot: -4, sc: 0.5,
+    widget: <RevenueChart values={[38, 46, 42, 55, 51, 62, 58, 70, 66, 78, 84, 93]} /> },
+  { key: "zoho", Icon: SiZoho, brand: "#ff5a5f", name: "Zoho", snippet: "2,918 leads", area: "ld", dx: -600, dy: -180, rot: 9, sc: 0.7, widget: <Leads /> },
+  { key: "odoo", Icon: SiOdoo, brand: "#c39bbd", name: "Odoo", snippet: "1,140 SKUs", area: "iv", dx: -980, dy: 70, rot: -8, sc: 0.7, widget: <Stock /> },
+  { key: "whatsapp", Icon: SiWhatsapp, brand: "#25d366", name: "WhatsApp", snippet: "18 new chats", area: "ac", dx: 480, dy: -20, rot: 7, sc: 0.5, widget: <Activity /> },
+  { key: "zapier", Icon: SiZapier, brand: "#ff4f00", name: "Zapier", snippet: "12 zaps", area: "au", dx: -540, dy: -20, rot: -6, sc: 0.5, widget: <Automations /> },
 ];
 
 const NAV = [
