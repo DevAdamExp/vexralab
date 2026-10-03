@@ -421,15 +421,25 @@
 @media (max-width: 767px) {
   .dash { grid-template-columns: 1fr 1fr; grid-template-rows: none; grid-auto-rows: minmax(92px, auto); grid-template-areas: "k1 k2" "k3 k4" "ch ch" "ld ld" "iv iv" "ac ac" "au au"; }
 }
-.slot { position: relative; border-radius: 10px; border: 1px solid rgb(239 234 227 / .08); background: rgb(255 255 255 / .025); }
-.slotBack { height: 100%; padding: 12px 14px; }
+.slot { position: relative; }
+.slotBack { height: 100%; padding: 12px 14px; border-radius: 10px; border: 1px solid rgb(239 234 227 / .08); background: rgb(255 255 255 / .025); }
+/* Tool card: one uniform size, centred on its slot while it flies in. */
 .slotFront {
-  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 12px; padding: 12px;
-  border-radius: 10px; border: 1px solid rgb(239 234 227 / .14);
-  background: linear-gradient(160deg, #1c1b22, #121117);
-  box-shadow: 0 24px 50px -18px rgb(0 0 0 / .85), inset 0 1px 0 rgb(255 255 255 / .08);
+  position: absolute; inset: 0; margin: auto; z-index: 2; width: 276px; height: 118px;
+  display: flex; flex-direction: column; justify-content: space-between; padding: 16px 18px;
+  border-radius: 14px; border: 1px solid rgb(239 234 227 / .14);
+  background:
+    radial-gradient(120% 90% at 0% 0%, color-mix(in oklab, var(--b) 14%, transparent), transparent 60%),
+    linear-gradient(165deg, #1d1c23, #121117);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / .09), 0 1px 0 rgb(0 0 0 / .6), 0 28px 60px -22px rgb(0 0 0 / .9), 0 0 0 1px rgb(0 0 0 / .35);
   opacity: 0; pointer-events: none;
 }
+.toolIcon { display: grid; place-items: center; width: 44px; height: 44px; flex-shrink: 0; border-radius: 12px; background: color-mix(in oklab, var(--b) 16%, #16151b); border: 1px solid color-mix(in oklab, var(--b) 30%, transparent); box-shadow: inset 0 1px 0 rgb(255 255 255 / .08); }
+.toolDot { width: 6px; height: 6px; border-radius: 999px; background: var(--hi); box-shadow: 0 0 6px var(--hi); }
+.toolSync { position: relative; width: 64px; height: 3px; border-radius: 999px; background: rgb(255 255 255 / .08); overflow: hidden; margin-bottom: 4px; }
+.toolSync i { position: absolute; inset: 0; width: 40%; border-radius: 999px; background: var(--b); }
+@media (prefers-reduced-motion: no-preference) { .toolSync i { animation: sync 1.6s ease-in-out infinite; } }
+@keyframes sync { 0% { transform: translateX(-100%); } 100% { transform: translateX(260%); } }
 
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) and (min-width: 1024px) {
@@ -452,7 +462,8 @@
     .win { background: transparent; border-color: transparent; box-shadow: none; animation-name: shotFlat, winIn; }
     /* Each card flies to its slot (staggered), then flips into its widget. */
     .slot { animation-name: fly; animation-range: contain calc(6% + var(--k) * 3.5%) contain calc(42% + var(--k) * 3.5%); animation-timing-function: cubic-bezier(.22,.8,.3,1); }
-    .slotFront { opacity: 1; animation-name: frontOut; animation-range: contain calc(44% + var(--k) * 2%) contain calc(54% + var(--k) * 2%); }
+    /* While landing the card shrinks toward its slot (scale is separate from the flip's transform). */
+    .slotFront { opacity: 1; animation-name: frontOut, frontLand; animation-range: contain calc(44% + var(--k) * 2%) contain calc(54% + var(--k) * 2%), contain calc(20% + var(--k) * 3.5%) contain calc(44% + var(--k) * 3.5%); }
     .slotBack { animation-name: backIn; animation-range: contain calc(50% + var(--k) * 2%) contain calc(62% + var(--k) * 2%); }
   }
 }
@@ -460,7 +471,8 @@
   0% { transform: translate(var(--dx), var(--dy)) rotate(var(--rot)) scale(var(--sc, .78)); }
   100% { transform: none; }
 }
-@keyframes frontOut { 0% { opacity: 1; transform: none; } 100% { opacity: 0; transform: rotateX(70deg) scale(.96); } }
+@keyframes frontLand { from { scale: 1; } to { scale: .74; } }
+@keyframes frontOut { 0% { opacity: 1; transform: none; } 100% { opacity: 0; transform: rotateX(75deg) scale(.82); } }
 @keyframes backIn { 0% { opacity: 0; transform: translateY(6px); } 100% { opacity: 1; transform: none; } }
 @keyframes shellIn { 0% { opacity: 0; } 100% { opacity: 1; } }
 @keyframes shotFlat { 0% { transform: rotateX(22deg) scale(.9); } 100% { transform: none; } }
@@ -483,8 +495,8 @@
 .shot::after { content: ""; position: absolute; left: 10%; right: 10%; bottom: -26px; height: 40px; background: radial-gradient(50% 50% at 50% 50%, rgb(0 0 0 / .75), transparent); filter: blur(10px); z-index: 0; pointer-events: none; }
 
 /* Widgets: quiet hover lift so the dashboard feels operable. */
-.slot { transition: border-color .3s, background .3s; }
-.slot:hover { border-color: rgb(111 211 199 / .3); background: rgb(255 255 255 / .035); }
+.slotBack { transition: border-color .3s, background .3s; }
+.slot:hover .slotBack { border-color: rgb(111 211 199 / .3); background: rgb(255 255 255 / .035); }
 
 /* Chart: hover a month to read its value; dashed target line. */
 .col2 { position: relative; }
