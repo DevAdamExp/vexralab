@@ -78,7 +78,7 @@ export default function AboutPage() {
         <ol className="grid sm:grid-cols-2 lg:grid-cols-5">
           {WEEK.map(({ day, Icon, name, text }) => (
             <li key={name} data-spot className="flex flex-col gap-4 border-r border-b border-white/[0.13] px-6 py-9 lg:border-b-0 lg:last:border-r-0">
-              <span className={`${s.mono} text-[12px] text-white/45`}>{day}</span>
+              <span className={`${s.mono} text-[12px] text-white/60`}>{day}</span>
               <Icon aria-hidden="true" className="size-6 text-(--hi)" />
               <p className="text-[20px] font-semibold tracking-[-0.01em]">{name}</p>
               <p className="text-[15px] leading-6 text-white/70">{text}</p>

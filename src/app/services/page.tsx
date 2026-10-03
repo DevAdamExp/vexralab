@@ -47,7 +47,7 @@ export default function ServicesPage() {
                 <span className={s.rowNum}>0{k + 1}</span>
                 <span>
                   <span className="block text-[18px] text-white">{x.name}</span>
-                  <span className={`${s.mono} mt-1 block text-[13px] text-white/45`}>{x.tag}</span>
+                  <span className={`${s.mono} mt-1 block text-[13px] text-white/60`}>{x.tag}</span>
                 </span>
                 <span className="mt-auto inline-flex items-center gap-1.5 text-[13px] text-(--muted) group-hover:text-white">
                   Details <PiCaretRight aria-hidden="true" />
@@ -80,22 +80,22 @@ export default function ServicesPage() {
                 </p>
                 <dl className={`${s.mono} mt-auto grid grid-cols-2 gap-4 border-t border-white/[0.13] pt-6 text-[13px]`}>
                   <div>
-                    <dt className="text-white/45">Timeline</dt>
+                    <dt className="text-white/60">Timeline</dt>
                     <dd className="mt-1 text-white">{x.timeline}</dd>
                   </div>
                   <div>
-                    <dt className="text-white/45">Price</dt>
+                    <dt className="text-white/60">Price</dt>
                     <dd className="mt-1 text-white">{x.price}</dd>
                   </div>
                 </dl>
-                <Link href="/contact" className={`${s.btnWhite} self-start`}>
+                <Link href="/contact" data-magnet className={`${s.btnWhite} self-start`}>
                   Talk about {x.name.split(" ")[0]} <PiCaretRight aria-hidden="true" />
                 </Link>
               </div>
 
               <div className="grid sm:grid-cols-2">
                 <div className="border-b border-white/[0.13] px-6 py-10 sm:border-r lg:px-8">
-                  <p className={s.kicker}>Before</p>
+                  <p className={`${s.kicker} ${s.kickerCoral}`}>Before</p>
                   <ul className="mt-5 flex flex-col gap-3 text-[15px] leading-6 text-white/55">
                     {x.before.map((b) => (
                       <li key={b}>{b}</li>

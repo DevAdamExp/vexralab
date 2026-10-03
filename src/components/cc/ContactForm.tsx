@@ -7,7 +7,7 @@ import { EMAIL, SERVICES, STUDIO_TZ } from "@/data/vx";
 import s from "./cc.module.css";
 
 const IDS = SERVICES.map((x) => x.id);
-const FIELD = "h-12 w-full border border-white/[0.13] bg-white/[0.03] px-4 text-[15px] text-white placeholder:text-white/35 outline-none transition-colors focus:border-(--hi)";
+const FIELD = "h-12 w-full border border-white/[0.13] bg-white/[0.03] px-4 text-[15px] text-white placeholder:text-white/50 outline-none transition-colors focus:border-(--hi)";
 
 function Chip({ on, label, onClick }: { on: boolean; label: string; onClick: () => void }) {
   return (
@@ -150,7 +150,7 @@ export function ContactForm() {
 
       <div className="flex flex-col gap-4 px-6 py-8 sm:flex-row sm:items-center sm:justify-between lg:px-10">
         <p className="text-[13px] text-white/50">No mailing list. NDA on request.</p>
-        <button type="submit" disabled={state === "sending"} className={`${s.btnAccent} disabled:opacity-60`}>
+        <button type="submit" disabled={state === "sending"} data-magnet className={`${s.btnAccent} disabled:opacity-60`}>
           {state === "sending" ? "Sending…" : "Send and book my audit"}
         </button>
       </div>

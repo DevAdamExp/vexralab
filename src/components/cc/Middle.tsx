@@ -71,8 +71,8 @@ export function Platform() {
                 <div className="grid gap-2 sm:grid-cols-2">
                   <div className="rounded-md border border-(--panel-2) bg-(--panel-3) p-3 text-white/75">
                     <p className="mb-2 text-white">Needs attention</p>
-                    <p>⚠ [N] invoices overdue</p>
-                    <p>⚠ [N] SKUs below reorder point</p>
+                    <p><span className="text-(--coral)">●</span> [N] invoices overdue</p>
+                    <p><span className="text-(--coral)">●</span> [N] SKUs below reorder point</p>
                   </div>
                   <div className={`${s.mono} rounded-md border border-(--panel-2) bg-(--panel-4) p-3 text-[10px] text-white/70`}>
                     <p className="text-(--ok)">✓ CRM synced 2 min ago</p>
@@ -102,16 +102,16 @@ export function Statements() {
         </div>
         <div className="grid lg:grid-cols-2">
           <div className="border-white/[0.13] px-6 py-12 lg:border-r lg:px-12">
-            <span className={s.tag}>data without structure is noise</span>
+            <span className={`${s.tag} !border-(--coral)/30 !bg-(--coral)/10 !text-(--coral)`}>data without structure is noise</span>
             <p className="mt-4 text-[20px] leading-7 text-(--muted)">
-              <span className="mr-2 text-white/35">{"//"}</span>
+              <span className="mr-2 text-white/50">{"//"}</span>
               <b className="font-semibold text-white">Scattered. Manual. Late.</b> Five tools, ten spreadsheets, and nobody trusts the numbers. What if every answer was one click away?
             </p>
           </div>
           <div className="border-t border-white/[0.13] px-6 py-12 lg:border-t-0 lg:px-12">
             <span className={s.tag}>systems, not spreadsheets</span>
             <p className="mt-4 text-[20px] leading-7 text-(--muted)">
-              <span className="mr-2 text-white/35">{"//"}</span>
+              <span className="mr-2 text-white/50">{"//"}</span>
               <b className="font-semibold text-white">Growing businesses run on VexraLab.</b> CRMs, ERPs and{" "}
               <u className="decoration-white/30 underline-offset-4">data pipelines</u> designed around your process, with{" "}
               <u className="decoration-white/30 underline-offset-4">fixed-price scopes</u> and weekly demos.
@@ -142,7 +142,7 @@ export function Clarity() {
         </div>
 
         <div className="relative flex items-center gap-4 border-y border-white/[0.13] px-6 py-8">
-          <span className={`${s.mono} absolute top-1/2 -left-[118px] hidden -translate-y-1/2 text-[13px] text-white/40 xl:block`}>[ Input ]</span>
+          <span className={`${s.mono} absolute top-1/2 -left-[118px] hidden -translate-y-1/2 text-[13px] text-white/55 xl:block`}>[ Input ]</span>
           <PiQuestion aria-hidden="true" className="size-6 shrink-0 rounded border border-white/25 p-0.5 text-white/70" />
           <p className="text-[15px]">Why are our margins shrinking this quarter?</p>
         </div>
@@ -151,7 +151,7 @@ export function Clarity() {
           <ol className="relative border-white/[0.13] lg:border-r">
             {steps.map(({ icon: Icon, title, text }, k) => (
               <li key={title} className={`${s.cycle} relative flex items-center gap-4 px-6 py-8`} style={{ "--k": k } as React.CSSProperties}>
-                {k === 0 && <span className={`${s.mono} absolute top-1/2 -left-[132px] hidden -translate-y-1/2 text-[13px] text-white/40 xl:block`}>[ Thinking ]</span>}
+                {k === 0 && <span className={`${s.mono} absolute top-1/2 -left-[132px] hidden -translate-y-1/2 text-[13px] text-white/55 xl:block`}>[ Thinking ]</span>}
                 <Icon aria-hidden="true" className="size-6 shrink-0 rounded border border-white/25 p-0.5 text-white/70" />
                 <p className="text-[15px] text-white">
                   {title} <span className="text-(--muted)">{text}</span>
@@ -173,7 +173,7 @@ export function Clarity() {
                 <p><span className={s.badge}>FOUND</span>shipping costs rising in one region</p>
                 <p><span className={s.badge}>FOUND</span>slow-moving stock tying up cash</p>
                 <p className="text-(--ok)">✓ 3 actions recommended</p>
-                <p className="mt-4 text-[12px] text-white/40">Illustrative example.</p>
+                <p className="mt-4 text-[12px] text-white/55">Illustrative example.</p>
               </div>
             </div>
           </div>
@@ -186,7 +186,7 @@ export function Clarity() {
               <span className="text-white/25">{"//"}</span>one-view
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Link href="/contact" className={s.btnAccent}>
+              <Link href="/contact" data-magnet className={s.btnAccent}>
                 Book a call
               </Link>
               <a href="#pricing" className={s.btnGhost}>

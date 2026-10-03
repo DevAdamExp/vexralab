@@ -26,7 +26,7 @@ export function Services() {
           Capture. Connect. Clean. Report. Grow, without the spreadsheets.
         </p>
         <div className="flex flex-wrap items-center gap-4 border-b border-white/[0.13] px-6 pb-10 lg:justify-center lg:px-12 lg:py-10">
-          <Link href="/services" className={s.btnWhite}>
+          <Link href="/services" data-magnet className={s.btnWhite}>
             Explore all services <PiCaretRight aria-hidden="true" className="size-4" />
           </Link>
           <Link href="/#pricing" className={s.btnGhost}>
@@ -49,7 +49,7 @@ export function Services() {
             >
               <span className={s.rowNum}>0{k + 1}</span>
               <span>
-                {x.name} <span className={`${s.mono} ml-1 text-[14px] text-white/45 max-sm:hidden`}>{x.tag}</span>
+                {x.name} <span className={`${s.mono} ml-1 text-[14px] text-white/60 max-sm:hidden`}>{x.tag}</span>
               </span>
             </button>
           ))}
@@ -57,16 +57,16 @@ export function Services() {
 
         <div id="service-panel" role="tabpanel" className="flex flex-col">
           <p key={`t${on}`} className={`${s.rise} border-b border-white/[0.13] px-6 py-12 text-[20px] leading-7 text-(--muted) lg:px-10`}>
-            <span className="mr-2 text-white/35">{"//"}</span>
+            <span className="mr-2 text-white/50">{"//"}</span>
             <b className="font-semibold text-white">{it.title}</b> {it.body}
           </p>
           <div key={`p${on}`} className={`${s.rise} grid flex-1 sm:grid-cols-2`}>
             <div className="border-b border-white/[0.13] px-6 py-8 sm:border-r sm:border-b-0 lg:px-10">
-              <p className={s.kicker}>Before</p>
+              <p className={`${s.kicker} ${s.kickerCoral}`}>Before</p>
               <ul className={`${s.stagger} mt-5 flex flex-col gap-3.5`}>
                 {it.before.map((b, i) => (
                   <li key={b} style={{ "--i": i } as React.CSSProperties} className="flex gap-3 text-[15px] leading-6 text-white/55">
-                    <PiX aria-hidden="true" className="mt-1 size-4 shrink-0 text-white/30" />
+                    <PiX aria-hidden="true" className="mt-1 size-4 shrink-0 text-(--coral)" />
                     {b}
                   </li>
                 ))}

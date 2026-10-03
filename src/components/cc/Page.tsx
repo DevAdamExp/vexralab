@@ -35,7 +35,7 @@ export function PageHead({ kicker, title, grey, lede, action }: { kicker: string
           <Tiles cols={10} rows={8} rowH={75} tiles={TILES} className="pointer-events-none absolute inset-0 hidden lg:grid" />
           <div className="relative z-10 flex flex-col justify-center px-6 py-20 lg:absolute lg:top-[75px] lg:left-0 lg:min-h-[450px] lg:w-[58%] lg:border-y lg:border-r lg:border-white/[0.13] lg:bg-black lg:px-10 lg:py-12">
             <p className={s.kicker}>
-              <span className="text-white/35">{"//"}</span> {kicker}
+              <span className="text-white/50">{"//"}</span> {kicker}
             </p>
             <h1 id="page-title" className={`${s.h1} ${s.rise} mt-5 max-w-[620px]`}>
               {title}
@@ -46,7 +46,7 @@ export function PageHead({ kicker, title, grey, lede, action }: { kicker: string
             </p>
             {action && (
               <div className={`${s.rise} mt-7`} style={{ animationDelay: "200ms" }}>
-                <Link href={action.href} className={s.btnAccent}>
+                <Link href={action.href} data-magnet className={s.btnAccent}>
                   {action.label} <PiCaretRight aria-hidden="true" />
                 </Link>
               </div>

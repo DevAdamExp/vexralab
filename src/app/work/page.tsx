@@ -63,7 +63,7 @@ export default function WorkPage() {
             <div className="flex flex-col gap-6 border-b border-white/[0.13] px-6 py-12 lg:flex-row lg:items-end lg:justify-between lg:px-10">
               <div>
                 <p className={s.kicker}>
-                  <span className="text-white/35">{"//"}</span> Sample · {c.sector}
+                  <span className="text-white/50">{"//"}</span> Sample · {c.sector}
                 </p>
                 <h2 id={`case-${k}`} className={`${s.h2mid} mt-4 max-w-[22ch]`}>
                   {c.title}
@@ -80,7 +80,7 @@ export default function WorkPage() {
             </div>
             <div className="grid lg:grid-cols-3">
               <div className="border-b border-white/[0.13] px-6 py-10 lg:border-r lg:border-b-0 lg:px-10">
-                <p className={s.kicker}>The problem</p>
+                <p className={`${s.kicker} ${s.kickerCoral}`}>The problem</p>
                 <p className="mt-5 text-[16px] leading-6 text-white/70">{c.problem}</p>
               </div>
               <div className="border-b border-white/[0.13] px-6 py-10 lg:border-r lg:border-b-0 lg:px-10">
@@ -88,7 +88,7 @@ export default function WorkPage() {
                 <ol className="mt-5 flex flex-col gap-3 text-[15px] leading-6 text-white">
                   {c.built.map((b, i) => (
                     <li key={b} data-spot className="flex gap-3">
-                      <span className={`${s.mono} pt-0.5 text-[11px] text-white/40`}>0{i + 1}</span>
+                      <span className={`${s.mono} pt-0.5 text-[11px] text-white/55`}>0{i + 1}</span>
                       {b}
                     </li>
                   ))}
@@ -120,7 +120,7 @@ export default function WorkPage() {
             <li key={p.name} data-spot className="flex flex-col gap-4 border-r border-b border-white/[0.13] px-6 py-9 lg:border-b-0 lg:last:border-r-0">
               <span className={`${s.mono} text-[12px] text-(--hi)`}>0{k + 1}</span>
               <p className="text-[24px] font-semibold tracking-[-0.02em]">{p.name}</p>
-              <p className={`${s.mono} text-[12px] text-white/45`}>{p.when}</p>
+              <p className={`${s.mono} text-[12px] text-white/60`}>{p.when}</p>
               <p className="text-[15px] leading-6 text-white/70">{p.text}</p>
             </li>
           ))}

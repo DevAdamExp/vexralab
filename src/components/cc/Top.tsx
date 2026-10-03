@@ -2,6 +2,8 @@ import Link from "next/link";
 import { PiCalendarCheck, PiCaretDown, PiKey, PiReceipt, PiShieldCheck } from "react-icons/pi";
 import { SiGooglebigquery, SiHubspot, SiLooker, SiOdoo, SiPostgresql, SiQuickbooks, SiSap, SiShopify, SiSnowflake, SiStripe, SiXero, SiZoho } from "react-icons/si";
 import { CopyText } from "./CopyText";
+import { DataFlow } from "./DataFlow";
+import { Logo } from "./Logo";
 import { Band, Tiles } from "./parts";
 import s from "./cc.module.css";
 
@@ -14,8 +16,8 @@ export function Nav() {
     <header className="sticky top-0 z-40 border-b border-white/[0.13] bg-black/85 backdrop-blur-md">
       <span aria-hidden="true" className={s.progress} />
       <div className="mx-auto flex h-[84px] max-w-[1200px] items-center justify-between px-6">
-        <Link href="/" aria-label="VexraLab home" className={`${s.mono} text-[22px] font-semibold tracking-[-0.04em]`}>
-          vexra<span className="text-(--hi)">/</span>lab
+        <Link href="/" aria-label="VexraLab home">
+          <Logo />
         </Link>
         <nav aria-label="Main" className="hidden items-center gap-1 lg:flex">
           {NAV.map((n) => (
@@ -28,7 +30,7 @@ export function Nav() {
           </Link>
         </nav>
         <div className="flex items-center gap-2">
-          <Link href="/contact" className="inline-flex h-9 items-center rounded-full bg-(--fg) px-5 text-[14px] font-medium text-black transition-colors hover:bg-white">
+          <Link href="/contact" data-magnet className="inline-flex h-9 items-center rounded-full bg-(--fg) px-5 text-[14px] font-medium text-black transition-colors hover:bg-white">
             Book a call
           </Link>
           {/* Phone menu: native disclosure, no script needed. */}
@@ -76,17 +78,18 @@ export function Hero() {
 
       <div data-spot className={`${s.heroGlow} relative lg:h-[600px]`}>
         <Tiles cols={10} rows={8} rowH={75} tiles={HERO_TILES} className="pointer-events-none absolute inset-0 hidden lg:grid" />
+        <DataFlow className="hidden lg:block" />
 
         <div className="relative z-10 flex flex-col justify-center px-5 py-20 sm:px-6 lg:absolute lg:top-[75px] lg:left-0 lg:h-[450px] lg:w-[54%] lg:border-y lg:border-r lg:border-white/[0.13] lg:bg-black lg:py-0">
           <div>
             <h1 id="hero-title" className={`${s.h1} ${s.rise} max-w-[520px]`}>
-              Run your business on data you can <span className="text-(--hi)">trust</span>.
+              Run your business on data you can <span className={s.sheen}>trust</span>.
               <span className="block text-white/55">VexraLab.</span>
             </h1>
 
             <div className={`${s.rise} mt-7 flex flex-wrap items-center gap-2.5`} style={{ animationDelay: "120ms" }}>
               <div className={s.pill}>
-                <Link href="/contact" className={s.pillBtn}>
+                <Link href="/contact" data-magnet className={s.pillBtn}>
                   Book a call <PiCaretDown aria-hidden="true" className="size-3.5 -rotate-90" />
                 </Link>
                 <CopyText text={EMAIL} className={`${s.mono} flex h-[34px] items-center gap-2 px-3 text-[14px] text-(--muted) hover:text-white`} />

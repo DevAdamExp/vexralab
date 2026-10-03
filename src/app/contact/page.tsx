@@ -35,7 +35,7 @@ export default function ContactPage() {
           <div className="flex flex-col border-b border-white/[0.13] lg:border-r lg:border-b-0">
             <div className="px-6 py-14 lg:px-10">
               <p className={s.kicker}>
-                <span className="text-white/35">{"//"}</span> Free data audit
+                <span className="text-white/50">{"//"}</span> Free data audit
               </p>
               <h1 id="contact-title" className={`${s.h1} ${s.rise} mt-5`}>
                 Let&rsquo;s look at your data <span className="text-(--hi)">together</span>.

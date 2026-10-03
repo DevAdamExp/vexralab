@@ -3,6 +3,7 @@ import { PiCaretDown, PiCaretRight, PiLinkedinLogo, PiXLogo } from "react-icons/
 import { SiGooglesheets, SiHubspot, SiMake, SiOdoo, SiQuickbooks, SiShopify, SiStripe, SiZoho } from "react-icons/si";
 import { EMAIL } from "./Top";
 import { FAQ } from "@/data/vx";
+import { Mark } from "./Logo";
 import { Band, Slash, Tiles } from "./parts";
 import s from "./cc.module.css";
 
@@ -39,17 +40,17 @@ export function Compare() {
           <div className={`${s.mono} flex flex-col gap-5 px-6 py-10 text-[14px] text-white/80 lg:border-r lg:border-white/[0.13]`}>
             {bad.map(([label, line, note], k) => (
               <div key={k} className="relative">
-                <span className="absolute top-0 -left-[128px] hidden text-[11px] tracking-[0.1em] text-white/35 xl:block">[ {label} ]</span>
+                <span className="absolute top-0 -left-[128px] hidden text-[11px] tracking-[0.1em] text-white/50 xl:block">[ {label} ]</span>
                 <p>{line}</p>
                 {note && (
                   <p className="mt-1.5">
                     <span className={s.badgeBad}>Interrupted</span>
-                    <span className="ml-2 text-white/45">└ {note}</span>
+                    <span className="ml-2 text-white/60">└ {note}</span>
                   </p>
                 )}
               </div>
             ))}
-            <p className="text-white/35">✦ Done. By Wednesday.</p>
+            <p className="text-white/50">✦ Done. By Wednesday.</p>
           </div>
           <div className={`${s.mono} flex flex-col gap-5 border-t border-white/[0.13] px-6 py-10 text-[14px] text-white lg:border-t-0`}>
             {good.map(([label, line], k) => (
@@ -169,7 +170,7 @@ export function Community() {
         <div className="flex flex-col gap-8 border-b border-white/[0.13] px-6 py-14 lg:flex-row lg:items-end lg:justify-between lg:px-10">
           <div>
             <p className={s.kicker}>
-              <span className="text-white/35">{"//"}</span> Who we work with
+              <span className="text-white/50">{"//"}</span> Who we work with
             </p>
             <h2 id="community-title" className={`${s.h2big} mt-5`}>
               Made for teams that
@@ -245,7 +246,7 @@ export function Benefits() {
               Start growing.
               <span className="block font-normal text-(--muted)">With your data.</span>
             </p>
-            <Link href="/contact" className={`${s.btnAccent} w-[220px] justify-between`}>
+            <Link href="/contact" data-magnet className={`${s.btnAccent} w-[220px] justify-between`}>
               Book a call <PiCaretRight aria-hidden="true" />
             </Link>
             <p className="text-[12px] text-(--muted)">Audit. Plan. Build.</p>
@@ -268,7 +269,7 @@ export function Faq() {
         <div className="grid lg:grid-cols-[1fr_2fr]">
           <div className="border-b border-white/[0.13] px-6 py-14 lg:border-r lg:border-b-0 lg:px-10">
             <p className={s.kicker}>
-              <span className="text-white/35">{"//"}</span> FAQ
+              <span className="text-white/50">{"//"}</span> FAQ
             </p>
             <h2 id="faq-title" className={`${s.h2mid} mt-4`}>
               Questions,
@@ -316,14 +317,14 @@ export function FinalCta() {
             <span className="mt-1 block font-medium text-(--muted)">Book a 30-minute call. Get a written plan. Start growing.</span>
           </h2>
           <div className="flex flex-wrap justify-center gap-4">
-            <Link href="/contact" className={s.btnAccent}>
+            <Link href="/contact" data-magnet className={s.btnAccent}>
               Book a call
             </Link>
             <a href={`mailto:${EMAIL}`} className={s.btnGhost}>
               {EMAIL}
             </a>
           </div>
-          <p className={`${s.mono} text-[11px] tracking-[0.2em] text-white/45`}>FREE AUDIT · NO OBLIGATION</p>
+          <p className={`${s.mono} text-[11px] tracking-[0.2em] text-white/60`}>FREE AUDIT · NO OBLIGATION</p>
         </div>
       </section>
       <Band />
@@ -356,9 +357,12 @@ export function Footer() {
           ))}
         </ul>
         <div className="relative flex min-h-[146px] items-end justify-center overflow-hidden border-b border-white/[0.13]">
-          <Tiles cols={6} rows={2} rowH={73} mono tiles={[[1, 2, 1], [4, 3, 1], [2, 3, 2], [6, 1, 2]]} className="absolute inset-0 grid opacity-50" />
-          <p className={`${s.mono} relative pb-3 text-[44px] leading-none font-semibold tracking-[-0.05em]`}>
-            vexra<span className="text-(--hi)">/</span>lab
+          <Tiles cols={6} rows={2} rowH={73} mono tiles={[[1, 2, 1], [4, 3, 1], [2, 3, 2], [6, 1, 2]]} className="absolute inset-0 grid opacity-20" />
+          <p className="relative flex items-center gap-3 pb-4 text-[44px] leading-none font-semibold tracking-[-0.05em]">
+            <Mark size={30} />
+            <span>
+              Vexra<span className="font-medium text-white/60">Lab</span>
+            </span>
           </p>
         </div>
         <ul className="flex border-b border-white/[0.13] lg:flex-col lg:border-l">
