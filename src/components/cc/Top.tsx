@@ -143,7 +143,7 @@ export function Logos() {
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6">
           <p className="flex h-[100px] items-center border-r border-b border-white/[0.13] px-6 text-[14px] leading-5 text-white">
             <span>
-              We build on the platforms <span className="text-(--muted)">you already run.</span>
+              Built on <span className="text-(--muted)">your stack.</span>
             </span>
           </p>
           {LOGOS.slice(0, 11).map(({ Icon, name, brand }) => (

@@ -15,20 +15,16 @@ export function Services() {
 
   return (
     <section id="services" className={`${s.col} scroll-mt-24`} aria-labelledby="services-title">
-      <div className="grid lg:grid-cols-2">
-        <div className="border-b border-white/[0.13] px-6 py-12 lg:border-r lg:px-12">
+      <div className="flex flex-col gap-6 border-b border-white/[0.13] px-6 py-12 lg:flex-row lg:items-center lg:justify-between lg:px-12">
+        <div>
           <Slash>
             <span id="services-title">data that runs your business.</span>
           </Slash>
+          <p className="mt-3 text-[17px] text-(--muted)">Capture, connect, clean and report, without the spreadsheets.</p>
         </div>
-        <div className="hidden border-b border-white/[0.13] lg:block" />
-
-        <p className="flex items-center border-b border-white/[0.13] px-6 py-10 text-[20px] leading-[25px] text-(--muted) lg:border-r lg:px-12">
-          Capture. Connect. Clean. Report. Grow, without the spreadsheets.
-        </p>
-        <div className="flex flex-wrap items-center gap-4 border-b border-white/[0.13] px-6 pb-10 lg:justify-center lg:px-12 lg:py-10">
+        <div className="flex flex-wrap items-center gap-3">
           <Link href="/services" data-magnet className={s.btnWhite}>
-            Explore all services <PiCaretRight aria-hidden="true" className="size-4" />
+            All services <PiCaretRight aria-hidden="true" className="size-4" />
           </Link>
           <Link href="/#pricing" className={s.btnGhost}>
             Pricing

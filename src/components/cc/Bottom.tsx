@@ -1,64 +1,58 @@
 import Link from "next/link";
-import { PiCaretDown, PiCaretRight, PiLinkedinLogo, PiXLogo } from "react-icons/pi";
-import { SiGooglesheets, SiHubspot, SiMake, SiOdoo, SiQuickbooks, SiShopify, SiStripe, SiZoho } from "react-icons/si";
+import { PiCaretDown, PiCaretRight, PiCheck, PiLinkedinLogo, PiXLogo } from "react-icons/pi";
+import { Glyph } from "./Glyph";
 import { EMAIL } from "./Top";
 import { FAQ } from "@/data/vx";
 import { Mark } from "./Logo";
 import { Band, Slash, Tiles } from "./parts";
 import s from "./cc.module.css";
 
-/** Without VexraLab vs with VexraLab, as two transcripts. */
+/** Without VexraLab vs with VexraLab: the same question, two very different afternoons. */
 export function Compare() {
-  const bad: [string, string, string][] = [
-    ["REQUEST", "> what were sales last month?", ""],
-    ["WRONG", "✳ Exporting CSV from CRM", "two versions of the truth"],
-    ["WRONG", "✳ Matching against invoices by hand", "three hours, one typo"],
-    ["WRONG", "✳ Emailing spreadsheet v7_final_FINAL", "already out of date"],
+  const bad: [string, string][] = [
+    ["Export a CSV from the CRM", "Two versions of the truth"],
+    ["Match it against invoices by hand", "Three hours, one typo"],
+    ["Email spreadsheet v7_final_FINAL", "Out of date on arrival"],
   ];
-  const good: [string, string][] = [
-    ["REQUEST", "> what were sales last month?"],
-    ["ANSWER", "✦ Open the dashboard. It’s already there."],
-    ["ANSWER", "✦ Split by product, region and rep."],
-    ["ANSWER", "✦ Same number for sales, ops and finance."],
-  ];
+  const good = ["Open the dashboard. It’s already there.", "Split by product, region and rep.", "Same number for sales, ops and finance."];
   return (
     <>
       <section className={s.col} aria-labelledby="compare-title">
-        <h2 id="compare-title" className="sr-only">
-          Without and with VexraLab
-        </h2>
+        <div className="border-b border-white/[0.13] px-6 py-12 lg:px-12">
+          <Slash>
+            <span id="compare-title">“what were sales last month?”</span>
+          </Slash>
+        </div>
         <div className="grid lg:grid-cols-2">
-          <div className="border-b border-white/[0.13] px-6 py-7 lg:border-r">
-            <p className="text-[18px] text-white">Without VexraLab</p>
-            <p className="text-[15px] text-(--muted)">Spreadsheets. The same Monday ritual.</p>
+          <div className="border-b border-white/[0.13] px-6 py-10 lg:border-r lg:border-b-0 lg:px-12">
+            <p className={`${s.kicker} ${s.kickerCoral}`}>Without VexraLab</p>
+            <ol className="mt-8 flex flex-col gap-6">
+              {bad.map(([step, cost], k) => (
+                <li key={step} className="grid grid-cols-[28px_1fr] gap-x-3">
+                  <span className={`${s.mono} pt-0.5 text-[12px] text-white/40`}>0{k + 1}</span>
+                  <span className="text-[16px] text-white/80">{step}</span>
+                  <span />
+                  <span className="mt-1 text-[14px] text-(--coral)">{cost}</span>
+                </li>
+              ))}
+            </ol>
+            <p className="mt-10 border-t border-white/[0.08] pt-6 text-[15px] text-white/55">
+              Answer ready <b className="font-semibold text-white">by Wednesday</b>.
+            </p>
           </div>
-          <div className="border-b border-white/[0.13] px-6 py-7">
-            <p className="text-[18px] text-white">With VexraLab</p>
-            <p className="text-[15px] text-(--muted)">One system. Every answer.</p>
-          </div>
-
-          <div className={`${s.mono} flex flex-col gap-5 px-6 py-10 text-[14px] text-white/80 lg:border-r lg:border-white/[0.13]`}>
-            {bad.map(([label, line, note], k) => (
-              <div key={k} className="relative">
-                <span className="absolute top-0 -left-[128px] hidden text-[11px] tracking-[0.1em] text-white/50 xl:block">[ {label} ]</span>
-                <p>{line}</p>
-                {note && (
-                  <p className="mt-1.5">
-                    <span className={s.badgeBad}>Interrupted</span>
-                    <span className="ml-2 text-white/60">└ {note}</span>
-                  </p>
-                )}
-              </div>
-            ))}
-            <p className="text-white/50">✦ Done. By Wednesday.</p>
-          </div>
-          <div className={`${s.mono} flex flex-col gap-5 border-t border-white/[0.13] px-6 py-10 text-[14px] text-white lg:border-t-0`}>
-            {good.map(([label, line], k) => (
-              <p key={k} className={label === "REQUEST" ? "text-white/80" : ""}>
-                {line}
-              </p>
-            ))}
-            <p className="text-(--ok)">✓ Done. In ten seconds.</p>
+          <div className="bg-(--accent)/[0.07] px-6 py-10 lg:px-12">
+            <p className={`${s.kicker} !text-(--hi)`}>With VexraLab</p>
+            <ul className="mt-8 flex flex-col gap-6">
+              {good.map((g) => (
+                <li key={g} className="flex gap-3 text-[16px] text-white">
+                  <PiCheck aria-hidden="true" className="mt-1 size-4 shrink-0 text-(--hi)" />
+                  {g}
+                </li>
+              ))}
+            </ul>
+            <p className="mt-10 border-t border-white/[0.08] pt-6 text-[15px] text-white/55">
+              Answer ready <b className="font-semibold text-(--hi)">in ten seconds</b>.
+            </p>
           </div>
         </div>
       </section>
@@ -67,81 +61,58 @@ export function Compare() {
   );
 }
 
-const STACK = [
-  { Icon: SiHubspot, name: "HubSpot" },
-  { Icon: SiZoho, name: "Zoho CRM" },
-  { Icon: SiOdoo, name: "Odoo ERP" },
-  { Icon: SiShopify, name: "Shopify" },
-  { Icon: SiStripe, name: "Stripe" },
-  { Icon: SiQuickbooks, name: "QuickBooks" },
-  { Icon: SiGooglesheets, name: "Google Sheets" },
-  { Icon: SiMake, name: "Make" },
+const INCLUDED = ["Training for your team", "Written documentation", "[30] days of support after launch", "A weekly written update", "One shared channel with the team", "Data checks before go-live"];
+
+const PLANS: [string, string, string][] = [
+  ["Starter", "[$X]", "One system, e.g. a CRM rollout"],
+  ["Growth", "[$X]", "CRM + dashboards + automations"],
+  ["Scale", "[$X]", "ERP, warehouse and integrations"],
+  ["Care", "[$X]/mo", "Improvements and support"],
 ];
 
-const PLANS = [
-  ["Audit", "Free"],
-  ["Starter", "[$X]"],
-  ["Growth", "[$X]"],
-  ["Scale", "[$X]"],
-  ["Care", "[$X]/mo"],
-];
-
-/** Pricing: headline + platform grid, the free audit as the accent card, plans on the right. */
+/** Pricing: the free audit as the way in, plans beside it, what every plan includes below. */
 export function Pricing() {
   return (
     <>
       <section id="pricing" className={`${s.col} scroll-mt-24`} aria-labelledby="pricing-title">
-        <div className="grid lg:grid-cols-[1.5fr_1fr_1fr]">
-          <div className="flex flex-col">
-            <h2 id="pricing-title" className={`${s.h2big} border-b border-white/[0.13] px-6 py-14 lg:px-10`}>
-              Start small.
-              <span className="block text-white/55">Grow with us.</span>
-            </h2>
-            <ul className="grid flex-1 grid-cols-2">
-              {STACK.map(({ Icon, name }) => (
-                <li key={name} className="flex h-[81px] items-center gap-3 border-r border-b border-white/[0.13] px-6 text-[16px]">
-                  <Icon aria-hidden="true" className="size-6 text-white/85" />
-                  {name}
-                </li>
-              ))}
-              <li className={`${s.mono} col-span-2 flex h-[81px] items-center gap-2 border-r border-white/[0.13] px-6 text-[14px] text-white/60`}>
-                and the rest of your stack <PiCaretRight aria-hidden="true" />
-              </li>
-            </ul>
-          </div>
-
-          <div className="flex flex-col justify-end gap-6 bg-(--accent) px-8 py-10 text-white">
-            <p className={`${s.mono} text-[64px] leading-none font-medium tracking-[-0.04em] text-white/90`} aria-hidden="true">
-              30:00
-            </p>
-            <p className="text-[16px] tracking-[0.2em] text-white/80">AUDIT</p>
+        <div className="border-b border-white/[0.13] px-6 py-12 lg:px-12">
+          <h2 id="pricing-title" className={s.h2big}>
+            Start small.
+            <span className="block text-white/55">Grow with us.</span>
+          </h2>
+        </div>
+        <div className="grid lg:grid-cols-[5fr_7fr]">
+          <div className="flex flex-col gap-6 bg-(--accent) px-8 py-10 lg:px-10">
+            <p className={`${s.kicker} !text-white/80`}>Start here</p>
             <p>
               <span className="text-[56px] leading-none font-semibold tracking-[-0.04em]">Free</span>
-              <span className="ml-1 text-[20px] text-white/70">/30 min</span>
+              <span className="ml-2 text-[18px] text-white/75">30-minute audit</span>
             </p>
-            <p className="text-[20px] leading-6">
-              A written data plan
-              <span className="block">for your business.</span>
-            </p>
-            <Link href="/contact" className="inline-flex h-10 items-center gap-2 self-start rounded-full bg-white px-4 text-[14px] font-medium text-black transition-colors hover:bg-white/90">
+            <p className="max-w-[32ch] text-[17px] leading-7 text-white/85">We look at your tools and data together, then send a written plan with scope, timeline and a fixed price.</p>
+            <Link href="/contact" data-magnet className={`${s.btnWhite} mt-auto self-start`}>
               Book a call <PiCaretRight aria-hidden="true" />
             </Link>
           </div>
-
-          <div className="flex flex-col border-white/[0.13] lg:border-l">
-            <div className="flex flex-col justify-center gap-2 border-b border-white/[0.13] px-8 py-14 lg:min-h-[227px]">
-              <p className="text-[36px] leading-tight font-medium tracking-[-0.03em]">Built to scale.</p>
-              <Link href="/contact" className="inline-flex items-center gap-2 text-[14px] text-(--muted) hover:text-white">
-                Ask for a quote <PiCaretRight aria-hidden="true" />
-              </Link>
-            </div>
-            {PLANS.map(([name, price]) => (
-              <div key={name} data-spot className="flex h-[81px] items-center justify-between border-b border-white/[0.13] px-8 last:border-b-0">
-                <span className="font-semibold">{name}</span>
-                <span className="text-[14px] text-white/70">{price}</span>
-              </div>
+          <ul className="flex flex-col">
+            {PLANS.map(([name, price, fit]) => (
+              <li key={name} data-spot className="grid grid-cols-[1fr_auto] items-center gap-x-6 gap-y-1 border-b border-white/[0.13] px-8 py-6 last:border-b-0">
+                <span className="text-[18px] font-semibold">{name}</span>
+                <span className={`${s.mono} ${s.tnum} row-span-2 text-[15px] text-white/80`}>{price}</span>
+                <span className="text-[14px] text-white/55">{fit}</span>
+              </li>
             ))}
-          </div>
+          </ul>
+        </div>
+        <div className="border-t border-white/[0.13] px-8 py-8 lg:px-10">
+          <p className={s.kicker}>Included in every plan</p>
+          <ul className="mt-5 grid gap-x-8 gap-y-3 sm:grid-cols-2 lg:grid-cols-3">
+            {INCLUDED.map((x) => (
+              <li key={x} className="flex gap-3 text-[15px] text-white/80">
+                <PiCheck aria-hidden="true" className="mt-1 size-4 shrink-0 text-(--hi)" />
+                {x}
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
       <Band />
@@ -150,112 +121,67 @@ export function Pricing() {
 }
 
 const CASES = [
-  {
-    kicker: "RETAIL · ODOO ERP",
-    text: "Orders, inventory and accounting in one system. Stock counts reconcile overnight instead of over a weekend.",
-    who: "Typical retail engagement",
-  },
-  {
-    kicker: "SERVICES · HUBSPOT CRM",
-    text: "Leads from four channels in one pipeline, with follow-ups that send themselves. Nothing slips through.",
-    who: "Typical services engagement",
-  },
+  { glyph: "erp", kicker: "Retail · Odoo ERP", text: "Orders, inventory and accounting in one system. Stock counts reconcile overnight instead of over a weekend." },
+  { glyph: "crm", kicker: "Services · HubSpot CRM", text: "Leads from four channels in one pipeline, with follow-ups that send themselves. Nothing slips through." },
+  { glyph: "dashboards", kicker: "Distribution · Dashboards", text: "Five weekly exports replaced by one live view that sales, operations and finance all agree on." },
 ];
 
-/** Who we work with: the headline, follow buttons, then two typical engagements. */
+/** Who we work with: one headline, three typical engagements. */
 export function Community() {
   return (
     <>
       <section className={s.col} aria-labelledby="community-title">
-        <div className="flex flex-col gap-8 border-b border-white/[0.13] px-6 py-14 lg:flex-row lg:items-end lg:justify-between lg:px-10">
-          <div>
-            <p className={s.kicker}>
-              <span className="text-white/50">{"//"}</span> Who we work with
-            </p>
-            <h2 id="community-title" className={`${s.h2big} mt-5`}>
-              Made for teams that
-              <span className="block text-white/55">outgrew spreadsheets.</span>
-            </h2>
-          </div>
-          <div className="flex flex-col items-start gap-3 lg:items-end">
-            <a href="https://x.com/" target="_blank" rel="noopener noreferrer" className={s.btnGhost}>
-              Follow on X <PiXLogo aria-hidden="true" className="size-5" />
-            </a>
-            <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" className={s.btnGhost}>
-              Follow on LinkedIn <PiLinkedinLogo aria-hidden="true" className="size-5" />
-            </a>
-          </div>
+        <div className="flex flex-col gap-6 border-b border-white/[0.13] px-6 py-12 lg:flex-row lg:items-end lg:justify-between lg:px-12">
+          <h2 id="community-title" className={s.h2big}>
+            Made for teams that
+            <span className="block text-white/55">outgrew spreadsheets.</span>
+          </h2>
+          <Link href="/work" className="inline-flex items-center gap-2 text-[15px] text-white/70 transition-colors hover:text-white">
+            See how we work <PiCaretRight aria-hidden="true" />
+          </Link>
         </div>
-        <div className="grid lg:grid-cols-2">
-          {CASES.map((c, k) => (
-            <article key={c.kicker} className={`flex flex-col gap-4 px-7 py-9 ${k === 0 ? "border-white/[0.13] lg:border-r" : "border-t border-white/[0.13] lg:border-t-0"}`}>
+        <ul className="grid lg:grid-cols-3">
+          {CASES.map((c) => (
+            <li key={c.kicker} data-spot data-glyph-host className="flex flex-col gap-6 border-b border-white/[0.13] px-8 py-10 lg:border-r lg:border-b-0 lg:last:border-r-0">
+              <Glyph id={c.glyph} size={6} />
               <p className={s.kicker}>{c.kicker}</p>
-              <p className="max-w-[46ch] text-[15px] leading-6 text-white/80">{c.text}</p>
-              <p className="mt-6 flex items-center gap-3 text-[14px]">
-                <span aria-hidden="true" className="grid size-9 place-items-center bg-(--accent) text-[12px] font-semibold">
-                  VL
-                </span>
-                <span>
-                  <span className="block font-semibold text-white">{c.who}</span>
-                  <span className="text-[12px] text-(--muted)">Illustrative scope</span>
-                </span>
-              </p>
-            </article>
+              <p className="text-[16px] leading-7 text-white/80">{c.text}</p>
+              <p className="mt-auto text-[13px] text-white/45">Typical engagement</p>
+            </li>
           ))}
-        </div>
+        </ul>
       </section>
       <Band />
     </>
   );
 }
 
-const T_A: [number, number, number][] = [[1, 1, 1], [2, 2, 1], [1, 2, 2], [3, 1, 2], [1, 1, 3], [2, 1, 3], [3, 1, 3], [1, 1, 4], [2, 2, 4], [1, 1, 5], [2, 2, 5]];
-const T_B: [number, number, number][] = [[1, 1, 1], [2, 2, 1], [1, 1, 2], [2, 2, 2], [1, 3, 3], [1, 1, 4], [2, 2, 4], [1, 2, 5], [3, 1, 5]];
+const BENEFITS: [string, string][] = [
+  ["Decide faster.", "Reports that update themselves. No waiting for Monday."],
+  ["One customer view.", "Every call, order and invoice on one record."],
+  ["Scale without chaos.", "Systems that work at 5 users and at 500."],
+  ["Fewer errors.", "No more copy-paste between tools."],
+];
 
-function Stmt({ b, rest }: { b: string; rest: string }) {
-  return (
-    <div data-spot className="flex items-center px-8 py-16 text-[22px] leading-[30px] text-(--muted) lg:px-10">
-      <p>
-        <b className="font-semibold text-white">{b}</b> {rest}
-      </p>
-    </div>
-  );
-}
-
-function Blocks({ t }: { t: [number, number, number][] }) {
-  return <Tiles cols={3} rows={5} rowH={58} tiles={t} mono className="grid h-full min-h-[290px]" />;
-}
-
-/** "// take control of your data." 3 x 3 grid of statements and grain blocks, CTA in the centre. */
+/** What changes: four outcomes in one calm row. */
 export function Benefits() {
   return (
     <>
       <section className={s.col} aria-labelledby="benefits-title">
         <div className="border-b border-white/[0.13] px-6 py-12 lg:px-12">
           <Slash>
-            <span id="benefits-title">take control of your data.</span>
+            <span id="benefits-title">what changes for you.</span>
           </Slash>
         </div>
-        <div className="grid lg:grid-cols-3 [&>*]:border-white/[0.13] lg:[&>*:nth-child(3n+1)]:border-r lg:[&>*:nth-child(3n+2)]:border-r [&>*:nth-child(-n+6)]:border-b">
-          <Stmt b="Decide faster." rest="Reports that update themselves. No waiting for Monday." />
-          <div className="hidden lg:block"><Blocks t={T_A} /></div>
-          <Stmt b="One customer view." rest="Every call, order and invoice on one record." />
-          <div className="hidden lg:block"><Blocks t={T_B} /></div>
-          <div className="flex flex-col items-center justify-center gap-6 px-6 py-16 text-center">
-            <p className="text-[28px] leading-[34px] font-semibold tracking-[-0.02em]">
-              Start growing.
-              <span className="block font-normal text-(--muted)">With your data.</span>
-            </p>
-            <Link href="/contact" data-magnet className={`${s.btnAccent} w-[220px] justify-between`}>
-              Book a call <PiCaretRight aria-hidden="true" />
-            </Link>
-            <p className="text-[12px] text-(--muted)">Audit. Plan. Build.</p>
-          </div>
-          <div className="hidden lg:block"><Blocks t={T_A} /></div>
-          <Stmt b="Scale without chaos." rest="Systems that work at 5 users and at 500." />
-          <div className="hidden lg:block"><Blocks t={T_B} /></div>
-          <Stmt b="Errors, slashed." rest="No more copy-paste between tools." />
-        </div>
+        <ul className="grid sm:grid-cols-2 lg:grid-cols-4">
+          {BENEFITS.map(([b, t], k) => (
+            <li key={b} data-spot className="flex flex-col gap-4 border-r border-b border-white/[0.13] px-8 py-10 last:border-r-0 lg:border-b-0">
+              <span className={`${s.mono} text-[12px] text-(--hi)`}>0{k + 1}</span>
+              <p className="text-[20px] leading-tight font-semibold tracking-[-0.02em]">{b}</p>
+              <p className="text-[15px] leading-6 text-white/65">{t}</p>
+            </li>
+          ))}
+        </ul>
       </section>
       <Band />
     </>
@@ -312,10 +238,8 @@ export function FinalCta() {
       <section className={`${s.col} relative overflow-hidden`} aria-labelledby="cta-title">
         <Tiles cols={10} rows={9} rowH={64} tiles={CTA_TILES} mono className="pointer-events-none absolute inset-0 hidden opacity-80 lg:grid" />
         <div className="relative z-10 mx-auto flex max-w-[640px] flex-col items-center gap-8 bg-black px-6 py-20 text-center lg:my-16 lg:py-12">
-          <h2 id="cta-title" className="text-[clamp(32px,3.8vw,48px)] leading-[1.1] font-semibold tracking-[-0.04em]">
-            <span className="mr-2 text-[0.8em] text-white/30">{"//"}</span>Take control of your data.
-            <span className="mt-1 block font-medium text-(--muted)">Book a 30-minute call. Get a written plan. Start growing.</span>
-          </h2>
+          <h2 id="cta-title" className="text-[clamp(32px,3.8vw,48px)] leading-[1.1] font-semibold tracking-[-0.04em]">Take control of your data.</h2>
+          <p className="-mt-3 max-w-[48ch] text-[18px] leading-7 text-(--muted)">Book a 30-minute call. Get a written plan in 5 days. No obligation.</p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link href="/contact" data-magnet className={s.btnAccent}>
               Book a call
@@ -324,7 +248,6 @@ export function FinalCta() {
               {EMAIL}
             </a>
           </div>
-          <p className={`${s.mono} text-[11px] tracking-[0.2em] text-white/60`}>FREE AUDIT · NO OBLIGATION</p>
         </div>
       </section>
       <Band />
@@ -357,8 +280,7 @@ export function Footer() {
           ))}
         </ul>
         <div className="relative flex min-h-[146px] items-end justify-center overflow-hidden border-b border-white/[0.13]">
-          <Tiles cols={6} rows={2} rowH={73} mono tiles={[[1, 2, 1], [4, 3, 1], [2, 3, 2], [6, 1, 2]]} className="absolute inset-0 grid opacity-35" />
-          <p className="relative flex items-center gap-3 pb-4 text-[44px] leading-none font-semibold tracking-[-0.05em]">
+          <p className="relative flex items-center gap-3 pb-5 text-[40px] leading-none font-semibold tracking-[-0.05em]">
             <Mark size={30} />
             <span>
               Vexra<span className="font-medium text-white/60">Lab</span>
