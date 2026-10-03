@@ -40,7 +40,7 @@ export default function AboutPage() {
         kicker="Studio"
         title={
           <>
-            A small team that makes data <span className="text-[#7c97f0]">simple</span>.
+            A small team that makes data <span className="text-(--hi)">simple</span>.
           </>
         }
         grey="Est. [year]."
@@ -56,8 +56,8 @@ export default function AboutPage() {
         <ul className="grid lg:grid-cols-2">
           {BELIEFS.map(([b, t], k) => (
             <li key={b} className={`flex gap-5 border-b border-white/[0.13] px-6 py-10 lg:px-10 ${k % 2 === 0 ? "lg:border-r" : ""} ${k > 1 ? "lg:border-b-0" : ""}`}>
-              <span className={`${s.mono} pt-1.5 text-[12px] text-[#7c97f0]`}>0{k + 1}</span>
-              <p className="text-[22px] leading-[30px] text-[#a1a1aa]">
+              <span className={`${s.mono} pt-1.5 text-[12px] text-(--hi)`}>0{k + 1}</span>
+              <p className="text-[22px] leading-[30px] text-(--muted)">
                 <b className="font-semibold text-white">{b}</b> {t}
               </p>
             </li>
@@ -77,9 +77,9 @@ export default function AboutPage() {
         </div>
         <ol className="grid sm:grid-cols-2 lg:grid-cols-5">
           {WEEK.map(({ day, Icon, name, text }) => (
-            <li key={name} className="flex flex-col gap-4 border-r border-b border-white/[0.13] px-6 py-9 lg:border-b-0 lg:last:border-r-0">
+            <li key={name} data-spot className="flex flex-col gap-4 border-r border-b border-white/[0.13] px-6 py-9 lg:border-b-0 lg:last:border-r-0">
               <span className={`${s.mono} text-[12px] text-white/45`}>{day}</span>
-              <Icon aria-hidden="true" className="size-6 text-[#7c97f0]" />
+              <Icon aria-hidden="true" className="size-6 text-(--hi)" />
               <p className="text-[20px] font-semibold tracking-[-0.01em]">{name}</p>
               <p className="text-[15px] leading-6 text-white/70">{text}</p>
             </li>
@@ -96,13 +96,13 @@ export default function AboutPage() {
         </div>
         <ul className="grid sm:grid-cols-2 lg:grid-cols-4">
           {TEAM.map((p, k) => (
-            <li key={k} className="flex flex-col gap-5 border-r border-b border-white/[0.13] px-6 py-9 lg:border-b-0 lg:last:border-r-0">
-              <span aria-hidden="true" className={`grid size-16 place-items-center text-[24px] font-semibold ${k === 0 ? "bg-[#2a4c9e]" : "border border-white/[0.13] bg-white/[0.04]"}`}>
+            <li key={k} data-spot className="flex flex-col gap-5 border-r border-b border-white/[0.13] px-6 py-9 lg:border-b-0 lg:last:border-r-0">
+              <span aria-hidden="true" className={`grid size-16 place-items-center text-[24px] font-semibold ${k === 0 ? "bg-(--accent)" : "border border-white/[0.13] bg-white/[0.04]"}`}>
                 {p.initials}
               </span>
               <div>
                 <p className="text-[18px] font-semibold">{p.name}</p>
-                <p className="text-[14px] text-[#a1a1aa]">{p.role}</p>
+                <p className="text-[14px] text-(--muted)">{p.role}</p>
               </div>
               <div className="mt-auto flex gap-2">
                 <a href="#" aria-label={`${p.name} on LinkedIn`} className="grid size-9 place-items-center rounded-full border border-white/[0.13] text-white/70 hover:text-white">

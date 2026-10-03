@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { PiCaretRight } from "react-icons/pi";
 import { FinalCta, Footer } from "./Bottom";
+import { Motion } from "./Motion";
 import { Nav } from "./Top";
 import { Band, Tiles } from "./parts";
 import s from "./cc.module.css";
@@ -10,6 +11,7 @@ import s from "./cc.module.css";
 export function Shell({ children, cta = true }: { children: ReactNode; cta?: boolean }) {
   return (
     <div className={s.page}>
+      <Motion />
       <Nav />
       <main id="main-content">
         {children}
@@ -39,7 +41,7 @@ export function PageHead({ kicker, title, grey, lede, action }: { kicker: string
               {title}
               <span className="block text-white/55">{grey}</span>
             </h1>
-            <p className={`${s.rise} mt-6 max-w-[52ch] text-[18px] leading-7 text-[#a1a1aa]`} style={{ animationDelay: "120ms" }}>
+            <p className={`${s.rise} mt-6 max-w-[52ch] text-[18px] leading-7 text-(--muted)`} style={{ animationDelay: "120ms" }}>
               {lede}
             </p>
             {action && (

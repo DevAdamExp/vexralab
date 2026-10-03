@@ -49,7 +49,7 @@ export default function WorkPage() {
         kicker="Work"
         title={
           <>
-            Systems that run <span className="text-[#7c97f0]">real</span> businesses.
+            Systems that run <span className="text-(--hi)">real</span> businesses.
           </>
         }
         grey="Here’s how."
@@ -71,7 +71,7 @@ export default function WorkPage() {
               </div>
               <ul className="flex gap-2">
                 {c.stack.map(({ Icon, name }) => (
-                  <li key={name} className="inline-flex h-9 items-center gap-2 rounded-full border border-white/[0.13] px-3.5 text-[13px] text-white/80">
+                  <li key={name} data-spot className="inline-flex h-9 items-center gap-2 rounded-full border border-white/[0.13] px-3.5 text-[13px] text-white/80">
                     <Icon aria-hidden="true" className="size-4" />
                     {name}
                   </li>
@@ -87,15 +87,15 @@ export default function WorkPage() {
                 <p className={s.kicker}>What we built</p>
                 <ol className="mt-5 flex flex-col gap-3 text-[15px] leading-6 text-white">
                   {c.built.map((b, i) => (
-                    <li key={b} className="flex gap-3">
+                    <li key={b} data-spot className="flex gap-3">
                       <span className={`${s.mono} pt-0.5 text-[11px] text-white/40`}>0{i + 1}</span>
                       {b}
                     </li>
                   ))}
                 </ol>
               </div>
-              <div className="bg-[#2a4c9e]/[0.12] px-6 py-10 lg:px-10">
-                <p className={`${s.kicker} !text-[#7c97f0]`}>What changed</p>
+              <div className="bg-(--accent)/12 px-6 py-10 lg:px-10">
+                <p className={`${s.kicker} !text-(--hi)`}>What changed</p>
                 <ul className="mt-5 flex flex-col gap-3 text-[15px] leading-6 text-white">
                   {c.result.map((r) => (
                     <li key={r}>{r}</li>
@@ -117,8 +117,8 @@ export default function WorkPage() {
         </div>
         <ol className="grid sm:grid-cols-2 lg:grid-cols-5">
           {PROCESS.map((p, k) => (
-            <li key={p.name} className="flex flex-col gap-4 border-r border-b border-white/[0.13] px-6 py-9 lg:border-b-0 lg:last:border-r-0">
-              <span className={`${s.mono} text-[12px] text-[#7c97f0]`}>0{k + 1}</span>
+            <li key={p.name} data-spot className="flex flex-col gap-4 border-r border-b border-white/[0.13] px-6 py-9 lg:border-b-0 lg:last:border-r-0">
+              <span className={`${s.mono} text-[12px] text-(--hi)`}>0{k + 1}</span>
               <p className="text-[24px] font-semibold tracking-[-0.02em]">{p.name}</p>
               <p className={`${s.mono} text-[12px] text-white/45`}>{p.when}</p>
               <p className="text-[15px] leading-6 text-white/70">{p.text}</p>
@@ -126,8 +126,8 @@ export default function WorkPage() {
           ))}
         </ol>
         <div className="flex flex-wrap items-center justify-between gap-4 border-t border-white/[0.13] px-6 py-6 lg:px-10">
-          <p className="text-[15px] text-[#a1a1aa]">Every step ends with something you can see. No black boxes.</p>
-          <Link href="/contact" className="inline-flex items-center gap-2 text-[14px] text-white hover:text-[#7c97f0]">
+          <p className="text-[15px] text-(--muted)">Every step ends with something you can see. No black boxes.</p>
+          <Link href="/contact" className="inline-flex items-center gap-2 text-[14px] text-white hover:text-(--hi)">
             Start with the audit <PiCaretRight aria-hidden="true" />
           </Link>
         </div>

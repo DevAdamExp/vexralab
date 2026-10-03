@@ -4,7 +4,7 @@ import s from "./cc.module.css";
 /** The 100px spacer band between sections: full-width rules, dashed column edges, corner squares. */
 export function Band({ children }: { children?: ReactNode }) {
   return (
-    <div className={s.band} aria-hidden={children ? undefined : true}>
+    <div className={s.band} data-r aria-hidden={children ? undefined : true}>
       <div className={s.bandCol}>
         <span className={s.sq} style={{ left: -9, top: -9 }} />
         <span className={s.sq} style={{ right: -9, top: -9 }} />
@@ -58,7 +58,7 @@ export function Tiles({
         <span
           key={k}
           className={`${mono ? s.tileMono : s.tile} ${flip && k % 3 === 1 ? s.tileFlip : ""}`}
-          style={{ gridColumn: `${c} / span ${span}`, gridRow: r, margin: 12, animationDelay: `${k * 60}ms` }}
+          style={{ gridColumn: `${c} / span ${span}`, gridRow: r, margin: 12, animationDelay: `${k * 60}ms`, "--k": k } as React.CSSProperties}
         />
       ))}
     </div>

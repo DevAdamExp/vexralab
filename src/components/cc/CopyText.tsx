@@ -22,7 +22,7 @@ export function CopyText({ text, className = "" }: { text: string; className?: s
       }}
     >
       {text}
-      {done ? <PiCheck aria-hidden="true" className="size-4 text-[#7c97f0]" /> : <PiCopy aria-hidden="true" className="size-4" />}
+      {done ? <PiCheck aria-hidden="true" className="size-4 text-(--hi)" /> : <PiCopy aria-hidden="true" className="size-4" />}
     </button>
   );
 }

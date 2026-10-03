@@ -12,9 +12,10 @@ export { EMAIL };
 export function Nav() {
   return (
     <header className="sticky top-0 z-40 border-b border-white/[0.13] bg-black/85 backdrop-blur-md">
+      <span aria-hidden="true" className={s.progress} />
       <div className="mx-auto flex h-[84px] max-w-[1200px] items-center justify-between px-6">
         <Link href="/" aria-label="VexraLab home" className={`${s.mono} text-[22px] font-semibold tracking-[-0.04em]`}>
-          vexra<span className="text-[#7c97f0]">/</span>lab
+          vexra<span className="text-(--hi)">/</span>lab
         </Link>
         <nav aria-label="Main" className="hidden items-center gap-1 lg:flex">
           {NAV.map((n) => (
@@ -27,7 +28,7 @@ export function Nav() {
           </Link>
         </nav>
         <div className="flex items-center gap-2">
-          <Link href="/contact" className="inline-flex h-9 items-center rounded-full bg-[#fafafa] px-5 text-[14px] font-medium text-black transition-colors hover:bg-white">
+          <Link href="/contact" className="inline-flex h-9 items-center rounded-full bg-(--fg) px-5 text-[14px] font-medium text-black transition-colors hover:bg-white">
             Book a call
           </Link>
           {/* Phone menu: native disclosure, no script needed. */}
@@ -63,23 +64,23 @@ export function Hero() {
     <section className={s.col} aria-labelledby="hero-title">
       <div className="flex items-center justify-between gap-4 border-b border-white/[0.13] px-4 py-3 text-[14px] sm:px-5">
         <Link href="/contact" className="flex items-center gap-2.5 underline decoration-white/30 underline-offset-4 hover:decoration-white">
-          <span aria-hidden="true" className="grid size-[18px] place-items-center rounded-[4px] bg-white/10 text-[10px]">✦</span>
+          <span aria-hidden="true" className={s.live} />
           Free 30-minute data audit. A written plan in 5 days.
         </Link>
         <span className="hidden items-center gap-5 text-[12px] text-white/70 md:flex">
           <span><b className="font-semibold text-white">Fixed price</b> agreed up front</span>
           <span><b className="font-semibold text-white">Demo</b> every Friday</span>
-          <span><b className="font-semibold text-[#7c97f0]">You own</b> everything</span>
+          <span><b className="font-semibold text-(--hi)">You own</b> everything</span>
         </span>
       </div>
 
-      <div className="relative lg:h-[600px]">
+      <div data-spot className={`${s.heroGlow} relative lg:h-[600px]`}>
         <Tiles cols={10} rows={8} rowH={75} tiles={HERO_TILES} className="pointer-events-none absolute inset-0 hidden lg:grid" />
 
         <div className="relative z-10 flex flex-col justify-center px-5 py-20 sm:px-6 lg:absolute lg:top-[75px] lg:left-0 lg:h-[450px] lg:w-[54%] lg:border-y lg:border-r lg:border-white/[0.13] lg:bg-black lg:py-0">
           <div>
             <h1 id="hero-title" className={`${s.h1} ${s.rise} max-w-[520px]`}>
-              Run your business on data you can <span className="text-[#7c97f0]">trust</span>.
+              Run your business on data you can <span className="text-(--hi)">trust</span>.
               <span className="block text-white/55">VexraLab.</span>
             </h1>
 
@@ -88,19 +89,19 @@ export function Hero() {
                 <Link href="/contact" className={s.pillBtn}>
                   Book a call <PiCaretDown aria-hidden="true" className="size-3.5 -rotate-90" />
                 </Link>
-                <CopyText text={EMAIL} className={`${s.mono} flex h-[34px] items-center gap-2 px-3 text-[14px] text-[#a1a1aa] hover:text-white`} />
+                <CopyText text={EMAIL} className={`${s.mono} flex h-[34px] items-center gap-2 px-3 text-[14px] text-(--muted) hover:text-white`} />
               </div>
               <a href="#platform" className="inline-flex h-11 items-center gap-2.5 rounded-full border border-white/[0.13] px-4 text-[14px] font-medium transition-colors hover:border-white/35">
-                <span aria-hidden="true" className="size-2 rounded-full bg-[#7c97f0]" />
+                <span aria-hidden="true" className="size-2 rounded-full bg-(--hi)" />
                 See a sample dashboard
               </a>
             </div>
 
-            <p className={`${s.rise} mt-9 text-[18px] leading-7 text-[#a1a1aa]`} style={{ animationDelay: "200ms" }}>
+            <p className={`${s.rise} mt-9 text-[18px] leading-7 text-(--muted)`} style={{ animationDelay: "200ms" }}>
               CRM, ERP and reporting, <span className="text-white">set up around how your team already works</span>.
             </p>
             <p className={`${s.rise} mt-2 text-[14px] leading-5 text-white/55`} style={{ animationDelay: "240ms" }}>
-              Start with a <a href="/contact" className="font-semibold text-[#7c97f0]">free audit</a>. No long contracts.
+              Start with a <a href="/contact" className="font-semibold text-(--hi)">free audit</a>. No long contracts.
             </p>
           </div>
         </div>
@@ -110,18 +111,18 @@ export function Hero() {
 }
 
 const LOGOS = [
-  { Icon: SiHubspot, name: "HubSpot" },
-  { Icon: SiZoho, name: "Zoho" },
-  { Icon: SiOdoo, name: "Odoo" },
-  { Icon: SiSap, name: "SAP" },
-  { Icon: SiShopify, name: "Shopify" },
-  { Icon: SiStripe, name: "Stripe" },
-  { Icon: SiQuickbooks, name: "QuickBooks" },
-  { Icon: SiXero, name: "Xero" },
-  { Icon: SiPostgresql, name: "PostgreSQL" },
-  { Icon: SiSnowflake, name: "Snowflake" },
-  { Icon: SiGooglebigquery, name: "BigQuery" },
-  { Icon: SiLooker, name: "Looker" },
+  { Icon: SiHubspot, name: "HubSpot", brand: "#ff7a59" },
+  { Icon: SiZoho, name: "Zoho", brand: "#ff5a5f" },
+  { Icon: SiOdoo, name: "Odoo", brand: "#c39bbd" },
+  { Icon: SiSap, name: "SAP", brand: "#36b8ff" },
+  { Icon: SiShopify, name: "Shopify", brand: "#95bf47" },
+  { Icon: SiStripe, name: "Stripe", brand: "#8f88ff" },
+  { Icon: SiQuickbooks, name: "QuickBooks", brand: "#3fbf2c" },
+  { Icon: SiXero, name: "Xero", brand: "#13b5ea" },
+  { Icon: SiPostgresql, name: "PostgreSQL", brand: "#6b8cff" },
+  { Icon: SiSnowflake, name: "Snowflake", brand: "#29b5e8" },
+  { Icon: SiGooglebigquery, name: "BigQuery", brand: "#669df6" },
+  { Icon: SiLooker, name: "Looker", brand: "#4285f4" },
 ];
 
 const PROMISES = [
@@ -139,11 +140,11 @@ export function Logos() {
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6">
           <p className="flex h-[100px] items-center border-r border-b border-white/[0.13] px-6 text-[14px] leading-5 text-white">
             <span>
-              We build on the platforms <span className="text-[#a1a1aa]">you already run.</span>
+              We build on the platforms <span className="text-(--muted)">you already run.</span>
             </span>
           </p>
-          {LOGOS.slice(0, 11).map(({ Icon, name }) => (
-            <div key={name} className="flex h-[100px] items-center justify-center gap-2.5 border-r border-b border-white/[0.13] text-white/85 transition-colors hover:text-white">
+          {LOGOS.slice(0, 11).map(({ Icon, name, brand }) => (
+            <div key={name} data-spot style={{ "--brand": brand } as React.CSSProperties} className={`${s.logo} flex h-[100px] items-center justify-center gap-2.5 border-r border-b border-white/[0.13] text-white/85 transition-colors hover:text-white`}>
               <Icon aria-hidden="true" className="size-6" />
               <span className="text-[17px] font-semibold tracking-[-0.02em]">{name}</span>
             </div>
@@ -151,11 +152,11 @@ export function Logos() {
         </div>
         <ul aria-label="What we commit to" className="grid sm:grid-cols-2 lg:grid-cols-4">
           {PROMISES.map(({ Icon, title, text }) => (
-            <li key={title} className="flex gap-4 border-r border-b border-white/[0.13] px-6 py-7 last:border-r-0 lg:border-b-0">
-              <Icon aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-[#7c97f0]" />
+            <li key={title} data-spot className="flex gap-4 border-r border-b border-white/[0.13] px-6 py-7 last:border-r-0 lg:border-b-0">
+              <Icon aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-(--hi)" />
               <p className="text-[14px] leading-5">
                 <span className="block font-semibold text-white">{title}</span>
-                <span className="text-[#a1a1aa]">{text}</span>
+                <span className="text-(--muted)">{text}</span>
               </p>
             </li>
           ))}

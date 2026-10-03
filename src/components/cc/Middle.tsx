@@ -23,25 +23,25 @@ export function Platform() {
         </div>
         <div className="grid lg:grid-cols-[5fr_7fr]">
           <div className="flex flex-col justify-center gap-10 px-6 py-14 lg:px-12">
-            <p className="text-[24px] leading-[33px] text-[#a1a1aa]">
+            <p className="text-[24px] leading-[33px] text-(--muted)">
               <b className="font-semibold text-white">See everything, live.</b> Sales, stock, finance and operations in one dashboard your whole team trusts.
             </p>
             <div className="flex flex-col items-center gap-3 self-start">
-              <Link href="/contact" className="inline-flex h-11 w-full min-w-[300px] items-center justify-center gap-2 rounded-full bg-[#fafafa] px-6 text-[16px] font-medium text-black transition-colors hover:bg-white">
+              <Link href="/contact" className="inline-flex h-11 w-full min-w-[300px] items-center justify-center gap-2 rounded-full bg-(--fg) px-6 text-[16px] font-medium text-black transition-colors hover:bg-white">
                 <PiChartBar aria-hidden="true" className="size-5" /> Book a call
               </Link>
-              <p className="text-[12px] text-[#a1a1aa]">
+              <p className="text-[12px] text-(--muted)">
                 Built on <u className="decoration-white/30 underline-offset-2">HubSpot</u>, <u className="decoration-white/30 underline-offset-2">Odoo</u> &amp; <u className="decoration-white/30 underline-offset-2">your stack</u>
               </p>
             </div>
           </div>
 
-          <figure className="border-white/[0.13] bg-[#141a33] lg:border-l" aria-label="Sample client dashboard">
+          <figure className="border-white/[0.13] bg-(--panel) lg:border-l" aria-label="Sample client dashboard">
             <div className="grid grid-cols-[150px_1fr] text-[11px] max-sm:grid-cols-1">
-              <aside className="flex flex-col gap-1.5 border-r border-[#1c2447] bg-[#10152b] p-3 text-white/70 max-sm:hidden">
+              <aside className="flex flex-col gap-1.5 border-r border-(--panel-2) bg-(--panel-3) p-3 text-white/70 max-sm:hidden">
                 <p className="mb-2 font-semibold text-white">Acorn Supply</p>
                 {["Overview", "Sales", "Inventory", "Finance", "Customers", "Reports"].map((n, k) => (
-                  <p key={n} className={`rounded px-2 py-1.5 ${k === 0 ? "bg-[#1c2447] text-white" : ""}`}>
+                  <p key={n} className={`rounded px-2 py-1.5 ${k === 0 ? "bg-(--panel-2) text-white" : ""}`}>
                     {n}
                   </p>
                 ))}
@@ -49,35 +49,35 @@ export function Platform() {
               <div className="flex flex-col gap-3 p-4">
                 <div className="flex items-center justify-between text-white">
                   <p className="text-[13px] font-semibold">Overview <span className="ml-1 font-normal text-white/50">this month</span></p>
-                  <span className={`${s.mono} rounded bg-[#1c2447] px-2 py-0.5 text-[10px] text-[#7c97f0]`}>sample data</span>
+                  <span className={`${s.mono} rounded bg-(--panel-2) px-2 py-0.5 text-[10px] text-(--hi)`}>sample data</span>
                 </div>
                 <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
                   {kpis.map(([l, v, d]) => (
-                    <div key={l} className="rounded-md border border-[#1c2447] bg-[#10152b] p-2.5">
+                    <div key={l} className="rounded-md border border-(--panel-2) bg-(--panel-3) p-2.5">
                       <p className="text-white/55">{l}</p>
                       <p className={`${s.mono} mt-1 text-[15px] text-white`}>{v}</p>
-                      <p className="text-[#7ee2c8]">{d}</p>
+                      <p className="text-(--ok)">{d}</p>
                     </div>
                   ))}
                 </div>
-                <div className="rounded-md border border-[#1c2447] bg-[#10152b] p-3">
+                <div className="rounded-md border border-(--panel-2) bg-(--panel-3) p-3">
                   <p className="mb-3 text-white/70">Revenue by month</p>
                   <div className="flex h-28 items-end gap-1.5">
                     {bars.map((h, k) => (
-                      <span key={k} className="flex-1 rounded-t-sm" style={{ height: `${h}%`, background: k === bars.length - 1 ? "#7c97f0" : "#2a4c9e" }} />
+                      <span key={k} className={`${s.bar} flex-1 rounded-t-sm`} style={{ "--k": k, height: `${h}%`, background: k === bars.length - 1 ? "var(--hi)" : k % 3 === 1 ? "var(--sail)" : "var(--accent)" } as React.CSSProperties} />
                     ))}
                   </div>
                 </div>
                 <div className="grid gap-2 sm:grid-cols-2">
-                  <div className="rounded-md border border-[#1c2447] bg-[#10152b] p-3 text-white/75">
+                  <div className="rounded-md border border-(--panel-2) bg-(--panel-3) p-3 text-white/75">
                     <p className="mb-2 text-white">Needs attention</p>
                     <p>⚠ [N] invoices overdue</p>
                     <p>⚠ [N] SKUs below reorder point</p>
                   </div>
-                  <div className={`${s.mono} rounded-md border border-[#1c2447] bg-[#0b0f20] p-3 text-[10px] text-white/70`}>
-                    <p className="text-[#7ee2c8]">✓ CRM synced 2 min ago</p>
-                    <p className="text-[#7ee2c8]">✓ ERP synced 2 min ago</p>
-                    <p>⟳ Payments syncing…</p>
+                  <div className={`${s.mono} rounded-md border border-(--panel-2) bg-(--panel-4) p-3 text-[10px] text-white/70`}>
+                    <p className="text-(--ok)">✓ CRM synced 2 min ago</p>
+                    <p className="text-(--ok)">✓ ERP synced 2 min ago</p>
+                    <p className="flex items-center gap-2"><span aria-hidden="true" className={s.live} /> Payments syncing…</p>
                   </div>
                 </div>
               </div>
@@ -103,14 +103,14 @@ export function Statements() {
         <div className="grid lg:grid-cols-2">
           <div className="border-white/[0.13] px-6 py-12 lg:border-r lg:px-12">
             <span className={s.tag}>data without structure is noise</span>
-            <p className="mt-4 text-[20px] leading-7 text-[#a1a1aa]">
+            <p className="mt-4 text-[20px] leading-7 text-(--muted)">
               <span className="mr-2 text-white/35">{"//"}</span>
               <b className="font-semibold text-white">Scattered. Manual. Late.</b> Five tools, ten spreadsheets, and nobody trusts the numbers. What if every answer was one click away?
             </p>
           </div>
           <div className="border-t border-white/[0.13] px-6 py-12 lg:border-t-0 lg:px-12">
             <span className={s.tag}>systems, not spreadsheets</span>
-            <p className="mt-4 text-[20px] leading-7 text-[#a1a1aa]">
+            <p className="mt-4 text-[20px] leading-7 text-(--muted)">
               <span className="mr-2 text-white/35">{"//"}</span>
               <b className="font-semibold text-white">Growing businesses run on VexraLab.</b> CRMs, ERPs and{" "}
               <u className="decoration-white/30 underline-offset-4">data pipelines</u> designed around your process, with{" "}
@@ -135,7 +135,7 @@ export function Clarity() {
     <>
       <section id="process" className={`${s.col} scroll-mt-24`} aria-labelledby="clarity-title">
         <div className="grid lg:grid-cols-2">
-          <h2 id="clarity-title" className="px-6 py-16 text-[26px] leading-[34px] font-normal text-[#a1a1aa] sm:text-[30px] sm:leading-9 lg:col-span-2 lg:px-[76px]">
+          <h2 id="clarity-title" className="px-6 py-16 text-[26px] leading-[34px] font-normal text-(--muted) sm:text-[30px] sm:leading-9 lg:col-span-2 lg:px-[76px]">
             <span className="text-white">Hello, clarity.</span> One source of truth that ties your CRM, ERP and finance into a single{" "}
             <u className="decoration-white/40 underline-offset-[6px]">view of your business</u>.
           </h2>
@@ -150,11 +150,11 @@ export function Clarity() {
         <div className="grid lg:grid-cols-2">
           <ol className="relative border-white/[0.13] lg:border-r">
             {steps.map(({ icon: Icon, title, text }, k) => (
-              <li key={title} className={`relative flex items-center gap-4 px-6 py-8 ${k === 0 ? "bg-white/[0.04]" : ""}`}>
+              <li key={title} className={`${s.cycle} relative flex items-center gap-4 px-6 py-8`} style={{ "--k": k } as React.CSSProperties}>
                 {k === 0 && <span className={`${s.mono} absolute top-1/2 -left-[132px] hidden -translate-y-1/2 text-[13px] text-white/40 xl:block`}>[ Thinking ]</span>}
                 <Icon aria-hidden="true" className="size-6 shrink-0 rounded border border-white/25 p-0.5 text-white/70" />
                 <p className="text-[15px] text-white">
-                  {title} <span className="text-[#a1a1aa]">{text}</span>
+                  {title} <span className="text-(--muted)">{text}</span>
                 </p>
               </li>
             ))}
@@ -172,7 +172,7 @@ export function Clarity() {
                 <p><span className={s.badge}>FOUND</span>discounting up on two product lines</p>
                 <p><span className={s.badge}>FOUND</span>shipping costs rising in one region</p>
                 <p><span className={s.badge}>FOUND</span>slow-moving stock tying up cash</p>
-                <p className="text-[#7ee2c8]">✓ 3 actions recommended</p>
+                <p className="text-(--ok)">✓ 3 actions recommended</p>
                 <p className="mt-4 text-[12px] text-white/40">Illustrative example.</p>
               </div>
             </div>

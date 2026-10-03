@@ -25,7 +25,7 @@ export default function ServicesPage() {
         kicker="Services"
         title={
           <>
-            Seven ways we make your data <span className="text-[#7c97f0]">work</span>.
+            Seven ways we make your data <span className="text-(--hi)">work</span>.
           </>
         }
         grey="One partner, base to end."
@@ -42,20 +42,20 @@ export default function ServicesPage() {
         </div>
         <ul className="grid sm:grid-cols-2 lg:grid-cols-4">
           {SERVICES.map((x, k) => (
-            <li key={x.id} className="border-r border-b border-white/[0.13]">
+            <li key={x.id} data-spot className="border-r border-b border-white/[0.13]">
               <a href={`#${x.id}`} className="group flex h-full flex-col gap-6 px-6 py-7 transition-colors hover:bg-white/[0.03]">
                 <span className={s.rowNum}>0{k + 1}</span>
                 <span>
                   <span className="block text-[18px] text-white">{x.name}</span>
                   <span className={`${s.mono} mt-1 block text-[13px] text-white/45`}>{x.tag}</span>
                 </span>
-                <span className="mt-auto inline-flex items-center gap-1.5 text-[13px] text-[#a1a1aa] group-hover:text-white">
+                <span className="mt-auto inline-flex items-center gap-1.5 text-[13px] text-(--muted) group-hover:text-white">
                   Details <PiCaretRight aria-hidden="true" />
                 </span>
               </a>
             </li>
           ))}
-          <li className="flex flex-col justify-between gap-6 border-b border-white/[0.13] bg-[#2a4c9e] px-6 py-7">
+          <li className="flex flex-col justify-between gap-6 border-b border-white/[0.13] bg-(--accent) px-6 py-7">
             <span className="text-[18px] leading-6 text-white">Not sure where to start?</span>
             <Link href="/contact" className="inline-flex items-center gap-1.5 text-[14px] font-medium text-white underline underline-offset-4">
               Get a free audit <PiCaretRight aria-hidden="true" />
@@ -75,7 +75,7 @@ export default function ServicesPage() {
                 <h2 id={`${x.id}-title`} className={s.h2mid}>
                   {x.name}
                 </h2>
-                <p className="text-[20px] leading-7 text-[#a1a1aa]">
+                <p className="text-[20px] leading-7 text-(--muted)">
                   <b className="font-semibold text-white">{x.title}</b> {x.body}
                 </p>
                 <dl className={`${s.mono} mt-auto grid grid-cols-2 gap-4 border-t border-white/[0.13] pt-6 text-[13px]`}>
@@ -102,8 +102,8 @@ export default function ServicesPage() {
                     ))}
                   </ul>
                 </div>
-                <div className="border-b border-white/[0.13] bg-[#2a4c9e]/[0.12] px-6 py-10 lg:px-8">
-                  <p className={`${s.kicker} !text-[#7c97f0]`}>After</p>
+                <div className="border-b border-white/[0.13] bg-(--accent)/12 px-6 py-10 lg:px-8">
+                  <p className={`${s.kicker} !text-(--hi)`}>After</p>
                   <ul className="mt-5 flex flex-col gap-3 text-[15px] leading-6 text-white">
                     {x.after.map((a) => (
                       <li key={a}>{a}</li>
@@ -114,8 +114,8 @@ export default function ServicesPage() {
                   <p className={s.kicker}>What you get</p>
                   <ul className="mt-5 grid gap-x-8 gap-y-3 text-[15px] sm:grid-cols-2">
                     {x.deliverables.map((d) => (
-                      <li key={d} className="flex gap-3">
-                        <PiCheck aria-hidden="true" className="mt-1 size-4 shrink-0 text-[#7c97f0]" />
+                      <li key={d} data-spot className="flex gap-3">
+                        <PiCheck aria-hidden="true" className="mt-1 size-4 shrink-0 text-(--hi)" />
                         {d}
                       </li>
                     ))}
@@ -137,7 +137,7 @@ export default function ServicesPage() {
         </div>
         <ul className="grid lg:grid-cols-3">
           {MODELS.map((m) => (
-            <li key={m.name} className={`flex flex-col gap-4 border-b border-white/[0.13] px-8 py-10 lg:border-r lg:border-b-0 lg:last:border-r-0 ${m.accent ? "bg-[#2a4c9e]" : ""}`}>
+            <li key={m.name} className={`flex flex-col gap-4 border-b border-white/[0.13] px-8 py-10 lg:border-r lg:border-b-0 lg:last:border-r-0 ${m.accent ? "bg-(--accent)" : ""}`}>
               <p className="text-[28px] font-semibold tracking-[-0.02em]">{m.name}</p>
               <p className="text-[16px] leading-6 text-white/80">{m.fit}</p>
               <p className={`${s.mono} mt-auto pt-6 text-[13px] text-white/60`}>{m.terms}</p>

@@ -38,18 +38,18 @@ export default function ContactPage() {
                 <span className="text-white/35">{"//"}</span> Free data audit
               </p>
               <h1 id="contact-title" className={`${s.h1} ${s.rise} mt-5`}>
-                Let&rsquo;s look at your data <span className="text-[#7c97f0]">together</span>.
+                Let&rsquo;s look at your data <span className="text-(--hi)">together</span>.
               </h1>
-              <p className="mt-6 max-w-[40ch] text-[18px] leading-7 text-[#a1a1aa]">Tell us what&rsquo;s slowing you down. You&rsquo;ll get a written plan in 5 days, whether you hire us or not.</p>
+              <p className="mt-6 max-w-[40ch] text-[18px] leading-7 text-(--muted)">Tell us what&rsquo;s slowing you down. You&rsquo;ll get a written plan in 5 days, whether you hire us or not.</p>
             </div>
 
             <ol className="border-t border-white/[0.13]">
               {NEXT.map(([t, d], k) => (
                 <li key={t} className="flex gap-5 border-b border-white/[0.13] px-6 py-5 lg:px-10">
-                  <span className={`${s.mono} pt-0.5 text-[12px] text-[#7c97f0]`}>0{k + 1}</span>
+                  <span className={`${s.mono} pt-0.5 text-[12px] text-(--hi)`}>0{k + 1}</span>
                   <p className="text-[15px] leading-6">
                     <span className="block text-white">{t}</span>
-                    <span className="text-[#a1a1aa]">{d}</span>
+                    <span className="text-(--muted)">{d}</span>
                   </p>
                 </li>
               ))}
@@ -58,7 +58,7 @@ export default function ContactPage() {
             <div className="mt-auto flex flex-col gap-5 px-6 py-8 lg:px-10">
               <div className="flex items-center gap-3">
                 <PiEnvelopeSimple aria-hidden="true" className="size-5 text-white/60" />
-                <CopyText text={EMAIL} className={`${s.mono} flex items-center gap-2 text-[15px] text-white hover:text-[#7c97f0]`} />
+                <CopyText text={EMAIL} className={`${s.mono} flex items-center gap-2 text-[15px] text-white hover:text-(--hi)`} />
               </div>
               <p className={`${s.mono} text-[13px] text-white/55`}>
                 Studio time <span className="text-white"><Clock /></span> · replies Mon-Fri

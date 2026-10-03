@@ -1,20 +1,34 @@
 /*
- * VexraLab dark system, modelled 1:1 on commandcode.ai's design language:
- * Geist + Geist Mono, pure black, ruled 1152px column with corner squares,
- * 100px spacer bands, grain-dithered accent tiles. Accent: Blue Sail.
+ * VexraLab dark system. Structure follows commandcode.ai (ruled column, bands,
+ * corner squares, grain tiles); the identity is VexraLab's own palette:
+ *   ground  Dark Void, deepened     surfaces  Dark Void #151419
+ *   ink     Ballroom Belle, lit     lines     Belle at low alpha (warm, not grey)
+ *   accent  Deep Sea Green          highlight sea, lifted for text on dark
+ *   spark   Decor Yellow, used only for live signals
+ *   data    Blue Sail as the second series in charts and tiles
  */
 .page {
-  --bg: #000;
-  --fg: #fafafa;
-  --muted: #a1a1aa;
-  --dim: rgb(255 255 255 / 0.55);
-  --line: rgb(255 255 255 / 0.13);
-  --dash: rgb(255 255 255 / 0.16);
-  --accent: #2a4c9e;
-  --accent-hi: #3a5fc4;
-  --accent-text: #7c97f0;
-  --panel: #141a33;
-  --panel-2: #1c2447;
+  --bg: #0d0c10;
+  --surface: #151419;
+  --fg: #efeae3;
+  --muted: #a8a29b;
+  --dim: rgb(239 234 227 / 0.55);
+  --line: rgb(218 210 200 / 0.12);
+  --dash: rgb(218 210 200 / 0.15);
+  --accent: #0b6b72;
+  --accent-hi: #0f8089;
+  --hi: #6fd3c7;
+  --spark: #f6bb02;
+  --sail: #3a5fb8;
+  --ok: #8fe3cc;
+  --err: #ff8f86;
+  --panel: #0f1a1c;
+  --panel-2: #17292c;
+  --panel-3: #0c1517;
+  --panel-4: #091012;
+  /* Tailwind's white/black utilities follow the palette inside the site. */
+  --color-white: #efeae3;
+  --color-black: #0d0c10;
   background: var(--bg);
   color: var(--fg);
   font-family: var(--font-geist), Arial, Helvetica, sans-serif;
@@ -34,30 +48,30 @@
 }
 .bandCol::before { left: 0; }
 .bandCol::after { right: 0; }
-.sq { position: absolute; width: 18px; height: 18px; background: var(--bg); border: 1px solid rgb(255 255 255 / 0.3); z-index: 3; }
+.sq { position: absolute; width: 18px; height: 18px; background: var(--bg); border: 1px solid rgb(218 210 200 / 0.32); z-index: 3; }
 
 /* Type */
 .h1 { font-size: clamp(36px, 4.2vw, 52px); font-weight: 600; line-height: 1.05; letter-spacing: -0.045em; }
 .h2big { font-size: clamp(38px, 4.4vw, 56px); font-weight: 600; line-height: 1.04; letter-spacing: -0.035em; }
 .h2mid { font-size: 36px; font-weight: 600; line-height: 1.1; letter-spacing: -0.02em; }
 .slash { font-family: var(--font-geist-mono), ui-monospace, monospace; font-size: 24px; font-weight: 500; line-height: 32px; }
-.slash i { font-style: normal; color: rgb(255 255 255 / 0.35); margin-right: 10px; letter-spacing: -0.1em; }
+.slash i { font-style: normal; color: var(--hi); opacity: .55; margin-right: 10px; letter-spacing: -0.1em; }
 .kicker { font-family: var(--font-geist-mono), ui-monospace, monospace; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); }
 .tag {
   display: inline-block; font-family: var(--font-geist-mono), ui-monospace, monospace; font-size: 13px; font-weight: 500;
-  padding: 3px 8px; background: rgb(255 255 255 / 0.06); border: 1px solid var(--line); color: #e4e4e7;
+  padding: 3px 8px; background: rgb(111 211 199 / 0.07); border: 1px solid rgb(111 211 199 / 0.22); color: var(--hi);
 }
 .hl { background: rgb(255 255 255 / 0.12); padding: 1px 5px; font-weight: 600; color: var(--fg); }
 
 /* Buttons */
-.btnWhite { display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 20px; border-radius: 999px; background: var(--fg); color: #000; font-size: 16px; font-weight: 500; transition: background .2s; }
+.btnWhite { display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 20px; border-radius: 999px; background: var(--fg); color: var(--bg); font-size: 16px; font-weight: 500; transition: background .2s; }
 .btnWhite:hover { background: #fff; }
-.btnGhost { display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 20px; border-radius: 999px; border: 1px solid var(--line); color: #fff; font-size: 16px; font-weight: 500; transition: border-color .2s, background .2s; }
-.btnGhost:hover { border-color: rgb(255 255 255 / 0.35); background: rgb(255 255 255 / 0.03); }
+.btnGhost { display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 20px; border-radius: 999px; border: 1px solid var(--line); color: var(--fg); font-size: 16px; font-weight: 500; transition: border-color .2s, background .2s; }
+.btnGhost:hover { border-color: rgb(111 211 199 / 0.45); background: rgb(111 211 199 / 0.05); }
 .btnAccent { display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 48px; padding: 0 24px; border-radius: 999px; background: var(--accent); color: #fff; font-size: 16px; font-weight: 600; transition: background .2s; }
 .btnAccent:hover { background: var(--accent-hi); }
-.navLink { padding: 8px 16px; border-radius: 999px; font-size: 14px; font-weight: 500; color: rgb(255 255 255 / 0.66); transition: color .2s; }
-.navLink:hover { color: #fff; }
+.navLink { padding: 8px 16px; border-radius: 999px; font-size: 14px; font-weight: 500; color: rgb(239 234 227 / 0.66); transition: color .2s; }
+.navLink:hover { color: var(--fg); }
 
 /* Hero command pill */
 .pill { display: inline-flex; align-items: center; gap: 4px; padding: 4px; border-radius: 999px; border: 1px solid var(--line); }
@@ -67,8 +81,9 @@
 /* Grain tiles: accent and mono variants */
 .cellDash { border-right: 1px dashed var(--dash); border-bottom: 1px dashed var(--dash); }
 .tile, .tileMono { position: relative; overflow: hidden; }
-.tile { background: linear-gradient(90deg, rgb(42 76 158 / 0.05), rgb(58 95 196 / 0.75) 55%, rgb(92 124 230 / 0.95)); }
-.tileMono { background: linear-gradient(90deg, rgb(255 255 255 / 0.03), rgb(255 255 255 / 0.32) 50%, rgb(255 255 255 / 0.55)); }
+.tile { background: linear-gradient(90deg, rgb(11 107 114 / 0.04), rgb(15 128 137 / 0.8) 55%, rgb(111 211 199 / 0.95)); }
+.tile:nth-of-type(5n) { background: linear-gradient(90deg, rgb(58 95 184 / 0.04), rgb(58 95 184 / 0.75) 55%, rgb(120 150 230 / 0.9)); }
+.tileMono { background: linear-gradient(90deg, rgb(218 210 200 / 0.03), rgb(218 210 200 / 0.3) 50%, rgb(218 210 200 / 0.5)); }
 .tile::after, .tileMono::after {
   content: ""; position: absolute; inset: 0; mix-blend-mode: multiply;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.15' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1.7 -0.4'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
@@ -81,18 +96,18 @@
 @keyframes breathe { from { opacity: 1; } to { opacity: .7; } }
 
 /* Terminal-style panel */
-.term { background: var(--panel); border: 1px solid var(--panel-2); font-family: var(--font-geist-mono), ui-monospace, monospace; font-size: 14px; line-height: 22px; color: #e4e4e7; }
+.term { background: var(--panel); border: 1px solid var(--panel-2); font-family: var(--font-geist-mono), ui-monospace, monospace; font-size: 14px; line-height: 22px; color: var(--fg); }
 .termBar { display: flex; align-items: center; gap: 8px; padding: 12px 16px; border-bottom: 1px solid var(--panel-2); color: var(--muted); font-size: 13px; }
 .dot { width: 12px; height: 12px; border-radius: 999px; }
 .prompt { background: var(--panel-2); padding: 4px 8px; }
-.badge { font-size: 11px; font-weight: 600; padding: 1px 6px; background: #0e5e55; color: #b6f0e2; margin-right: 8px; }
-.badgeBad { font-size: 11px; font-weight: 600; padding: 1px 6px; border: 1px dashed rgb(255 255 255 / 0.25); color: var(--muted); }
+.badge { font-size: 11px; font-weight: 600; padding: 1px 6px; background: var(--accent); color: #dff7f2; margin-right: 8px; }
+.badgeBad { font-size: 11px; font-weight: 600; padding: 1px 6px; border: 1px dashed rgb(255 143 134 / 0.45); color: var(--err); }
 
 /* Feature rows */
-.row { display: flex; align-items: center; gap: 14px; height: 88px; padding: 0 40px; border-bottom: 1px solid var(--line); text-align: left; width: 100%; font-size: 20px; letter-spacing: -0.3px; color: rgb(255 255 255 / 0.55); transition: background .25s, color .25s; }
-.row:hover { color: rgb(255 255 255 / 0.85); }
-.rowOn { background: #141414; color: #fff; }
-.rowNum { font-family: var(--font-geist-mono), ui-monospace, monospace; font-size: 11px; color: rgb(255 255 255 / 0.35); padding-top: 4px; }
+.row { display: flex; align-items: center; gap: 14px; height: 88px; padding: 0 40px; border-bottom: 1px solid var(--line); text-align: left; width: 100%; font-size: 20px; letter-spacing: -0.3px; color: rgb(239 234 227 / 0.55); transition: background .35s, color .35s; position: relative; }
+.row:hover { color: rgb(239 234 227 / 0.9); }
+.rowOn { background: var(--surface); color: var(--fg); }
+.rowNum { font-family: var(--font-geist-mono), ui-monospace, monospace; font-size: 11px; color: rgb(239 234 227 / 0.35); padding-top: 4px; }
 
 /* FAQ */
 .faq summary { list-style: none; cursor: pointer; }
@@ -110,3 +125,120 @@
 .page .h1 { font-weight: 600; letter-spacing: -0.045em; }
 .page .h2big { font-weight: 600; letter-spacing: -0.035em; }
 .page .h2mid { font-weight: 600; letter-spacing: -0.02em; }
+
+/* =====================================================================
+ * Motion. Every rule is either gated by html[data-motion="on"] (set by
+ * <Motion/> only when motion is allowed) or a hover state. Only transform,
+ * opacity, clip-path and backgrounds animate.
+ * ===================================================================== */
+.page { interpolate-size: allow-keywords; }
+
+/* Reveal: section content lifts in; list items stagger by --i. */
+:global(html[data-motion="on"]) .page main section > *,
+:global(html[data-motion="on"]) .page main section li {
+  transition: opacity 900ms cubic-bezier(.16,1,.3,1), transform 900ms cubic-bezier(.16,1,.3,1);
+  transition-delay: calc(var(--i, 0) * 55ms);
+}
+:global(html[data-motion="on"]) .page main section:not([data-in]) > * { opacity: 0; transform: translateY(22px); }
+:global(html[data-motion="on"]) .page main section:not([data-in]) li { opacity: 0; transform: translateY(14px); }
+
+/* Bands: corner squares light up teal as the band arrives. */
+:global(html[data-motion="on"]) .band[data-in] .sq { animation: sqPing 1400ms cubic-bezier(.16,1,.3,1); }
+@keyframes sqPing {
+  0% { border-color: rgb(218 210 200 / .32); background: var(--bg); }
+  35% { border-color: var(--hi); background: rgb(111 211 199 / .22); transform: rotate(90deg); }
+  100% { border-color: rgb(218 210 200 / .32); background: var(--bg); transform: rotate(90deg); }
+}
+
+/* Spotlight: a soft teal glow under the pointer inside any [data-spot] cell. */
+.page [data-spot] { position: relative; isolation: isolate; }
+.page [data-spot]::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: 0;
+  background: radial-gradient(260px circle at var(--sx, 50%) var(--sy, 50%), rgb(111 211 199 / .09), transparent 70%);
+  transition: opacity .4s;
+}
+.page [data-spot]:hover::before { opacity: 1; }
+/* The hero grid gets a larger beam that lights the tiles. */
+.heroGlow::after {
+  content: ""; position: absolute; inset: 0; z-index: 5; pointer-events: none; opacity: 0; mix-blend-mode: screen;
+  background: radial-gradient(340px circle at var(--sx, 80%) var(--sy, 40%), rgb(111 211 199 / .22), transparent 65%);
+  transition: opacity .6s;
+}
+.heroGlow:hover::after { opacity: 1; }
+
+/* Tiles: a slow light sweep, offset per tile, so the grid feels alive. */
+.tile::before, .tileMono::before {
+  content: ""; position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(100deg, transparent 30%, rgb(255 255 255 / .22) 50%, transparent 70%);
+  transform: translateX(-120%);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .tile::before, .tileMono::before { animation: sweep 7s ease-in-out infinite; animation-delay: calc(var(--k, 0) * 430ms); }
+}
+@keyframes sweep { 0%, 70% { transform: translateX(-120%); } 100% { transform: translateX(120%); } }
+
+/* Buttons: accent buttons catch a sheen; any trailing icon nudges forward; press sinks. */
+.btnAccent, .pillBtn, .btnWhite, .btnGhost { position: relative; overflow: hidden; isolation: isolate; }
+.btnAccent::after, .pillBtn::after {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(110deg, transparent 35%, rgb(255 255 255 / .28) 50%, transparent 65%);
+  transform: translateX(-130%); transition: transform 0s;
+}
+.btnAccent:hover::after, .pillBtn:hover::after { transform: translateX(130%); transition: transform 900ms cubic-bezier(.16,1,.3,1); }
+.btnAccent svg, .pillBtn svg, .btnWhite svg, .btnGhost svg { transition: transform .45s cubic-bezier(.16,1,.3,1); }
+.btnAccent:hover svg, .pillBtn:hover svg, .btnWhite:hover svg { transform: translateX(3px); }
+.btnAccent:active, .pillBtn:active, .btnWhite:active, .btnGhost:active { transform: scale(.98); }
+
+/* Nav: a teal hairline grows from the centre under the hovered link. */
+.navLink { position: relative; }
+.navLink::after {
+  content: ""; position: absolute; left: 16px; right: 16px; bottom: 2px; height: 1px; background: var(--hi);
+  transform: scaleX(0); transition: transform .45s cubic-bezier(.16,1,.3,1);
+}
+.navLink:hover::after { transform: scaleX(1); }
+
+/* Reading progress along the bottom edge of the sticky nav (scroll-driven, no JS). */
+.progress { position: absolute; left: 0; right: 0; bottom: -1px; height: 1px; background: linear-gradient(90deg, var(--accent), var(--hi)); transform-origin: left; transform: scaleX(0); }
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .progress { animation: grow linear both; animation-timeline: scroll(root); }
+  }
+}
+@keyframes grow { to { transform: scaleX(1); } }
+
+/* Live signal: a Decor Yellow dot with a soft ping. */
+.live { position: relative; display: inline-block; width: 7px; height: 7px; border-radius: 999px; background: var(--spark); }
+@media (prefers-reduced-motion: no-preference) {
+  .live::after { content: ""; position: absolute; inset: 0; border-radius: 999px; background: var(--spark); animation: ping 2.2s cubic-bezier(0,0,.2,1) infinite; }
+}
+@keyframes ping { 75%, 100% { transform: scale(2.6); opacity: 0; } }
+
+/* Feature rows: a teal bar draws down the left edge of the active row. */
+.row::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--hi); transform: scaleY(0); transform-origin: top; transition: transform .5s cubic-bezier(.16,1,.3,1); }
+.rowOn::before { transform: scaleY(1); }
+.rowOn .rowNum { color: var(--hi); }
+
+/* Panel list items rise in one after another when a service is selected. */
+@media (prefers-reduced-motion: no-preference) {
+  .stagger > * { animation: rise 700ms cubic-bezier(.16,1,.3,1) both; animation-delay: calc(var(--i, 0) * 70ms + 80ms); }
+}
+
+/* Chart bars grow from the baseline when the dashboard enters view. */
+.bar { transform-origin: bottom; transition: transform 1100ms cubic-bezier(.16,1,.3,1); transition-delay: calc(var(--k, 0) * 60ms); }
+:global(html[data-motion="on"]) .page section:not([data-in]) .bar { transform: scaleY(0); }
+
+/* Process steps: the highlight walks through the steps on a loop. */
+@media (prefers-reduced-motion: no-preference) {
+  .cycle { animation: cycle 9s infinite; animation-delay: calc(var(--k) * 3s - 9s); }
+}
+@keyframes cycle { 0%, 30% { background: rgb(111 211 199 / .06); } 34%, 100% { background: transparent; } }
+
+/* Logo wall: each mark takes its own brand colour on hover. */
+.logo svg { transition: color .35s, transform .45s cubic-bezier(.16,1,.3,1); }
+.logo:hover svg { color: var(--brand); transform: translateY(-2px) scale(1.06); }
+
+/* FAQ answers open with a height transition where the browser supports it. */
+.faq::details-content { height: 0; overflow: clip; transition: height .45s cubic-bezier(.16,1,.3,1), content-visibility .45s allow-discrete; }
+.faq[open]::details-content { height: auto; }
+.faq summary { transition: color .25s; }
+.faq summary:hover { color: var(--hi); }

@@ -7,7 +7,7 @@ import { EMAIL, SERVICES, STUDIO_TZ } from "@/data/vx";
 import s from "./cc.module.css";
 
 const IDS = SERVICES.map((x) => x.id);
-const FIELD = "h-12 w-full border border-white/[0.13] bg-white/[0.03] px-4 text-[15px] text-white placeholder:text-white/35 outline-none transition-colors focus:border-[#7c97f0]";
+const FIELD = "h-12 w-full border border-white/[0.13] bg-white/[0.03] px-4 text-[15px] text-white placeholder:text-white/35 outline-none transition-colors focus:border-(--hi)";
 
 function Chip({ on, label, onClick }: { on: boolean; label: string; onClick: () => void }) {
   return (
@@ -15,7 +15,7 @@ function Chip({ on, label, onClick }: { on: boolean; label: string; onClick: () 
       type="button"
       aria-pressed={on}
       onClick={onClick}
-      className={`inline-flex min-h-10 items-center gap-2 rounded-full border px-4 text-[14px] transition-colors ${on ? "border-[#2a4c9e] bg-[#2a4c9e] text-white" : "border-white/[0.13] text-white/75 hover:border-white/35 hover:text-white"}`}
+      className={`inline-flex min-h-10 items-center gap-2 rounded-full border px-4 text-[14px] transition-colors ${on ? "border-(--accent) bg-(--accent) text-white" : "border-white/[0.13] text-white/75 hover:border-white/35 hover:text-white"}`}
     >
       {on && <PiCheck aria-hidden="true" className="size-3.5" />}
       {label}
@@ -63,9 +63,9 @@ export function ContactForm() {
   if (state === "sent") {
     return (
       <div className="flex min-h-[520px] flex-col items-start justify-center gap-5 px-6 py-16 lg:px-10" role="status">
-        <PiCheckCircle aria-hidden="true" className="size-10 text-[#7c97f0]" />
+        <PiCheckCircle aria-hidden="true" className="size-10 text-(--hi)" />
         <p className={s.h2mid}>Thanks, {b.name.split(" ")[0]}.</p>
-        <p className="max-w-[44ch] text-[18px] leading-7 text-[#a1a1aa]">
+        <p className="max-w-[44ch] text-[18px] leading-7 text-(--muted)">
           We&rsquo;ll reply by <b className="font-semibold text-white">{replyDay(new Date(), STUDIO_TZ)}</b> with a few questions and times for your free audit call.
         </p>
       </div>
@@ -74,7 +74,7 @@ export function ContactForm() {
 
   const err = (f: BriefField) =>
     errors[f] ? (
-      <p id={`e-${f}`} className="mt-2 text-[13px] text-[#ff8f8f]">
+      <p id={`e-${f}`} className="mt-2 text-[13px] text-(--err)">
         {errors[f]}
       </p>
     ) : null;
@@ -155,7 +155,7 @@ export function ContactForm() {
         </button>
       </div>
       {state === "failed" && (
-        <p role="alert" className="px-6 pb-8 text-[14px] text-[#ff8f8f] lg:px-10">
+        <p role="alert" className="px-6 pb-8 text-[14px] text-(--err) lg:px-10">
           That didn&rsquo;t go through. Your answers are still here; try again, or email {EMAIL}.
         </p>
       )}

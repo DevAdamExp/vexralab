@@ -29,11 +29,11 @@ export function Compare() {
         <div className="grid lg:grid-cols-2">
           <div className="border-b border-white/[0.13] px-6 py-7 lg:border-r">
             <p className="text-[18px] text-white">Without VexraLab</p>
-            <p className="text-[15px] text-[#a1a1aa]">Spreadsheets. The same Monday ritual.</p>
+            <p className="text-[15px] text-(--muted)">Spreadsheets. The same Monday ritual.</p>
           </div>
           <div className="border-b border-white/[0.13] px-6 py-7">
             <p className="text-[18px] text-white">With VexraLab</p>
-            <p className="text-[15px] text-[#a1a1aa]">One system. Every answer.</p>
+            <p className="text-[15px] text-(--muted)">One system. Every answer.</p>
           </div>
 
           <div className={`${s.mono} flex flex-col gap-5 px-6 py-10 text-[14px] text-white/80 lg:border-r lg:border-white/[0.13]`}>
@@ -57,7 +57,7 @@ export function Compare() {
                 {line}
               </p>
             ))}
-            <p className="text-[#7ee2c8]">✓ Done. In ten seconds.</p>
+            <p className="text-(--ok)">✓ Done. In ten seconds.</p>
           </div>
         </div>
       </section>
@@ -109,7 +109,7 @@ export function Pricing() {
             </ul>
           </div>
 
-          <div className="flex flex-col justify-end gap-6 bg-[#2a4c9e] px-8 py-10 text-white">
+          <div className="flex flex-col justify-end gap-6 bg-(--accent) px-8 py-10 text-white">
             <p className={`${s.mono} text-[64px] leading-none font-medium tracking-[-0.04em] text-white/90`} aria-hidden="true">
               30:00
             </p>
@@ -130,12 +130,12 @@ export function Pricing() {
           <div className="flex flex-col border-white/[0.13] lg:border-l">
             <div className="flex flex-col justify-center gap-2 border-b border-white/[0.13] px-8 py-14 lg:min-h-[227px]">
               <p className="text-[36px] leading-tight font-medium tracking-[-0.03em]">Built to scale.</p>
-              <Link href="/contact" className="inline-flex items-center gap-2 text-[14px] text-[#a1a1aa] hover:text-white">
+              <Link href="/contact" className="inline-flex items-center gap-2 text-[14px] text-(--muted) hover:text-white">
                 Ask for a quote <PiCaretRight aria-hidden="true" />
               </Link>
             </div>
             {PLANS.map(([name, price]) => (
-              <div key={name} className="flex h-[81px] items-center justify-between border-b border-white/[0.13] px-8 last:border-b-0">
+              <div key={name} data-spot className="flex h-[81px] items-center justify-between border-b border-white/[0.13] px-8 last:border-b-0">
                 <span className="font-semibold">{name}</span>
                 <span className="text-[14px] text-white/70">{price}</span>
               </div>
@@ -191,12 +191,12 @@ export function Community() {
               <p className={s.kicker}>{c.kicker}</p>
               <p className="max-w-[46ch] text-[15px] leading-6 text-white/80">{c.text}</p>
               <p className="mt-6 flex items-center gap-3 text-[14px]">
-                <span aria-hidden="true" className="grid size-9 place-items-center bg-[#2a4c9e] text-[12px] font-semibold">
+                <span aria-hidden="true" className="grid size-9 place-items-center bg-(--accent) text-[12px] font-semibold">
                   VL
                 </span>
                 <span>
                   <span className="block font-semibold text-white">{c.who}</span>
-                  <span className="text-[12px] text-[#a1a1aa]">Illustrative scope</span>
+                  <span className="text-[12px] text-(--muted)">Illustrative scope</span>
                 </span>
               </p>
             </article>
@@ -213,7 +213,7 @@ const T_B: [number, number, number][] = [[1, 1, 1], [2, 2, 1], [1, 1, 2], [2, 2,
 
 function Stmt({ b, rest }: { b: string; rest: string }) {
   return (
-    <div className="flex items-center px-8 py-16 text-[22px] leading-[30px] text-[#a1a1aa] lg:px-10">
+    <div data-spot className="flex items-center px-8 py-16 text-[22px] leading-[30px] text-(--muted) lg:px-10">
       <p>
         <b className="font-semibold text-white">{b}</b> {rest}
       </p>
@@ -243,12 +243,12 @@ export function Benefits() {
           <div className="flex flex-col items-center justify-center gap-6 px-6 py-16 text-center">
             <p className="text-[28px] leading-[34px] font-semibold tracking-[-0.02em]">
               Start growing.
-              <span className="block font-normal text-[#a1a1aa]">With your data.</span>
+              <span className="block font-normal text-(--muted)">With your data.</span>
             </p>
             <Link href="/contact" className={`${s.btnAccent} w-[220px] justify-between`}>
               Book a call <PiCaretRight aria-hidden="true" />
             </Link>
-            <p className="text-[12px] text-[#a1a1aa]">Audit. Plan. Build.</p>
+            <p className="text-[12px] text-(--muted)">Audit. Plan. Build.</p>
           </div>
           <div className="hidden lg:block"><Blocks t={T_A} /></div>
           <Stmt b="Scale without chaos." rest="Systems that work at 5 users and at 500." />
@@ -274,7 +274,7 @@ export function Faq() {
               Questions,
               <span className="block">answered.</span>
             </h2>
-            <p className="mt-6 max-w-[34ch] text-[16px] leading-[22px] text-[#a1a1aa]">
+            <p className="mt-6 max-w-[34ch] text-[16px] leading-[22px] text-(--muted)">
               Everything that usually comes up before a first call. Still curious?{" "}
               <Link href="/contact" className="underline underline-offset-4 hover:text-white">
                 Ask us directly
@@ -289,7 +289,7 @@ export function Faq() {
                   {q}
                   <PiCaretDown aria-hidden="true" className={`${s.chev} size-4 shrink-0`} />
                 </summary>
-                <p className="px-8 pb-8 text-[15px] leading-6 text-[#a1a1aa]">{a}</p>
+                <p className="px-8 pb-8 text-[15px] leading-6 text-(--muted)">{a}</p>
               </details>
             ))}
           </div>
@@ -313,7 +313,7 @@ export function FinalCta() {
         <div className="relative z-10 mx-auto flex max-w-[640px] flex-col items-center gap-8 bg-black px-6 py-20 text-center lg:my-16 lg:py-12">
           <h2 id="cta-title" className="text-[clamp(32px,3.8vw,48px)] leading-[1.1] font-semibold tracking-[-0.04em]">
             <span className="mr-2 text-[0.8em] text-white/30">{"//"}</span>Take control of your data.
-            <span className="mt-1 block font-medium text-[#a1a1aa]">Book a 30-minute call. Get a written plan. Start growing.</span>
+            <span className="mt-1 block font-medium text-(--muted)">Book a 30-minute call. Get a written plan. Start growing.</span>
           </h2>
           <div className="flex flex-wrap justify-center gap-4">
             <Link href="/contact" className={s.btnAccent}>
@@ -358,7 +358,7 @@ export function Footer() {
         <div className="relative flex min-h-[146px] items-end justify-center overflow-hidden border-b border-white/[0.13]">
           <Tiles cols={6} rows={2} rowH={73} mono tiles={[[1, 2, 1], [4, 3, 1], [2, 3, 2], [6, 1, 2]]} className="absolute inset-0 grid opacity-50" />
           <p className={`${s.mono} relative pb-3 text-[44px] leading-none font-semibold tracking-[-0.05em]`}>
-            vexra<span className="text-[#7c97f0]">/</span>lab
+            vexra<span className="text-(--hi)">/</span>lab
           </p>
         </div>
         <ul className="flex border-b border-white/[0.13] lg:flex-col lg:border-l">
@@ -377,7 +377,7 @@ export function Footer() {
           })}
         </ul>
       </div>
-      <div className="flex flex-wrap items-center justify-between gap-3 px-6 py-6 text-[13px] text-[#a1a1aa]">
+      <div className="flex flex-wrap items-center justify-between gap-3 px-6 py-6 text-[13px] text-(--muted)">
         <span>© {new Date().getFullYear()} VexraLab. Data, CRM and ERP partner.</span>
         <a href={`mailto:${EMAIL}`} className="hover:text-white">
           {EMAIL}
