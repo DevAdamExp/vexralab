@@ -42,7 +42,7 @@ export function Shelf() {
                 <p className="text-[18px] leading-7 text-(--muted)">
                   <b className="font-semibold text-white">{x.title}</b> {x.body}
                 </p>
-                <dl className={`${s.mono} mt-2 grid grid-cols-2 gap-4 border-t border-white/[0.13] pt-5 text-[13px]`}>
+                <dl className={`${s.mono} mt-2 grid grid-cols-2 gap-4 border-t border-(--line) pt-5 text-[13px]`}>
                   <div>
                     <dt className="text-white/60">Timeline</dt>
                     <dd className="mt-1">{x.timeline}</dd>
@@ -57,7 +57,7 @@ export function Shelf() {
                 </Link>
               </div>
 
-              <div className="flex flex-col gap-6 border-white/[0.13] max-md:border-t max-md:pt-6 md:border-l md:pl-8">
+              <div className="flex flex-col gap-6 border-(--line) max-md:border-t max-md:pt-6 md:border-l md:pl-8">
                 <div>
                   <p className={`${s.kicker} ${s.kickerCoral}`}>Before</p>
                   <ul className="mt-3 flex flex-col gap-2 text-[15px] leading-6 text-white/60">
@@ -84,7 +84,7 @@ export function Shelf() {
                   <p className={s.kicker}>What you get</p>
                   <ul className="mt-3 flex flex-wrap gap-2">
                     {x.deliverables.map((d) => (
-                      <li key={d} className="rounded-full border border-white/[0.13] px-3 py-1 text-[13px] text-white/80">
+                      <li key={d} className="rounded-full border border-(--line) px-3 py-1 text-[13px] text-white/80">
                         {d}
                       </li>
                     ))}

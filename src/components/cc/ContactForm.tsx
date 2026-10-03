@@ -7,7 +7,7 @@ import { EMAIL, SERVICES, STUDIO_TZ } from "@/data/vx";
 import s from "./cc.module.css";
 
 const IDS = SERVICES.map((x) => x.id);
-const FIELD = "h-12 w-full rounded-lg border border-white/[0.12] bg-white/[0.025] px-4 text-[15px] text-white placeholder:text-white/30 outline-none transition-[border-color,background-color,box-shadow] hover:border-white/25 focus:border-(--hi) focus:bg-white/[0.04] focus:shadow-[0_0_0_4px_rgb(111_211_199/0.12)]";
+const FIELD = "h-12 w-full rounded-lg border border-(--line) bg-white/[0.025] px-4 text-[15px] text-white placeholder:text-white/30 outline-none transition-[border-color,background-color,box-shadow] hover:border-white/25 focus:border-(--hi) focus:bg-white/[0.04] focus:shadow-[0_0_0_4px_rgb(111_211_199/0.12)]";
 
 function Chip({ on, label, onClick }: { on: boolean; label: string; onClick: () => void }) {
   return (
@@ -15,7 +15,7 @@ function Chip({ on, label, onClick }: { on: boolean; label: string; onClick: () 
       type="button"
       aria-pressed={on}
       onClick={onClick}
-      className={`inline-flex min-h-10 items-center gap-2 rounded-full border px-4 text-[14px] transition-colors ${on ? "border-(--accent) bg-(--accent) text-white" : "border-white/[0.13] text-white/75 hover:border-white/35 hover:text-white"}`}
+      className={`inline-flex min-h-10 items-center gap-2 rounded-full border px-4 text-[14px] transition-colors ${on ? "border-(--accent) bg-(--accent) text-white" : "border-(--line) text-white/75 hover:border-white/35 hover:text-white"}`}
     >
       {on && <PiCheck aria-hidden="true" className="size-3.5" />}
       {label}
@@ -82,7 +82,7 @@ export function ContactForm() {
 
   return (
     <form ref={form} onSubmit={submit} noValidate className="flex flex-col">
-      <fieldset className="grid gap-5 border-b border-white/[0.13] px-6 py-10 sm:grid-cols-2 lg:px-10">
+      <fieldset className="grid gap-5 border-b border-(--line) px-6 py-10 sm:grid-cols-2 lg:px-10">
         <legend className="sr-only">About you</legend>
         <p aria-hidden="true" className={`${s.kicker} mb-6 sm:col-span-2`}>01 · About you</p>
         {(
@@ -105,7 +105,7 @@ export function ContactForm() {
         <input type="text" name="nickname" tabIndex={-1} autoComplete="off" aria-hidden="true" className="absolute -left-[9999px] h-0 w-0" />
       </fieldset>
 
-      <fieldset className="border-b border-white/[0.13] px-6 py-10 lg:px-10">
+      <fieldset className="border-b border-(--line) px-6 py-10 lg:px-10">
         <legend className="sr-only">The challenge</legend>
         <p aria-hidden="true" className={`${s.kicker} mb-6 sm:col-span-2`}>02 · The challenge</p>
         <div className="flex flex-wrap gap-2.5">
@@ -120,7 +120,7 @@ export function ContactForm() {
         {err("words")}
       </fieldset>
 
-      <fieldset className="border-b border-white/[0.13] px-6 py-10 lg:px-10">
+      <fieldset className="border-b border-(--line) px-6 py-10 lg:px-10">
         <legend className="sr-only">What you need</legend>
         <p aria-hidden="true" className={`${s.kicker} mb-6 sm:col-span-2`}>03 · What you need</p>
         <div className="flex flex-wrap gap-2.5">

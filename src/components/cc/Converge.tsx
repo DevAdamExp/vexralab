@@ -70,7 +70,7 @@ export function Converge() {
             <div className={s.shot}>
               <div className={s.win}>
                 <div className={s.winChrome} aria-hidden="true">
-                  <div className="flex items-center gap-2 border-b border-white/[0.08] px-4 py-2.5">
+                  <div className="flex items-center gap-2 border-b border-(--line-soft) px-4 py-2.5">
                     <span className="size-2.5 rounded-full bg-white/15" />
                     <span className="size-2.5 rounded-full bg-white/15" />
                     <span className="size-2.5 rounded-full bg-white/15" />
@@ -88,7 +88,7 @@ export function Converge() {
                         <Icon aria-hidden="true" className="size-3.5" /> {n}
                       </p>
                     ))}
-                    <div className="mt-auto rounded-md border border-white/[0.08] p-2.5 text-[10px] text-white/55">
+                    <div className="mt-auto rounded-md border border-(--line-soft) p-2.5 text-[10px] text-white/55">
                       <p className="mb-1.5 text-white/80">9 sources connected</p>
                       <div className="flex flex-wrap gap-1.5">
                         {SLOTS.map(({ Icon, key, brand }) => (
@@ -99,12 +99,12 @@ export function Converge() {
                   </aside>
 
                   <div className="flex min-w-0 flex-col">
-                    <div className={`${s.appTop} flex items-center gap-3 border-b border-white/[0.08] px-4 py-2.5`} aria-hidden="true">
+                    <div className={`${s.appTop} flex items-center gap-3 border-b border-(--line-soft) px-4 py-2.5`} aria-hidden="true">
                       <p className="text-[13px] font-semibold">Overview</p>
                       <span className="flex flex-1 items-center gap-2 rounded-md bg-white/[0.04] px-2.5 py-1 text-[11px] text-white/40 max-sm:hidden">
                         <PiMagnifyingGlass className="size-3" /> Search customers, orders, SKUs
                       </span>
-                      <span className="ml-auto flex items-center gap-1.5 rounded-md border border-white/[0.08] px-2 py-1 text-[11px] text-white/70">
+                      <span className="ml-auto flex items-center gap-1.5 rounded-md border border-(--line-soft) px-2 py-1 text-[11px] text-white/70">
                         <PiCalendarBlank className="size-3" /> This month
                       </span>
                       <PiBell className="size-3.5 text-white/60" />

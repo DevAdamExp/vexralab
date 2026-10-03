@@ -34,7 +34,7 @@ export function PageHead({ kicker, title, grey, lede, action, art }: { kicker: s
         <div className="relative lg:min-h-[600px]">
           <Tiles cols={10} rows={8} rowH={75} tiles={art ? [] : TILES} className="pointer-events-none absolute inset-0 hidden lg:grid" />
           {art && <div aria-hidden="true" className="absolute top-[75px] right-0 hidden h-[450px] w-[42%] place-items-center lg:grid">{art}</div>}
-          <div className="relative z-10 flex flex-col justify-center px-6 py-20 lg:absolute lg:top-[75px] lg:left-0 lg:min-h-[450px] lg:w-[58%] lg:border-y lg:border-r lg:border-white/[0.13] lg:bg-black lg:px-10 lg:py-12">
+          <div className="relative z-10 flex flex-col justify-center px-6 py-20 lg:absolute lg:top-[75px] lg:left-0 lg:min-h-[450px] lg:w-[58%] lg:border-y lg:border-r lg:border-(--line) lg:bg-black lg:px-10 lg:py-12">
             <p className={s.kicker}>
               <span className="text-white/50">{"//"}</span> {kicker}
             </p>

@@ -31,7 +31,7 @@ export function ServicesHero() {
     <>
       <section className={s.col} aria-labelledby="page-title">
         <div className="grid lg:grid-cols-[11fr_13fr]">
-          <div className="flex flex-col gap-8 border-b border-white/[0.13] px-6 py-14 lg:border-r lg:border-b-0 lg:px-12">
+          <div className="flex flex-col gap-8 border-b border-(--line) px-6 py-14 lg:border-r lg:border-b-0 lg:px-12">
             <div>
               <p className={s.kicker}>Services</p>
               <h1 id="page-title" className={`${s.h1} ${s.rise} mt-5`}>
@@ -81,7 +81,7 @@ export function ServicesHero() {
               <p className={`${s.rise} max-w-[52ch] text-[18px] leading-7 text-(--muted)`}>
                 <b className="font-semibold text-white">{x.title}</b> {x.body}
               </p>
-              <div className={`${s.rise} grid gap-px overflow-hidden rounded-xl border border-white/[0.08] bg-white/[0.08] sm:grid-cols-3`}>
+              <div className={`${s.rise} grid gap-px overflow-hidden rounded-xl border border-(--line-soft) bg-white/[0.08] sm:grid-cols-3`}>
                 {x.after.map((a, i) => (
                   <div key={a} className="flex flex-col gap-2 bg-(--bg) px-4 py-4">
                     <span className={`${s.mono} text-[11px] text-(--hi)`}>0{i + 1}</span>
@@ -91,7 +91,7 @@ export function ServicesHero() {
               </div>
             </div>
 
-            <div className="flex flex-wrap items-center justify-between gap-4 border-t border-white/[0.1] pt-6">
+            <div className="flex flex-wrap items-center justify-between gap-4 border-t border-(--line) pt-6">
               <p className={`${s.mono} text-[13px] text-white/60`}>
                 {x.timeline} · {x.price}
               </p>

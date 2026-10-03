@@ -13,7 +13,7 @@ export { EMAIL };
 
 export function Nav() {
   return (
-    <header className="sticky top-0 z-40 border-b border-white/[0.13] bg-black/85 backdrop-blur-md">
+    <header className="sticky top-0 z-40 border-b border-(--line) bg-black/85 backdrop-blur-md">
       <span aria-hidden="true" className={s.progress} />
       <div className="mx-auto flex h-[84px] max-w-[1200px] items-center justify-between px-6">
         <Link href="/" aria-label="VexraLab home">
@@ -35,13 +35,13 @@ export function Nav() {
           </Link>
           {/* Phone menu: native disclosure, no script needed. */}
           <details className="group relative lg:hidden">
-            <summary aria-label="Menu" className="grid size-9 cursor-pointer list-none place-items-center rounded-full border border-white/[0.13] [&::-webkit-details-marker]:hidden">
+            <summary aria-label="Menu" className="grid size-9 cursor-pointer list-none place-items-center rounded-full border border-(--line) [&::-webkit-details-marker]:hidden">
               <span aria-hidden="true" className="flex w-4 flex-col gap-1">
                 <i className="h-px bg-white transition-transform group-open:translate-y-[2.5px] group-open:rotate-45" />
                 <i className="h-px bg-white transition-transform group-open:-translate-y-[2.5px] group-open:-rotate-45" />
               </span>
             </summary>
-            <nav aria-label="Mobile" className="absolute top-12 right-0 flex w-56 flex-col border border-white/[0.13] bg-black p-2">
+            <nav aria-label="Mobile" className="absolute top-12 right-0 flex w-56 flex-col border border-(--line) bg-black p-2">
               {[...NAV, { label: "Contact", href: "/contact" }].map((n) => (
                 <Link key={n.href} href={n.href} className="px-3 py-3 text-[15px] text-white/80 hover:bg-white/5 hover:text-white">
                   {n.label}
@@ -64,7 +64,7 @@ const HERO_TILES: [number, number, number][] = [
 export function Hero() {
   return (
     <section className={s.col} aria-labelledby="hero-title">
-      <div className="flex items-center justify-between gap-4 border-b border-white/[0.13] px-4 py-3 text-[14px] sm:px-5">
+      <div className="flex items-center justify-between gap-4 border-b border-(--line) px-4 py-3 text-[14px] sm:px-5">
         <Link href="/contact" className="flex items-center gap-2.5 underline decoration-white/30 underline-offset-4 hover:decoration-white">
           <span aria-hidden="true" className={s.live} />
           Free 30-minute data audit. A written plan in 5 days.
@@ -80,7 +80,7 @@ export function Hero() {
         <Tiles cols={10} rows={8} rowH={75} tiles={HERO_TILES} className="pointer-events-none absolute inset-0 hidden lg:grid" />
         <DataFlow className="hidden lg:block" />
 
-        <div className="relative z-10 flex flex-col justify-center px-5 py-20 sm:px-6 lg:absolute lg:top-[75px] lg:left-0 lg:h-[450px] lg:w-[54%] lg:border-y lg:border-r lg:border-white/[0.13] lg:bg-black lg:py-0">
+        <div className="relative z-10 flex flex-col justify-center px-5 py-20 sm:px-6 lg:absolute lg:top-[75px] lg:left-0 lg:h-[450px] lg:w-[54%] lg:border-y lg:border-r lg:border-(--line) lg:bg-black lg:py-0">
           <div>
             <h1 id="hero-title" className={`${s.h1} ${s.rise} max-w-[520px]`}>
               Run your business on data you can <span className={s.sheen}>trust</span>.
@@ -94,7 +94,7 @@ export function Hero() {
                 </Link>
                 <CopyText text={EMAIL} className={`${s.mono} flex h-[34px] items-center gap-2 px-3 text-[14px] text-(--muted) hover:text-white`} />
               </div>
-              <a href="#platform" className="inline-flex h-11 items-center gap-2.5 rounded-full border border-white/[0.13] px-4 text-[14px] font-medium transition-colors hover:border-white/35">
+              <a href="#platform" className="inline-flex h-11 items-center gap-2.5 rounded-full border border-(--line) px-4 text-[14px] font-medium transition-colors hover:border-white/35">
                 <span aria-hidden="true" className="size-2 rounded-full bg-(--hi)" />
                 See a sample dashboard
               </a>
@@ -102,9 +102,6 @@ export function Hero() {
 
             <p className={`${s.rise} mt-9 text-[18px] leading-7 text-(--muted)`} style={{ animationDelay: "200ms" }}>
               CRM, ERP and reporting, <span className="text-white">set up around how your team already works</span>.
-            </p>
-            <p className={`${s.rise} mt-2 text-[14px] leading-5 text-white/55`} style={{ animationDelay: "240ms" }}>
-              Start with a <a href="/contact" className="font-semibold text-(--hi)">free audit</a>. No long contracts.
             </p>
           </div>
         </div>
@@ -148,14 +145,14 @@ export function Logos() {
     <>
       <Band />
       <section className={s.col} aria-label="Integrations and commitments">
-        <div className="grid border-b border-white/[0.13] lg:grid-cols-[5fr_7fr]">
-          <div className="flex flex-col justify-center gap-6 px-6 py-14 lg:border-r lg:border-white/[0.13] lg:px-12">
+        <div className="grid border-b border-(--line) lg:grid-cols-[5fr_7fr]">
+          <div className="flex flex-col justify-center gap-6 px-6 py-14 lg:border-r lg:border-(--line) lg:px-12">
             <p className={s.kicker}>Integrations</p>
             <h2 className="text-[clamp(30px,3.2vw,40px)] leading-[1.08] font-semibold tracking-[-0.035em]">
               Works with the tools <span className="text-white/55">you already run.</span>
             </h2>
             <p className="max-w-[40ch] text-[17px] leading-7 text-(--muted)">No rip and replace. We connect what you have, then add only what&rsquo;s missing.</p>
-            <dl className="mt-2 grid grid-cols-[auto_1fr] gap-x-6 gap-y-3 border-t border-white/[0.1] pt-6 text-[14px]">
+            <dl className="mt-2 grid grid-cols-[auto_1fr] gap-x-6 gap-y-3 border-t border-(--line) pt-6 text-[14px]">
               {GROUPS.map(([k, v]) => (
                 <div key={k} className="contents">
                   <dt className={`${s.mono} text-[12px] text-white/45`}>{k}</dt>
@@ -191,7 +188,7 @@ export function Logos() {
             {/* Phones: the same platforms as a tidy grid. */}
             <ul className="grid w-full grid-cols-2 gap-2 sm:grid-cols-3 lg:hidden">
               {LOGOS.map(({ Icon, name, brand }) => (
-                <li key={name} className="flex items-center gap-2.5 rounded-lg border border-white/[0.1] px-3 py-3 text-[14px]">
+                <li key={name} className="flex items-center gap-2.5 rounded-lg border border-(--line) px-3 py-3 text-[14px]">
                   <Icon aria-hidden="true" className="size-4" style={{ color: brand }} />
                   {name}
                 </li>
@@ -202,7 +199,7 @@ export function Logos() {
         </div>
         <ul aria-label="What we commit to" className="grid sm:grid-cols-2 lg:grid-cols-4">
           {PROMISES.map(({ Icon, title, text }) => (
-            <li key={title} data-spot className="flex gap-4 border-r border-b border-white/[0.13] px-6 py-7 last:border-r-0 lg:border-b-0">
+            <li key={title} data-spot className="flex gap-4 border-r border-b border-(--line) px-6 py-7 last:border-r-0 lg:border-b-0">
               <Icon aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-(--hi)" />
               <p className="text-[14px] leading-5">
                 <span className="block font-semibold text-white">{title}</span>

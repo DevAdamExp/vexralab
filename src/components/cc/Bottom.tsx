@@ -18,13 +18,13 @@ export function Compare() {
   return (
     <>
       <section className={s.col} aria-labelledby="compare-title">
-        <div className="border-b border-white/[0.13] px-6 py-12 lg:px-12">
+        <div className="border-b border-(--line) px-6 py-12 lg:px-12">
           <Slash>
             <span id="compare-title">“what were sales last month?”</span>
           </Slash>
         </div>
         <div className="grid lg:grid-cols-2">
-          <div className="border-b border-white/[0.13] px-6 py-10 lg:border-r lg:border-b-0 lg:px-12">
+          <div className="border-b border-(--line) px-6 py-10 lg:border-r lg:border-b-0 lg:px-12">
             <p className={`${s.kicker} ${s.kickerCoral}`}>Without VexraLab</p>
             <ol className="mt-8 flex flex-col gap-6">
               {bad.map(([step, cost], k) => (
@@ -36,7 +36,7 @@ export function Compare() {
                 </li>
               ))}
             </ol>
-            <p className="mt-10 border-t border-white/[0.08] pt-6 text-[15px] text-white/55">
+            <p className="mt-10 border-t border-(--line-soft) pt-6 text-[15px] text-white/55">
               Answer ready <b className="font-semibold text-white">by Wednesday</b>.
             </p>
           </div>
@@ -50,7 +50,7 @@ export function Compare() {
                 </li>
               ))}
             </ul>
-            <p className="mt-10 border-t border-white/[0.08] pt-6 text-[15px] text-white/55">
+            <p className="mt-10 border-t border-(--line-soft) pt-6 text-[15px] text-white/55">
               Answer ready <b className="font-semibold text-(--hi)">in ten seconds</b>.
             </p>
           </div>
@@ -75,7 +75,7 @@ export function Pricing() {
   return (
     <>
       <section id="pricing" className={`${s.col} scroll-mt-24`} aria-labelledby="pricing-title">
-        <div className="border-b border-white/[0.13] px-6 py-12 lg:px-12">
+        <div className="border-b border-(--line) px-6 py-12 lg:px-12">
           <h2 id="pricing-title" className={s.h2big}>
             Start small.
             <span className="block text-white/55">Grow with us.</span>
@@ -95,7 +95,7 @@ export function Pricing() {
           </div>
           <ul className="flex flex-col">
             {PLANS.map(([name, price, fit]) => (
-              <li key={name} data-spot className="grid grid-cols-[1fr_auto] items-center gap-x-6 gap-y-1 border-b border-white/[0.13] px-8 py-6 last:border-b-0">
+              <li key={name} data-spot className="grid grid-cols-[1fr_auto] items-center gap-x-6 gap-y-1 border-b border-(--line) px-8 py-6 last:border-b-0">
                 <span className="text-[18px] font-semibold">{name}</span>
                 <span className={`${s.mono} ${s.tnum} row-span-2 text-[15px] text-white/80`}>{price}</span>
                 <span className="text-[14px] text-white/55">{fit}</span>
@@ -103,7 +103,7 @@ export function Pricing() {
             ))}
           </ul>
         </div>
-        <div className="border-t border-white/[0.13] px-8 py-8 lg:px-10">
+        <div className="border-t border-(--line) px-8 py-8 lg:px-10">
           <p className={s.kicker}>Included in every plan</p>
           <ul className="mt-5 grid gap-x-8 gap-y-3 sm:grid-cols-2 lg:grid-cols-3">
             {INCLUDED.map((x) => (
@@ -131,7 +131,7 @@ export function Community() {
   return (
     <>
       <section className={s.col} aria-labelledby="community-title">
-        <div className="flex flex-col gap-6 border-b border-white/[0.13] px-6 py-12 lg:flex-row lg:items-end lg:justify-between lg:px-12">
+        <div className="flex flex-col gap-6 border-b border-(--line) px-6 py-12 lg:flex-row lg:items-end lg:justify-between lg:px-12">
           <h2 id="community-title" className={s.h2big}>
             Made for teams that
             <span className="block text-white/55">outgrew spreadsheets.</span>
@@ -142,7 +142,7 @@ export function Community() {
         </div>
         <ul className="grid lg:grid-cols-3">
           {CASES.map((c) => (
-            <li key={c.kicker} data-spot data-glyph-host className="flex flex-col gap-6 border-b border-white/[0.13] px-8 py-10 lg:border-r lg:border-b-0 lg:last:border-r-0">
+            <li key={c.kicker} data-spot data-glyph-host className="flex flex-col gap-6 border-b border-(--line) px-8 py-10 lg:border-r lg:border-b-0 lg:last:border-r-0">
               <Glyph id={c.glyph} size={6} />
               <p className={s.kicker}>{c.kicker}</p>
               <p className="text-[16px] leading-7 text-white/80">{c.text}</p>
@@ -168,14 +168,14 @@ export function Benefits() {
   return (
     <>
       <section className={s.col} aria-labelledby="benefits-title">
-        <div className="border-b border-white/[0.13] px-6 py-12 lg:px-12">
+        <div className="border-b border-(--line) px-6 py-12 lg:px-12">
           <Slash>
             <span id="benefits-title">what changes for you.</span>
           </Slash>
         </div>
         <ul className="grid sm:grid-cols-2 lg:grid-cols-4">
           {BENEFITS.map(([b, t], k) => (
-            <li key={b} data-spot className="flex flex-col gap-4 border-r border-b border-white/[0.13] px-8 py-10 last:border-r-0 lg:border-b-0">
+            <li key={b} data-spot className="flex flex-col gap-4 border-r border-b border-(--line) px-8 py-10 last:border-r-0 lg:border-b-0">
               <span className={`${s.mono} text-[12px] text-(--hi)`}>0{k + 1}</span>
               <p className="text-[20px] leading-tight font-semibold tracking-[-0.02em]">{b}</p>
               <p className="text-[15px] leading-6 text-white/65">{t}</p>
@@ -193,7 +193,7 @@ export function Faq() {
     <>
       <section id="faq" className={`${s.col} scroll-mt-24`} aria-labelledby="faq-title">
         <div className="grid lg:grid-cols-[5fr_7fr]">
-          <div className="border-b border-white/[0.13] px-6 py-14 lg:border-r lg:border-b-0 lg:px-12">
+          <div className="border-b border-(--line) px-6 py-14 lg:border-r lg:border-b-0 lg:px-12">
             <div className="lg:sticky lg:top-28">
               <p className={s.kicker}>FAQ</p>
               <h2 id="faq-title" className={`${s.h2mid} mt-4`}>
@@ -201,7 +201,7 @@ export function Faq() {
                 <span className="block text-white/55">answered.</span>
               </h2>
               <p className="mt-5 max-w-[34ch] text-[16px] leading-6 text-(--muted)">Everything that usually comes up before a first call.</p>
-              <div className="mt-8 rounded-xl border border-white/[0.1] bg-white/[0.02] p-5">
+              <div className="mt-8 rounded-xl border border-(--line) bg-white/[0.02] p-5">
                 <p className="text-[15px] font-medium">Still have a question?</p>
                 <p className="mt-1 text-[14px] text-(--muted)">A real person replies within one working day.</p>
                 <Link href="/contact" className="mt-4 inline-flex items-center gap-2 text-[14px] text-(--hi) hover:underline">
@@ -212,7 +212,7 @@ export function Faq() {
           </div>
           <div className="px-2 py-4 lg:px-4">
             {FAQ.map(([q, a], k) => (
-              <details key={q} name="faq" className={`${s.faq} ${s.faqItem} border-b border-white/[0.1] last:border-b-0`} open={k === 0}>
+              <details key={q} name="faq" className={`${s.faq} ${s.faqItem} border-b border-(--line) last:border-b-0`} open={k === 0}>
                 <summary className="flex min-h-[72px] items-center gap-5 px-5 py-5 text-[16.5px] font-medium">
                   <span className={`${s.mono} ${s.faqNum} text-[12px]`}>0{k + 1}</span>
                   <span className="flex-1">{q}</span>
@@ -274,14 +274,14 @@ export function Footer() {
       <div className="grid lg:grid-cols-[1fr_1fr_80px]">
         <ul className="grid grid-cols-2 sm:grid-cols-4">
           {FOOT.map(([l, h]) => (
-            <li key={l} className="border-r border-b border-white/[0.13]">
+            <li key={l} className="border-r border-b border-(--line)">
               <Link href={h} className="flex h-[73px] items-center px-6 text-[14px] text-white/75 transition-colors hover:text-white">
                 {l}
               </Link>
             </li>
           ))}
         </ul>
-        <div className="relative flex min-h-[146px] items-end justify-center overflow-hidden border-b border-white/[0.13]">
+        <div className="relative flex min-h-[146px] items-end justify-center overflow-hidden border-b border-(--line)">
           <p className="relative flex items-center gap-3 pb-5 text-[40px] leading-none font-semibold tracking-[-0.05em]">
             <Mark size={30} />
             <span>
@@ -289,14 +289,14 @@ export function Footer() {
             </span>
           </p>
         </div>
-        <ul className="flex border-b border-white/[0.13] lg:flex-col lg:border-l">
+        <ul className="flex border-b border-(--line) lg:flex-col lg:border-l">
           {[
             [PiXLogo, "X", "https://x.com/"],
             [PiLinkedinLogo, "LinkedIn", "https://www.linkedin.com/"],
           ].map(([Icon, label, href]) => {
             const I = Icon as typeof PiXLogo;
             return (
-              <li key={label as string} className="flex-1 border-white/[0.13] max-lg:border-r lg:border-b lg:last:border-b-0">
+              <li key={label as string} className="flex-1 border-(--line) max-lg:border-r lg:border-b lg:last:border-b-0">
                 <a href={href as string} target="_blank" rel="noopener noreferrer" aria-label={label as string} className="grid h-[73px] place-items-center text-white/75 hover:text-white">
                   <I aria-hidden="true" className="size-5" />
                 </a>

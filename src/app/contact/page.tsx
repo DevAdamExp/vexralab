@@ -32,7 +32,7 @@ export default function ContactPage() {
     <Shell cta={false}>
       <section className={s.col} aria-labelledby="contact-title">
         <div className="grid lg:grid-cols-[5fr_7fr]">
-          <div className="border-b border-white/[0.13] lg:border-r lg:border-b-0">
+          <div className="border-b border-(--line) lg:border-r lg:border-b-0">
             <div className="flex flex-col lg:sticky lg:top-[85px]">
             <div className="px-6 py-14 lg:px-10">
               <p className={s.kicker}>
@@ -44,9 +44,9 @@ Free data audit
               <p className="mt-6 max-w-[40ch] text-[18px] leading-7 text-(--muted)">Tell us what&rsquo;s slowing you down. You&rsquo;ll get a written plan in 5 days, whether you hire us or not.</p>
             </div>
 
-            <ol className="border-t border-white/[0.13]">
+            <ol className="border-t border-(--line)">
               {NEXT.map(([t, d], k) => (
-                <li key={t} className="flex gap-5 border-b border-white/[0.13] px-6 py-5 lg:px-10">
+                <li key={t} className="flex gap-5 border-b border-(--line) px-6 py-5 lg:px-10">
                   <span className={`${s.mono} pt-0.5 text-[12px] text-(--hi)`}>0{k + 1}</span>
                   <p className="text-[15px] leading-6">
                     <span className="block text-white">{t}</span>
@@ -67,7 +67,7 @@ Free data audit
               <ul className="flex gap-2">
                 {DIRECT.map(({ Icon, label, href }) => (
                   <li key={label}>
-                    <a href={href} target="_blank" rel="noopener noreferrer" aria-label={`${label} (opens in a new tab)`} className="grid size-11 place-items-center rounded-full border border-white/[0.13] text-white/75 transition-colors hover:border-white/35 hover:text-white">
+                    <a href={href} target="_blank" rel="noopener noreferrer" aria-label={`${label} (opens in a new tab)`} className="grid size-11 place-items-center rounded-full border border-(--line) text-white/75 transition-colors hover:border-white/35 hover:text-white">
                       <Icon aria-hidden="true" className="size-5" />
                     </a>
                   </li>

@@ -15,7 +15,7 @@ export function Services() {
 
   return (
     <section id="services" className={`${s.col} scroll-mt-24`} aria-labelledby="services-title">
-      <div className="flex flex-col gap-6 border-b border-white/[0.13] px-6 py-12 lg:flex-row lg:items-center lg:justify-between lg:px-12">
+      <div className="flex flex-col gap-6 border-b border-(--line) px-6 py-12 lg:flex-row lg:items-center lg:justify-between lg:px-12">
         <div>
           <Slash>
             <span id="services-title">data that runs your business.</span>
@@ -33,7 +33,7 @@ export function Services() {
       </div>
 
       <div className="grid lg:grid-cols-2">
-        <div role="tablist" aria-label="Services" className="flex flex-col lg:border-r lg:border-white/[0.13]">
+        <div role="tablist" aria-label="Services" className="flex flex-col lg:border-r lg:border-(--line)">
           {SERVICES.map((x, k) => (
             <button
               key={x.id}
@@ -57,7 +57,7 @@ export function Services() {
         </div>
 
         <div id="service-panel" role="tabpanel" className="flex flex-col">
-          <div key={`t${on}`} className={`${s.rise} flex items-start gap-8 border-b border-white/[0.13] px-6 py-12 lg:px-10`}>
+          <div key={`t${on}`} className={`${s.rise} flex items-start gap-8 border-b border-(--line) px-6 py-12 lg:px-10`}>
             <p className="flex-1 text-[20px] leading-7 text-(--muted)">
               <span className="mr-2 text-white/50">{"//"}</span>
               <b className="font-semibold text-white">{it.title}</b> {it.body}
@@ -67,7 +67,7 @@ export function Services() {
             </span>
           </div>
           <div key={`p${on}`} className={`${s.rise} grid flex-1 sm:grid-cols-2`}>
-            <div className="border-b border-white/[0.13] px-6 py-8 sm:border-r sm:border-b-0 lg:px-10">
+            <div className="border-b border-(--line) px-6 py-8 sm:border-r sm:border-b-0 lg:px-10">
               <p className={`${s.kicker} ${s.kickerCoral}`}>Before</p>
               <ul className={`${s.stagger} mt-5 flex flex-col gap-3.5`}>
                 {it.before.map((b, i) => (
@@ -90,17 +90,17 @@ export function Services() {
               </ul>
             </div>
           </div>
-          <div key={`d${on}`} className={`${s.rise} border-t border-white/[0.13] px-6 py-6 lg:px-10`}>
+          <div key={`d${on}`} className={`${s.rise} border-t border-(--line) px-6 py-6 lg:px-10`}>
             <p className={s.kicker}>What you get</p>
             <ul className="mt-4 flex flex-wrap gap-2">
               {it.deliverables.map((d) => (
-                <li key={d} className="rounded-full border border-white/[0.12] px-3 py-1 text-[13px] text-white/80">
+                <li key={d} className="rounded-full border border-(--line) px-3 py-1 text-[13px] text-white/80">
                   {d}
                 </li>
               ))}
             </ul>
           </div>
-          <div className="flex flex-wrap items-center justify-between gap-3 border-t border-white/[0.13] px-6 py-5 lg:px-10">
+          <div className="flex flex-wrap items-center justify-between gap-3 border-t border-(--line) px-6 py-5 lg:px-10">
             <span className={`${s.mono} text-[13px] text-white/50`}>
               {it.timeline} · {it.price}
             </span>

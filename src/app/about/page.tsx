@@ -57,7 +57,7 @@ export default function AboutPage() {
 
       {/* Manifesto: one paragraph that lights up line by line as you read it. */}
       <section className={s.col} aria-labelledby="believe-title">
-        <div className="border-b border-white/[0.13] px-6 py-12 lg:px-12">
+        <div className="border-b border-(--line) px-6 py-12 lg:px-12">
           <Slash>
             <span id="believe-title">what we believe.</span>
           </Slash>
@@ -75,7 +75,7 @@ export default function AboutPage() {
       <Band />
 
       <section className={s.col} aria-labelledby="week-title">
-        <div className="flex flex-col gap-4 border-b border-white/[0.13] px-6 py-12 lg:flex-row lg:items-center lg:justify-between lg:px-12">
+        <div className="flex flex-col gap-4 border-b border-(--line) px-6 py-12 lg:flex-row lg:items-center lg:justify-between lg:px-12">
           <Slash>
             <span id="week-title">a week with us.</span>
           </Slash>
@@ -85,7 +85,7 @@ export default function AboutPage() {
         </div>
         <ol className="grid sm:grid-cols-2 lg:grid-cols-5">
           {WEEK.map(({ day, Icon, name, text }) => (
-            <li key={name} data-spot className="flex flex-col gap-4 border-r border-b border-white/[0.13] px-6 py-9 lg:border-b-0 lg:last:border-r-0">
+            <li key={name} data-spot className="flex flex-col gap-4 border-r border-b border-(--line) px-6 py-9 lg:border-b-0 lg:last:border-r-0">
               <span className={`${s.mono} text-[12px] text-white/60`}>{day}</span>
               <Icon aria-hidden="true" className="size-6 text-(--hi)" />
               <p className="text-[20px] font-semibold tracking-[-0.01em]">{name}</p>
@@ -97,15 +97,15 @@ export default function AboutPage() {
       <Band />
 
       <section className={s.col} aria-labelledby="team-title">
-        <div className="border-b border-white/[0.13] px-6 py-12 lg:px-12">
+        <div className="border-b border-(--line) px-6 py-12 lg:px-12">
           <Slash>
             <span id="team-title">who you’ll work with.</span>
           </Slash>
         </div>
         <ul className="grid sm:grid-cols-2 lg:grid-cols-4">
           {TEAM.map((p, k) => (
-            <li key={k} data-spot className="flex flex-col gap-5 border-r border-b border-white/[0.13] px-6 py-9 lg:border-b-0 lg:last:border-r-0">
-              <span aria-hidden="true" className={`grid size-16 place-items-center text-[24px] font-semibold ${k === 0 ? "bg-(--accent)" : "border border-white/[0.13] bg-white/[0.04]"}`}>
+            <li key={k} data-spot className="flex flex-col gap-5 border-r border-b border-(--line) px-6 py-9 lg:border-b-0 lg:last:border-r-0">
+              <span aria-hidden="true" className={`grid size-16 place-items-center text-[24px] font-semibold ${k === 0 ? "bg-(--accent)" : "border border-(--line) bg-white/[0.04]"}`}>
                 {p.initials}
               </span>
               <div>
@@ -113,10 +113,10 @@ export default function AboutPage() {
                 <p className="text-[14px] text-(--muted)">{p.role}</p>
               </div>
               <div className="mt-auto flex gap-2">
-                <a href="#" aria-label={`${p.name} on LinkedIn`} className="grid size-9 place-items-center rounded-full border border-white/[0.13] text-white/70 hover:text-white">
+                <a href="#" aria-label={`${p.name} on LinkedIn`} className="grid size-9 place-items-center rounded-full border border-(--line) text-white/70 hover:text-white">
                   <PiLinkedinLogo aria-hidden="true" />
                 </a>
-                <a href="#" aria-label={`${p.name} on GitHub`} className="grid size-9 place-items-center rounded-full border border-white/[0.13] text-white/70 hover:text-white">
+                <a href="#" aria-label={`${p.name} on GitHub`} className="grid size-9 place-items-center rounded-full border border-(--line) text-white/70 hover:text-white">
                   <PiGithubLogo aria-hidden="true" />
                 </a>
               </div>
